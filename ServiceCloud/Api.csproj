@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="delete_this\**" />
+    <Content Remove="delete_this\**" />
+    <EmbeddedResource Remove="delete_this\**" />
+    <None Remove="delete_this\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
   </ItemGroup>
 
@@ -14,8 +21,6 @@
     <Folder Include="Controllers\" />
     <Folder Include="Middlewares\" />
     <Folder Include="ExceptionHandlers\" />
-    <Folder Include="delete_this\" />
-    <Folder Include="Delete-it\" />
   </ItemGroup>
 
   <ItemGroup>
