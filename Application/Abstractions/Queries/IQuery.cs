@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Persistence.Queries
 {
-    internal class IQuery
+    public interface IQuery<TResponse>
     {
     }
 }

@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Application.Abstractions.Commands
 {
-    internal class ICommand
+    public interface ICommand
+    {
+    }
+
+    public interface ICommand<TResponse>
     {
     }
 }

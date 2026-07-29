@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Persistence.Repositories.Common
+namespace Persistence.Repositories.Common;
+
+public interface IGenericRepository<TEntity>
+    : IReadRepository<TEntity>
+    where TEntity : class
 {
-    internal class IGenericRepository
-    {
-    }
+    void Add(TEntity entity);
+
+    void Update(TEntity entity);
+
+    void Remove(TEntity entity);
 }
