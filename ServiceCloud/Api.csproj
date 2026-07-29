@@ -14,6 +14,7 @@
     <Folder Include="Controllers\" />
     <Folder Include="Middlewares\" />
     <Folder Include="ExceptionHandlers\" />
+    <Folder Include="delete_this\" />
     <Folder Include="Delete-it\" />
   </ItemGroup>
 
