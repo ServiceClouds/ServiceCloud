@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
+using Shared.Response;
 
 namespace Application.Abstractions.Commands
 {
-    public interface ICommand
+    public interface ICommand : IRequest<Result>
     {
     }
 
-    public interface ICommand<TResponse>
+    public interface ICommand<TResponse> : IRequest<Result<TResponse>>
     {
     }
 }

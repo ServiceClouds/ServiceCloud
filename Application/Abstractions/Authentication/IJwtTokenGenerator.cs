@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Application.Abstractions.Commands.Login;
 using Domain.Entities;
 namespace Application.Abstractions.Authentication
 {
     public interface IJwtTokenGenerator
     {
-        string GenerateToken(Staff staff);
+         LoginResponse GenerateToken(AuthenticatedUser User);
     }
 }

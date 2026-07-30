@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 using Shared.Response;
-
-
 
 namespace Application.Abstractions.Commands
 {
-    //only result object came
-    public interface ICommandHandler<in TCommand>
-     where TCommand : ICommand
-    {
-        Task<Result> Handle(
-            TCommand command,
-            CancellationToken cancellationToken);
-    }
-    //if response came
-    public interface ICommandHandler<in TCommand, TResponse>
+    public interface ICommandHandler<TCommand, TResponse>
+        : IRequestHandler<TCommand, Result<TResponse>>
         where TCommand : ICommand<TResponse>
     {
-        Task<Result<TResponse>> Handle(
-            TCommand command,
-            CancellationToken cancellationToken);
+    }
+
+    public interface ICommandHandler<TCommand>
+        : IRequestHandler<TCommand, Result>
+        where TCommand : ICommand
+    {
     }
 }
