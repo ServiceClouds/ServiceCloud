@@ -7,6 +7,7 @@ using Shared.Response;
 
 namespace Application.Abstractions.Commands
 {
+    //only result object came
     public interface ICommandHandler<in TCommand>
      where TCommand : ICommand
     {
@@ -14,7 +15,7 @@ namespace Application.Abstractions.Commands
             TCommand command,
             CancellationToken cancellationToken);
     }
-
+    //if response came
     public interface ICommandHandler<in TCommand, TResponse>
         where TCommand : ICommand<TResponse>
     {

@@ -11,7 +11,7 @@ namespace Persistence.Repositories.Common
         IQueryable<TEntity> GetAll(bool asNoTracking = true);
 
         Task<TEntity?> FirstOrDefaultAsync(
-            Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, bool>> predicate,//provide me a condition
             bool asNoTracking = true,
             CancellationToken cancellationToken = default);
 
