@@ -21,6 +21,7 @@ namespace Infrastructure.Authentication
             return Convert.ToBase64String(hash);
         }
 
+
         public bool VerifyPassword(
             string password,
             string passwordHash,

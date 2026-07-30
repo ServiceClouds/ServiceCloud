@@ -8,8 +8,7 @@ using Shared.Response;
 
 namespace Application.Commands.Login;
 
-public sealed class LoginCommandHandler
-    : ICommandHandler<LoginCommand, LoginResponse>
+public sealed class LoginCommandHandler: ICommandHandler<LoginCommand, LoginResponse>
 {
     private readonly IAuthRepository _authRepository;
     private readonly IPasswordHasher _passwordHasher;
@@ -31,7 +30,7 @@ public sealed class LoginCommandHandler
     {
         // 1. Find Staff
         var staff = await _authRepository.GetStaffByEmailAsync(
-            command.Email,
+            command.Email,//verify exists
             cancellationToken);
 
         if (staff is null)
@@ -41,7 +40,7 @@ public sealed class LoginCommandHandler
         }
 
         // 2. Get Login Information
-        var staffLogin = await _authRepository.GetStaffLoginAsync(
+        var staffLogin = await _authRepository.GetStaffLoginAsync(//
             staff.StaffId,
             cancellationToken);
 
@@ -80,7 +79,7 @@ public sealed class LoginCommandHandler
         // 6. Get Company
         var company = await _authRepository.GetCompanyAsync(
             staff.CompanyId,
-            cancellationToken);
+            cancellationToken);//for later we need
 
         if (company is null)
         {

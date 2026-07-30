@@ -7,6 +7,6 @@ namespace Application.Abstractions.Commands.Login
     public sealed record LoginCommand(
     string Email,
     string Password)
-    : ICommand<LoginResponse>;
-    }
+    : ICommand<LoginResponse>;//mediatr return response
+    }//only carries data from controller
 

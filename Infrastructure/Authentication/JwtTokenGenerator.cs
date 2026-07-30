@@ -32,7 +32,7 @@ namespace Infrastructure.Authentication
 
             var claims = new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.StaffId.ToString()),
+               
                 new Claim("StaffId", user.StaffId.ToString()),
                 new Claim("CompanyId", user.CompanyId.ToString()),
                 new Claim("Email", user.Email),

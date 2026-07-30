@@ -13,7 +13,7 @@ public class AuthController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public AuthController(ISender sender)
+    public AuthController(ISender sender)//provided by mediatr
     {
         _sender = sender;
     }
@@ -21,17 +21,26 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(
      LoginCommand command,
-     CancellationToken cancellationToken)
+     CancellationToken cancellationToken)//command obj created containg data of loginuser
     {
-        var result = await _sender.Send(command, cancellationToken);
+        var result = await _sender.Send(command, cancellationToken);//mediart search for handler and obtaon a response
 
         if (result.IsFailure)
         {
-            return BadRequest(result);
+            return BadRequest(new
+            {
+                Success = false,
+                Message = result.Error.Description
+            });
         }
 
         return Ok(result.Value);
     }
+
+
+
+
+
     [HttpGet("generate-hash")]
     public IActionResult GenerateHash()
     {
