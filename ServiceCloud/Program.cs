@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Persistence.Configurations;
 using Persistence.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,14 @@ builder.Services.AddControllers();
 //database registration 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+//register appoption
+builder.Services.Configure<AppOptions>(
+    builder.Configuration.GetSection("AppOptions"));
+
+
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 //builder.Services.AddOpenApi();

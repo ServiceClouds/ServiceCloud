@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Entities;
+using Domain.Entities;
 
 namespace Persistence.Data
 {
