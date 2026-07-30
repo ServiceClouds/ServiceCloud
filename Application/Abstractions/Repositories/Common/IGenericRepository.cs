@@ -8,7 +8,7 @@ public interface IGenericRepository<TEntity>
     : IReadRepository<TEntity>
     where TEntity : class
 {
-    void Add(TEntity entity);
+    Task AddAsync(TEntity entity);
 
     void Update(TEntity entity);
 

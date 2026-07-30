@@ -14,9 +14,9 @@ namespace Persistence.Repositories.Common
         {
         }
 
-        public void Add(TEntity entity)
+        public async Task AddAsync(TEntity entity)
         {
-            _context.AddEntity(entity);
+           await _context.AddEntity(entity);
         }
 
         public void Update(TEntity entity)

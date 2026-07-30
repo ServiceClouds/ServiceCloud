@@ -9,7 +9,7 @@ namespace Application.Abstractions.Data
         IQueryable<TEntity> Query<TEntity>(bool asNoTracking = true)
             where TEntity : class;
 
-        void AddEntity<TEntity>(TEntity entity)
+        Task AddEntity<TEntity>(TEntity entity)
             where TEntity : class;
 
         void UpdateEntity<TEntity>(TEntity entity)
