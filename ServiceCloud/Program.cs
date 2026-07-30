@@ -1,6 +1,8 @@
+using Application.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
 using Persistence.Data;
+using Persistence.Data.MasterDbContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,11 +10,15 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-//database registration 
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<MasterTenantDbContext>(options =>
+{
+    options.UseSqlServer(
+        builder.Configuration["AppOptions:ConnectionStrings:MasterDatabase"]);
+});
 
 
+builder.Services.AddScoped<IDbContext>(provider =>
+    provider.GetRequiredService<MasterTenantDbContext>());
 
 //register appoption
 builder.Services.Configure<AppOptions>(
