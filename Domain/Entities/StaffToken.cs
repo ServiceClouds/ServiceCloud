@@ -10,9 +10,13 @@ public partial class StaffToken
 
     public int StaffLoginId { get; private set; }
 
+    public string? AccessToken { get; private set; }
+
+    public string? RefreshToken { get; private set; }
+
     public DateTime? AccessTokenExpiry { get; private set; }
 
-    public int? AppSourceTypeId { get;  private set; }
+    public DateTime? RefreshTokenExpiry { get; private set; }
 
-    public DateTime? CreatedOn { get; private set; }
+    public DateTime CreatedOn { get; private set; }
 }
