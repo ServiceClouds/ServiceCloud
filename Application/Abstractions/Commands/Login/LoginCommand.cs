@@ -5,8 +5,9 @@ using System.Text;
 namespace Application.Abstractions.Commands.Login
 {
     public sealed record LoginCommand(
-    string Email,
-    string Password)
+     int StaffId,
+    int CompanyId,
+    int BranchId)
     : ICommand<LoginResponse>;//mediatr return response
     }//only carries data from controller
 

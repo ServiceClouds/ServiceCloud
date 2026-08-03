@@ -48,6 +48,7 @@ namespace Application.Abstractions.Commands.Login.VefityLogin
             // 3. Get Login Information
             var staffLogin = await _authRepository.GetStaffLoginAsync(
                 command.StaffId,
+                command.CompanyId,
                 cancellationToken);
 
             if (staffLogin is null)

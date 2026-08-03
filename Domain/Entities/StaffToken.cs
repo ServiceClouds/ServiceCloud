@@ -1,11 +1,11 @@
-﻿
-namespace Domain.Entities;
+﻿namespace Domain.Entities;
 
-
-
-public partial class StaffToken
+public class StaffToken
 {
-    private StaffToken() { }
+    private StaffToken()
+    {
+    }
+
     public long StaffTokenId { get; private set; }
 
     public int StaffLoginId { get; private set; }
@@ -19,4 +19,22 @@ public partial class StaffToken
     public DateTime? RefreshTokenExpiry { get; private set; }
 
     public DateTime CreatedOn { get; private set; }
+
+    public static StaffToken Create(
+        int staffLoginId,
+        string accessToken,
+        DateTime? accessTokenExpiry = null,
+        string? refreshToken = null,
+        DateTime? refreshTokenExpiry = null)
+    {
+        return new StaffToken
+        {
+            StaffLoginId = staffLoginId,
+            AccessToken = accessToken,
+            AccessTokenExpiry = accessTokenExpiry,
+            RefreshToken = refreshToken,
+            RefreshTokenExpiry = refreshTokenExpiry,
+            CreatedOn = DateTime.UtcNow
+        };
+    }
 }
