@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Persistence.TempScaffold.Models;
 
 namespace Persistence.Data.MasterDbContext
 {
@@ -28,7 +29,9 @@ namespace Persistence.Data.MasterDbContext
 
         public virtual DbSet<StaffLogin> StaffLogins { get; set; }
 
-        
+        public virtual DbSet<StaffToken> StaffTokens { get; set; }
+
+
 
         public DbSet<TEntity> GetDbSet<TEntity>()
             where TEntity : class
