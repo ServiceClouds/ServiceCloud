@@ -9,25 +9,18 @@ namespace Persistence.Configurations.Master
     {
         public void Configure(EntityTypeBuilder<StaffToken> entity)
         {
-            entity
-                .HasNoKey()
-                .ToTable("StaffToken");
+            entity.HasKey(e => e.StaffTokenId).HasName("PK__StaffTok__8321B1A8B21A6EEA");
 
-            entity.Property(e => e.AccessTokenExpiry)
-                .HasColumnType("datetime");
+            entity.ToTable("StaffToken");
 
-            entity.Property(e => e.AppSourceTypeId)
-                .HasColumnName("AppSourceTypeID");
+            entity.Property(e => e.AccessTokenExpiry).HasColumnType("datetime");
 
             entity.Property(e => e.CreatedOn)
+                .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
 
-            entity.Property(e => e.StaffLoginId)
-                .HasColumnName("StaffLoginID");
-
-            entity.Property(e => e.StaffTokenId)
-                .ValueGeneratedOnAdd()
-                .HasColumnName("StaffTokenID");
+            entity.Property(e => e.RefreshToken).HasMaxLength(500);
+            entity.Property(e => e.RefreshTokenExpiry).HasColumnType("datetime");
         }
     }
 }
