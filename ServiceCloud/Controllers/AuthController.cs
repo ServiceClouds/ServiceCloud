@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Commands.Login;
 using Application.Abstractions.Commands.Login.GetCompanies;
+using Application.Abstractions.Commands.Login.VefityLogin;
 using Application.Commands.Login;
 using Infrastructure.Authentication;
 using MediatR;
@@ -59,21 +60,21 @@ public class AuthController : ControllerBase
 
         return Ok(result.Value);
     }
-    [HttpGet("generate-hash")]
-    public IActionResult GenerateHash()
+    [HttpPost("verify-login")]
+    public async Task<IActionResult> VerifyLogin(
+    VerifyLoginCommand command,
+    CancellationToken cancellationToken)
     {
-        var hasher = new PasswordHasher();
+        var result = await _sender.Send(command, cancellationToken);
 
-        string salt = "ServiceCloud@2026";
-
-        string hash = hasher.HashPassword("Admin123", salt);
-
-        return Ok(new
+        if (result.IsFailure)
         {
-            Password = "Admin123",
-            Salt = salt,
-            Hash = hash
-        });
+            return BadRequest(result.Error);
+        }
+
+        return Ok(result.Value);
+
     }
+   
 
 }
