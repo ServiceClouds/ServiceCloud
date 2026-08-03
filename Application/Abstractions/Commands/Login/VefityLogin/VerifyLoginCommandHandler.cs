@@ -89,7 +89,7 @@ namespace Application.Abstractions.Commands.Login.VefityLogin
                 command.CompanyId,
                 cancellationToken);
 
-            // 8. Return Response
+            
             return Result<VerifyLoginResponse>.Success(
                 new VerifyLoginResponse
                 {

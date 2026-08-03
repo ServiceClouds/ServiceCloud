@@ -10,7 +10,8 @@ namespace Application.Abstractions.Commands.Login.GetCompanies
    
 
     public sealed class GetCompaniesByEmailQueryHandler
-        : IQueryHandler<GetCompaniesByEmailQuery, List<CompanyLookupResponse>>
+        : IQueryHandler<GetCompaniesByEmailQuery//accept
+                                                , List<CompanyLookupResponse>>//return
     {
         private readonly IAuthRepository _authRepository;
 
@@ -27,7 +28,7 @@ namespace Application.Abstractions.Commands.Login.GetCompanies
                 query.Email,
                 cancellationToken);
 
-            if (companies == null || !companies.Any())
+            if (companies == null || !companies.Any())//nullor emptylist
             {
                 return Result<List<CompanyLookupResponse>>.Failure(
                     Error.NotFound(
