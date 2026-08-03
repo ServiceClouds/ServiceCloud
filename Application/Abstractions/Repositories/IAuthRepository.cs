@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Authentication;
+using Application.Abstractions.Commands.Login.GetCompanies;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,11 @@ namespace Application.Abstractions.Repositories
             int companyId,
             CancellationToken cancellationToken = default);
 
-        
+        Task<List<CompanyLookupResponse>> GetCompaniesByEmailAsync(
+    string email,
+    CancellationToken cancellationToken);
     }
+
+
+
 }
