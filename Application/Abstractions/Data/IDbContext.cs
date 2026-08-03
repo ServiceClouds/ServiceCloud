@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,9 @@ namespace Application.Abstractions.Data
 {
     public interface IDbContext
     {
+        DbSet<TEntity> GetDbSet<TEntity>()
+           where TEntity : class;
+
         IQueryable<TEntity> Query<TEntity>(bool asNoTracking = true)
             where TEntity : class;
 

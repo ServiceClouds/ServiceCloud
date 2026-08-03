@@ -31,16 +31,35 @@ builder.Services.AddDbContext<MasterTenantDbContext>(options =>
         builder.Configuration["AppOptions:ConnectionStrings:MasterDatabase"]);
 });
 
-// Operational tenant database context
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(
-        builder.Configuration["AppOptions:ConnectionStrings:MasterDatabase"]);
-});
+// ============================================================================
+// TENANT DATABASE SERVICES
+// ============================================================================
 
-// Map the generic IDbContext interface STRICTLY to your operational ApplicationDbContext
-builder.Services.AddScoped<IDbContext>(provider =>
-    provider.GetRequiredService<ApplicationDbContext>());
+// Gives access to HttpContext
+builder.Services.AddHttpContextAccessor();
+
+// Reads tenant connection string from Master DB
+builder.Services.AddScoped<IDbConnectionService, DbConnectionService>();
+
+// Creates Tenant AppDbContext dynamically
+builder.Services.AddScoped<ITenantDbContextFactory, TenantDbContextFactory>();
+
+// Lazy wrapper around Tenant DbContext
+builder.Services.AddScoped<LazyApplicationDbContext>();
+
+// Unit Of Work
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+//// Operational tenant database context
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//{
+//    options.UseSqlServer(
+//        builder.Configuration["AppOptions:ConnectionStrings:MasterDatabase"]);
+//});
+
+//// Map the generic IDbContext interface STRICTLY to your operational ApplicationDbContext
+//builder.Services.AddScoped<IDbContext>(provider =>
+//    provider.GetRequiredService<ApplicationDbContext>());
 
 // Register concrete architectural implementations
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();

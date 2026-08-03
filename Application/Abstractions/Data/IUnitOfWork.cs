@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Application.Abstractions.Data
 {
-    internal class IUnitOfWork
+    public interface IUnitOfWork
     {
+        Task<int> SaveChangesAsync(
+            int companyId,
+            CancellationToken cancellationToken = default);
     }
 }

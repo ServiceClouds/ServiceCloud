@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Application.Abstractions.Data
 {
-    internal class IDbConnectionService
+    public interface IDbConnectionService
     {
+        Task<string> GetTenantConnectionStringAsync(int companyId);
+
+        string GetMasterConnectionString();
     }
 }
