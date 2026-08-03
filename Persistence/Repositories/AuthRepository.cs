@@ -1,4 +1,5 @@
-﻿using Application.Abstractions.Repositories;
+﻿using Application.Abstractions.Commands.Login.GetCompanies;
+using Application.Abstractions.Repositories;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.MasterDbContext;
@@ -42,6 +43,27 @@ namespace Persistence.Repositories
                 .FirstOrDefaultAsync(
                     c => c.CompanyId == companyId,
                     cancellationToken);
+        }
+
+        public async Task<List<CompanyLookupResponse>> GetCompaniesByEmailAsync(
+     string email,
+     CancellationToken cancellationToken)
+        {
+            return await (
+                from staff in _context.Query<Staff>()
+                join company in _context.Query<Company>()
+                    on staff.CompanyId equals company.CompanyId
+                where staff.Email == email
+                      && staff.AllowLogin
+                      && company.IsActive
+                      && !company.IsArchived
+                select new CompanyLookupResponse
+                {
+                    StaffId = staff.StaffId,
+                    CompanyId = company.CompanyId,
+                    CompanyName = company.CompanyName
+                })
+                .ToListAsync(cancellationToken);
         }
     }
 }

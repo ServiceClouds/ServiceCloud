@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
 using Shared.Response;
 
-namespace Persistence.Queries
+namespace Application.Abstractions.Queries
 {
-    public interface IQueryHandler<in TQuery, TResponse>
-    where TQuery : IQuery<TResponse>
+    public interface IQueryHandler<TQuery, TResponse>
+        : IRequestHandler<TQuery, Result<TResponse>>
+        where TQuery : IQuery<TResponse>
     {
-        Task<Result<TResponse>> Handle(
-            TQuery query,
-            CancellationToken cancellationToken);
     }
 }

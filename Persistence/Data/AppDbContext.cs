@@ -34,6 +34,7 @@ namespace Persistence.Data
             Set<TEntity>().Update(entity);
         }
 
+
         public void RemoveEntity<TEntity>(TEntity entity)
             where TEntity : class
         {

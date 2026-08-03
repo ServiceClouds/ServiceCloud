@@ -12,6 +12,8 @@
         public string MasterDatabase { get; init; } = default!;
     }
 
+
+
     public sealed class BearerTokensOptions
     {
         public string Key { get; init; } = default!;

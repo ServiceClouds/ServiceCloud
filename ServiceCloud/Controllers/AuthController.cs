@@ -1,9 +1,11 @@
 ﻿using Application.Abstractions.Commands.Login;
+using Application.Abstractions.Commands.Login.GetCompanies;
 using Application.Commands.Login;
+using Infrastructure.Authentication;
 using MediatR;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
-using Infrastructure.Authentication;
+using Shared.Response;
 
 namespace API.Controllers;
 
@@ -37,10 +39,26 @@ public class AuthController : ControllerBase
         return Ok(result.Value);
     }
 
+    [HttpPost("get-companies")]
+    public async Task<IActionResult> GetCompanies(
+        GetCompaniesByEmailRequest request,
+        CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(
+            new GetCompaniesByEmailQuery(request.Email),
+            cancellationToken);
 
+        if (result.IsFailure)
+        {
+            return BadRequest(new
+            {
+                Success = false,
+                Message = result.Error.Description
+            });
+        }
 
-
-
+        return Ok(result.Value);
+    }
     [HttpGet("generate-hash")]
     public IActionResult GenerateHash()
     {
@@ -57,4 +75,5 @@ public class AuthController : ControllerBase
             Hash = hash
         });
     }
+
 }

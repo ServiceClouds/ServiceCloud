@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MediatR;
+using Shared.Response;
 
-namespace Persistence.Queries
+namespace Application.Abstractions.Queries
 {
-    public interface IQuery<TResponse>
+    public interface IQuery<TResponse> : IRequest<Result<TResponse>>
     {
     }
 }

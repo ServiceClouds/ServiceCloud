@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Data;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Persistence.TempScaffold.Models;
+
 
 namespace Persistence.Data.MasterDbContext
 {
