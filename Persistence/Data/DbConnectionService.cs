@@ -33,7 +33,7 @@ namespace Persistence.Data
                 throw new Exception("Tenant connection string not configured.");
             }
 
-            // Currently DatabaseConnectionCode stores the connection string.
+            // As DatabaseConnectionCode stores the connection string.
             return company.DatabaseConnectionCode;
         }
 
