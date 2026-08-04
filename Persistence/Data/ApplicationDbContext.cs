@@ -1,10 +1,11 @@
-﻿using Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
+﻿using Application.Abstractions.Data;
+using Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
 using Domain.Tenant.ServiceCloudTenant.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data
 {
-    public partial class ApplicationDbContext : BaseDbContext
+    public partial class ApplicationDbContext : BaseDbContext,IApplicationDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

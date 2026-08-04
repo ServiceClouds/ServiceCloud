@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Persistence.Data
 {
-    public abstract class BaseDbContext : DbContext, IApplicationDbContext
+    public abstract class BaseDbContext : DbContext, IDbContext
     {
         protected BaseDbContext(DbContextOptions options)
             : base(options)

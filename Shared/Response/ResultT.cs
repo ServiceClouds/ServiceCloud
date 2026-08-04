@@ -25,7 +25,7 @@ namespace Shared.Response
         public static Result<T> Success(T value)
             => new(value, true, Error.None);
 
-        public static Result<T> Failure(Error error)
+        public new static Result<T> Failure(Error error)
             => new(default, false, error);
 
         public static implicit operator Result<T>(T value)

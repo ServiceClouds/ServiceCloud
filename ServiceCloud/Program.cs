@@ -63,6 +63,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Register concrete architectural implementations
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
