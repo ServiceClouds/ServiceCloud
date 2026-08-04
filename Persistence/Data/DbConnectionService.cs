@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.MasterDbContext;
+using Shared.Response;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,7 +18,7 @@ namespace Persistence.Data
             _masterContext = masterContext;
         }
 
-        public async Task<string> GetTenantConnectionStringAsync(int companyId)
+        public async Task<Result<string>> GetTenantConnectionStringAsync(int companyId)
         {
             var company = await _masterContext.Companies
                 .AsNoTracking()
@@ -25,16 +26,19 @@ namespace Persistence.Data
 
             if (company == null)
             {
-                throw new Exception("Company not found.");
+                return Result<string>.Failure(
+                    Error.NotFound(
+                        "Company.NotFound Company not found."));
             }
 
             if (string.IsNullOrWhiteSpace(company.DatabaseConnectionCode))
             {
-                throw new Exception("Tenant connection string not configured.");
+                return Result<string>.Failure(
+                    Error.Validation(
+                        "Company.ConnectionStringMissing Tenant connection string is not configured."));
             }
 
-            // As DatabaseConnectionCode stores the connection string.
-            return company.DatabaseConnectionCode;
+            return Result<string>.Success(company.DatabaseConnectionCode);
         }
 
         public string GetMasterConnectionString()
@@ -43,3 +47,4 @@ namespace Persistence.Data
         }
     }
 }
+

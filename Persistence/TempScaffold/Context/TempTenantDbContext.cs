@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Persistence.TempScaffold.Models;
+using Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
 
 namespace Persistence.TempScaffold.Context;
 
