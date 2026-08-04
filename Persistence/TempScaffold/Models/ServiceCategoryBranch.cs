@@ -11,7 +11,7 @@ public partial class ServiceCategoryBranch
 {
     [Key]
     public int ServiceCategoryBranchId { get; set; }
-
+    
     public int ServiceCategoryId { get; set; }
 
     public int BranchId { get; set; }

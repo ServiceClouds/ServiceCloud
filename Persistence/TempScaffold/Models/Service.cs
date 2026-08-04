@@ -24,7 +24,7 @@ public partial class Service
     public DateTime CreatedOn { get; set; }
 
     public int CreatedBy { get; set; }
-
+    
     [Column(TypeName = "datetime")]
     public DateTime? ModifiedOn { get; set; }
 

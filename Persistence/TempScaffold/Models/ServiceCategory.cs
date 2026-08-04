@@ -11,7 +11,7 @@ public partial class ServiceCategory
 {
     [Key]
     public int ServiceCategoryId { get; set; }
-
+    
     [StringLength(100)]
     public string? ServiceCategoryName { get; set; }
 
