@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Data;
+using Shared.Response;
 
 namespace Persistence.Data
 {
@@ -15,17 +16,23 @@ namespace Persistence.Data
             _factory = factory;
         }
 
-        public async Task<IApplicationDbContext> GetAsync(int companyId)
+        public async Task<Result<IApplicationDbContext>> GetAsync(int companyId)
         {
-            // Create a new tenant DbContext only if it doesn't exist
-            // or if the requested company is different.
+
             if (_context == null || _companyId != companyId)
             {
-                _context = await _factory.CreateAsync(companyId);
+                var contextResult = await _factory.CreateAsync(companyId);
+
+                if (contextResult.IsFailure)
+                {
+                    return Result<IApplicationDbContext>.Failure(contextResult.Error);
+                }
+
+                _context = contextResult.Value;
                 _companyId = companyId;
             }
 
-            return _context;
+            return Result<IApplicationDbContext>.Success(_context!);
         }
     }
 }

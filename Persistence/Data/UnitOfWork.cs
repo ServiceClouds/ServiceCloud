@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Data;
+using Shared.Response;
 
 namespace Persistence.Data
 {
@@ -12,13 +13,21 @@ namespace Persistence.Data
             _lazyContext = lazyContext;
         }
 
-        public async Task<int> SaveChangesAsync(
+        public async Task<Result<int>> SaveChangesAsync(
             int companyId,
             CancellationToken cancellationToken = default)
         {
-            var context = await _lazyContext.GetAsync(companyId);
+            var contextResult = await _lazyContext.GetAsync(companyId);
 
-            return await context.SaveChangesAsync(cancellationToken);
+            if (contextResult.IsFailure)
+            {
+                return Result<int>.Failure(contextResult.Error);
+            }
+
+            var affectedRows = await contextResult.Value
+                .SaveChangesAsync(cancellationToken);
+
+            return Result<int>.Success(affectedRows);
         }
     }
 }

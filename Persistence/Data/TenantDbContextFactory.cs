@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
+using Shared.Response;
 
 using System;
 using System.Collections.Generic;
@@ -17,17 +18,23 @@ namespace Persistence.Data
             _connectionService = connectionService;
         }
 
-        public async Task<IApplicationDbContext> CreateAsync(int companyId)
+        public async Task<Result<IApplicationDbContext>> CreateAsync(int companyId)
         {
-            var connectionString =
+            var connectionResult =
                 await _connectionService.GetTenantConnectionStringAsync(companyId);
 
-            var options =
-                new DbContextOptionsBuilder<ApplicationDbContext>()
-                    .UseSqlServer(connectionString)
-                    .Options;
+            if (connectionResult.IsFailure)
+            {
+                return Result<IApplicationDbContext>.Failure(connectionResult.Error);
+            }
 
-            return new ApplicationDbContext(options);
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseSqlServer(connectionResult.Value)
+                .Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            return Result<IApplicationDbContext>.Success(dbContext);
         }
     }
 }

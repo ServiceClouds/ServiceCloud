@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Shared.Response;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Application.Abstractions.Data
 {
-    public interface ITenantDbContextFactory
+     public interface ITenantDbContextFactory
     {
-        Task<IApplicationDbContext> CreateAsync(int companyId);
+        Task<Result<IApplicationDbContext>> CreateAsync(int companyId);
     }
 }
 
