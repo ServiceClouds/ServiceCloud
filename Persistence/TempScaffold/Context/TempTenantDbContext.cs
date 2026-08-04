@@ -33,7 +33,7 @@ public partial class TempTenantDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_ServiceCategoryBranch_ServiceCategory");
         });
-
+        
         OnModelCreatingPartial(modelBuilder);
     }
 
