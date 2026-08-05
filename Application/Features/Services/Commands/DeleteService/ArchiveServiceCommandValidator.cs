@@ -7,13 +7,6 @@ public sealed class ArchiveServiceCommandValidator
 {
     public ArchiveServiceCommandValidator()
     {
-        RuleFor(x => x.CompanyId)
-            .GreaterThan(0);
-
-        RuleFor(x => x.ServiceId)
-            .GreaterThan(0);
-
-        RuleFor(x => x.ModifiedBy)
-            .GreaterThan(0);
+        
     }
 }

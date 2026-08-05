@@ -3,7 +3,7 @@
 namespace Application.Features.Services.Commands.ArchiveService;
 
 public sealed record ArchiveServiceCommand(
-    int CompanyId,
-    int ServiceId,
-    int ModifiedBy
+ 
+    int ServiceId
+  
 ) : ICommand<ArchiveServiceResponse>;

@@ -1,22 +1,27 @@
 ﻿using Application.Abstractions.Commands;
 using Application.Abstractions.Data;
 using Application.Abstractions.Repositories;
+using Application.Common;
 using Shared.Response;
 
 namespace Application.Features.Services.Commands.UpdateService;
 
 public sealed class UpdateServiceCommandHandler
     : ICommandHandler<UpdateServiceCommand, UpdateServiceResponse>
-{
+    {
     private readonly IServiceRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserContext _userContext;
 
     public UpdateServiceCommandHandler(
         IServiceRepository repository,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IUserContext userContext
+        )
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
+        _userContext = userContext;
     }
 
     public async Task<Result<UpdateServiceResponse>> Handle(
@@ -25,7 +30,7 @@ public sealed class UpdateServiceCommandHandler
     {
         // 1. Check service exists
         var serviceResult = await _repository.GetByIdAsync(
-            request.CompanyId,
+            
             request.ServiceId,
             cancellationToken);
 
@@ -34,7 +39,7 @@ public sealed class UpdateServiceCommandHandler
 
         // 2. Check category exists
         var categoryResult = await _repository.CategoryExistsAsync(
-            request.CompanyId,
+           
             request.ServiceCategoryId,
             cancellationToken);
 
@@ -59,7 +64,7 @@ public sealed class UpdateServiceCommandHandler
 
         // 4. Mark entity as modified
         var updateResult = await _repository.UpdateAsync(
-            request.CompanyId,
+           
             service);
 
         if (updateResult.IsFailure)
@@ -67,7 +72,7 @@ public sealed class UpdateServiceCommandHandler
 
         // 5. Save changes
         var saveResult = await _unitOfWork.SaveChangesAsync(
-            request.CompanyId,
+         
             cancellationToken);
 
         if (saveResult.IsFailure)

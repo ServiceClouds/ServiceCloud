@@ -7,7 +7,7 @@ namespace Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
 [Table("Service")]
 public partial class Service
 {
-    // EF Core requires a parameterless constructor when materializing entities from the DB
+  
     private Service()
     {
     }
@@ -50,9 +50,6 @@ public partial class Service
     [InverseProperty("Services")]
     public virtual ServiceCategory ServiceCategory { get; private set; } = null!;
 
-    /// <summary>
-    /// Static Factory Method to create a new Service safely with valid initial state.
-    /// </summary>
     public static Service Create(
         int serviceCategoryId,
         string? serviceName,

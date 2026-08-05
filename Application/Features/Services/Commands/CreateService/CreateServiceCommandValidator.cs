@@ -14,11 +14,7 @@ public sealed class CreateServiceCommandValidator
         RuleFor(x => x.ServiceCategoryId)
             .GreaterThan(0);
 
-        RuleFor(x => x.CompanyId)
-            .GreaterThan(0);
-
-        RuleFor(x => x.CreatedBy)
-            .GreaterThan(0);
+       
 
         RuleFor(x => x.AppSourceTypeId)
             .GreaterThan(0);

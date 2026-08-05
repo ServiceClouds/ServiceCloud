@@ -20,7 +20,7 @@ public sealed class GetPagedServicesQueryHandler
         CancellationToken cancellationToken)
     {
         var result = await _repository.GetPagedAsync(
-            request.CompanyId,
+      
             request.Pagination,
             cancellationToken);
 

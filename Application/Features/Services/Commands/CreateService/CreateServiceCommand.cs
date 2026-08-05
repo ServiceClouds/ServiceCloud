@@ -3,8 +3,6 @@
 namespace Application.Features.Services.Commands.CreateService;
 
 public sealed record CreateServiceCommand(
-    int CompanyId,
-    int CreatedBy,
     int ServiceCategoryId,
     string ServiceName,
     string? Description,

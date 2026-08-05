@@ -46,11 +46,11 @@ public class ServiceController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(
       int id,
-      [FromQuery] int companyId,
+      
       CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetServiceByIdQuery(companyId, id),
+            new GetServiceByIdQuery( id),
             cancellationToken);
 
         if (result.IsFailure)
@@ -68,12 +68,12 @@ public class ServiceController : ControllerBase
     //Get Pagged Endpoint
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-    [FromQuery] int companyId,
+  
     [FromQuery] PaginationRequest request,
     CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetPagedServicesQuery(companyId, request),
+            new GetPagedServicesQuery(request),
             cancellationToken);
 
         if (result.IsFailure)
@@ -119,14 +119,11 @@ public class ServiceController : ControllerBase
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Archive(
     int id,
-    [FromQuery] int companyId,
-    [FromQuery] int modifiedBy,
+    
+
     CancellationToken cancellationToken)
     {
-        var command = new ArchiveServiceCommand(
-            companyId,
-            id,
-            modifiedBy);
+        var command = new ArchiveServiceCommand(id);
 
         var result = await _sender.Send(command, cancellationToken);
 

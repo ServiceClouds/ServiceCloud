@@ -12,26 +12,23 @@ namespace Application.Abstractions.Repositories
     public interface  IServiceRepository
     {
 
-        Task<Result> AddAsync(int companyid, Service service, CancellationToken cancellationToken = default);
-        Task<Result<Service?>> GetByIdAsync(int companyid, int serviceid, CancellationToken cancellationToken = default);
+        Task<Result> AddAsync( Service service, CancellationToken cancellationToken = default);
+        Task<Result<Service?>> GetByIdAsync(int serviceid, CancellationToken cancellationToken = default);
 
         Task<Result<PagedResponse<Service>>> GetPagedAsync(
-    int companyId,
+  
     PaginationRequest request,
     CancellationToken cancellationToken = default);
         Task<Result<bool>> ExistsAsync(
-       int companyId,
        int serviceId,
        CancellationToken cancellationToken = default);
 
         Task<Result<bool>> CategoryExistsAsync(
-            int companyId,
             int serviceCategoryId,
             CancellationToken cancellationToken = default);
 
 
         Task<Result> UpdateAsync(
-     int companyId,
      Service service);
 
 

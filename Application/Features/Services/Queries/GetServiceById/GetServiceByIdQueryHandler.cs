@@ -19,7 +19,7 @@ public sealed class GetServiceByIdQueryHandler
         CancellationToken cancellationToken)
     {
         var result = await _repository.GetByIdAsync(
-            request.CompanyId,
+            
             request.ServiceId,
             cancellationToken);
 

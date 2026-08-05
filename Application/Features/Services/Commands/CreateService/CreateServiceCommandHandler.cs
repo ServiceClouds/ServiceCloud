@@ -1,6 +1,7 @@
 ﻿using Application.Abstractions.Commands;
 using Application.Abstractions.Data;
 using Application.Abstractions.Repositories;
+using Application.Common;
 using Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
 using Shared.Response;
 
@@ -11,13 +12,17 @@ public sealed class CreateServiceCommandHandler
 {
     private readonly IServiceRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserContext _userContext;
 
     public CreateServiceCommandHandler(
         IServiceRepository repository,
-        IUnitOfWork unitOfWork)
+        IUnitOfWork unitOfWork,
+        IUserContext userContext
+        )
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
+        _userContext = userContext;
     }
 
     public async Task<Result<CreateServiceResponse>> Handle(
@@ -27,7 +32,7 @@ public sealed class CreateServiceCommandHandler
         // 1. Check Category
 
         var categoryExists = await _repository.CategoryExistsAsync(
-            request.CompanyId,
+            
             request.ServiceCategoryId,
             cancellationToken);
 
@@ -44,8 +49,8 @@ public sealed class CreateServiceCommandHandler
             request.ServiceCategoryId,
             request.ServiceName,
             request.Description,
-            request.CreatedBy,
-            request.CompanyId,
+            _userContext.StaffId,
+            _userContext.CompanyId,
             request.SpecialInstruction,
             request.HasBranchPermission,
             request.AllowBranchEditPrice,
@@ -54,7 +59,7 @@ public sealed class CreateServiceCommandHandler
         // 3. Add
 
         var addResult = await _repository.AddAsync(
-            request.CompanyId,
+      
             service,
             cancellationToken);
 
@@ -64,7 +69,6 @@ public sealed class CreateServiceCommandHandler
         // 4. Save
 
         var saveResult = await _unitOfWork.SaveChangesAsync(
-            request.CompanyId,
             cancellationToken);
 
         if (saveResult.IsFailure)

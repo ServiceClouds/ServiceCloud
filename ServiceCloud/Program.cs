@@ -1,14 +1,16 @@
 using Application.Abstractions.Authentication;
 using Application.Abstractions.Data;
 using Application.Abstractions.Repositories;
+using Application.Common;
+using Infrastructure;
 using Infrastructure.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Persistence.Configurations;
 using Persistence.Data;
 using Persistence.Data.MasterDbContext;
 using Persistence.Repositories;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -67,6 +69,10 @@ builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<IUserContext, UserContext>();
 
 // =========================================================================
 // 3. MEDIATR & TYPED OPTIONS SETUP

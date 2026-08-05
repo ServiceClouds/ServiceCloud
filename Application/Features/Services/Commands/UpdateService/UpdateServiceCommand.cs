@@ -3,7 +3,7 @@
 namespace Application.Features.Services.Commands.UpdateService;
 
 public sealed record UpdateServiceCommand(
-    int CompanyId,
+    
     int ModifiedBy,
     int ServiceId,
     int ServiceCategoryId,

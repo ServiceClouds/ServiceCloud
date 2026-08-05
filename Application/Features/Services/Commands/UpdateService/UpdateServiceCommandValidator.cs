@@ -10,8 +10,7 @@ public sealed class UpdateServiceCommandValidator
         RuleFor(x => x.ServiceId)
             .GreaterThan(0);
 
-        RuleFor(x => x.CompanyId)
-            .GreaterThan(0);
+        
 
         RuleFor(x => x.ModifiedBy)
             .GreaterThan(0);

@@ -10,20 +10,23 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 
+
 namespace Persistence.Repositories
 {
     public  class ServiceRepository:IServiceRepository
     {
         private readonly LazyApplicationDbContext _lazyContext;
+        private readonly IUserContext _userContext;
 
-        public ServiceRepository(LazyApplicationDbContext lazyContext)
+        public ServiceRepository(LazyApplicationDbContext lazyContext,IUserContext usercontext)
         {
             _lazyContext= lazyContext;
+            _userContext = usercontext;
         }
-        public async Task<Result> AddAsync(int companyId, Service service,
+        public async Task<Result> AddAsync( Service service,
     CancellationToken cancellationToken = default)
         {
-            var contextResult = await _lazyContext.GetAsync(companyId);
+            var contextResult = await _lazyContext.GetAsync(_userContext.CompanyId);
             if (contextResult.IsFailure)
             {
                 return Result.Failure(contextResult.Error);
@@ -33,11 +36,10 @@ namespace Persistence.Repositories
             return Result.Success();
         }
         public async Task<Result<Service>> GetByIdAsync(
-    int companyId,
     int serviceId,
     CancellationToken cancellationToken = default)
         {
-            var contextResult = await _lazyContext.GetAsync(companyId);
+            var contextResult = await _lazyContext.GetAsync(_userContext.CompanyId);
 
             if (contextResult.IsFailure)
             {
@@ -59,10 +61,10 @@ namespace Persistence.Repositories
 
             return Result<Service>.Success(service);
         }
-       public async Task<Result<bool>> ExistsAsync( int companyId,int serviceId,
+       public async Task<Result<bool>> ExistsAsync(int serviceId,
     CancellationToken cancellationToken = default)
         {
-            var contextResult = await _lazyContext.GetAsync(companyId);
+            var contextResult = await _lazyContext.GetAsync(_userContext.CompanyId);
 
             if (contextResult.IsFailure)
             {
@@ -78,10 +80,10 @@ namespace Persistence.Repositories
             return Result<bool>.Success(exists);
 
         }
-       public async Task<Result<bool>> CategoryExistsAsync(int companyId, int categoryId,
+       public async Task<Result<bool>> CategoryExistsAsync(int categoryId,
     CancellationToken cancellationToken = default)
         {
-            var contextResult = await _lazyContext.GetAsync(companyId);
+            var contextResult = await _lazyContext.GetAsync(_userContext.CompanyId);
 
             if (contextResult.IsFailure)
             {
@@ -99,9 +101,9 @@ namespace Persistence.Repositories
 
 
 
-       public async  Task<Result> UpdateAsync(int companyId,Service service)
+       public async  Task<Result> UpdateAsync(Service service)
         {
-            var contextresult=await _lazyContext.GetAsync(companyId);
+            var contextresult=await _lazyContext.GetAsync(_userContext.CompanyId);
             if (contextresult.IsFailure)
             {
 
@@ -112,12 +114,13 @@ namespace Persistence.Repositories
 
 
         }
+
         public async Task<Result<PagedResponse<Service>>> GetPagedAsync(
-    int companyId,
+  
     PaginationRequest request,
     CancellationToken cancellationToken = default)
         {
-            var contextResult = await _lazyContext.GetAsync(companyId);
+            var contextResult = await _lazyContext.GetAsync(_userContext.CompanyId);
 
             if (contextResult.IsFailure)
             {
