@@ -1,11 +1,12 @@
-﻿using Application.Features.Services.Commands.CreateService;
-using Application.Features.Services.Commands.UpdateService;
+﻿using Application.Common;
 using Application.Features.Services.Commands.ArchiveService;
+using Application.Features.Services.Commands.CreateService;
+using Application.Features.Services.Commands.UpdateService;
 using Application.Features.Services.Queries.GetPagedServices;
 using Application.Features.Services.Queries.GetServiceById;
-using Application.Common;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Response;
 
 namespace API.Controllers;
 
@@ -20,81 +21,58 @@ public class ServiceController : ControllerBase
         _sender = sender;
     }
 
-
-
-    //Crreate Endpoint
+    // Create Endpoint
     [HttpPost]
     public async Task<IActionResult> Create(
-    CreateServiceCommand command,
-    CancellationToken cancellationToken)
+        CreateServiceCommand command,
+        CancellationToken cancellationToken)
     {
         var result = await _sender.Send(command, cancellationToken);
 
         if (result.IsFailure)
-        {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
-        }
+            return BadRequest(result.ToApiResponse());
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
 
     // Get by Id Endpoint
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(
-      int id,
-      
-      CancellationToken cancellationToken)
+        int id,
+        CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetServiceByIdQuery( id),
+            new GetServiceByIdQuery(id),
             cancellationToken);
 
         if (result.IsFailure)
-        {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
-        }
+            return BadRequest(result.ToApiResponse());
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
 
-    //Get Pagged Endpoint
+    // Get Paged Endpoint
     [HttpGet]
     public async Task<IActionResult> GetPaged(
-  
-    [FromQuery] PaginationRequest request,
-    CancellationToken cancellationToken)
+        [FromQuery] PaginationRequest request,
+        CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
             new GetPagedServicesQuery(request),
             cancellationToken);
 
         if (result.IsFailure)
-        {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
-        }
+            return BadRequest(result.ToApiResponse());
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
 
-
-    //Update Endpoint
+    // Update Endpoint
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
-    int id,
-    UpdateServiceCommand command,
-    CancellationToken cancellationToken)
+        int id,
+        UpdateServiceCommand command,
+        CancellationToken cancellationToken)
     {
         if (id != command.ServiceId)
         {
@@ -104,38 +82,24 @@ public class ServiceController : ControllerBase
         var result = await _sender.Send(command, cancellationToken);
 
         if (result.IsFailure)
-        {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
-        }
+            return BadRequest(result.ToApiResponse());
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
 
-    //Delete (Archive) Endpoint
+    // Delete (Archive) Endpoint
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Archive(
-    int id,
-    
-
-    CancellationToken cancellationToken)
+        int id,
+        CancellationToken cancellationToken)
     {
         var command = new ArchiveServiceCommand(id);
 
         var result = await _sender.Send(command, cancellationToken);
 
         if (result.IsFailure)
-        {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
-        }
+            return BadRequest(result.ToApiResponse());
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
 }

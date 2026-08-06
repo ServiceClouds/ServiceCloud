@@ -16,28 +16,24 @@ public class AuthController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public AuthController(ISender sender)//provided by mediatr
+    public AuthController(ISender sender)
     {
         _sender = sender;
     }
 
     [HttpPost("login")]
     public async Task<IActionResult> Login(
-     LoginCommand command,
-     CancellationToken cancellationToken)//command obj created containg data of loginuser
+        LoginCommand command,
+        CancellationToken cancellationToken)
     {
-        var result = await _sender.Send(command, cancellationToken);//mediart search for handler and obtaon a response
+        var result = await _sender.Send(command, cancellationToken);
 
         if (result.IsFailure)
         {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
+            return BadRequest(result.ToApiResponse());
         }
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
 
     [HttpPost("get-companies")]
@@ -51,30 +47,24 @@ public class AuthController : ControllerBase
 
         if (result.IsFailure)
         {
-            return BadRequest(new
-            {
-                Success = false,
-                Message = result.Error.Description
-            });
+            return BadRequest(result.ToApiResponse());
         }
 
-        return Ok(result.Value);
+        return Ok(result.ToApiResponse());
     }
+
     [HttpPost("verify-login")]
     public async Task<IActionResult> VerifyLogin(
-    VerifyLoginCommand command,
-    CancellationToken cancellationToken)
+        VerifyLoginCommand command,
+        CancellationToken cancellationToken)
     {
         var result = await _sender.Send(command, cancellationToken);
 
         if (result.IsFailure)
         {
-            return BadRequest(result.Error);
+            return BadRequest(result.ToApiResponse());
         }
 
-        return Ok(result.Value);
-
+        return Ok(result.ToApiResponse());
     }
-   
-
 }

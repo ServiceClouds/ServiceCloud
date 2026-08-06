@@ -10,8 +10,13 @@
     <Folder Include="Attributes\" />
   </ItemGroup>
 
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="MediatR" Version="14.2.0" />
   </ItemGroup>
 
 </Project>
+    
