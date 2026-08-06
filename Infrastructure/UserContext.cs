@@ -19,7 +19,7 @@ namespace Infrastructure
         private ClaimsPrincipal User =>
             _httpContextAccessor.HttpContext?.User
             ?? throw new InvalidOperationException("No authenticated user.");
-
+        
         public bool IsAuthenticated =>
             User.Identity?.IsAuthenticated ?? false;
 
