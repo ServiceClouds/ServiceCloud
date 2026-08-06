@@ -1,24 +1,61 @@
-import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { login } from "../api/authApi";
+import "./Auth.css";
 
 function BranchSelection() {
 
     const navigate = useNavigate();
     const location = useLocation();
 
+    const email = location.state?.email;
+    const company = location.state?.company;
     const branches = location.state?.branches || [];
 
     const [selectedBranch, setSelectedBranch] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    const login = async () => {
+    const handleLogin = async () => {
 
-        /*
-        Verify Login
+        if (!selectedBranch) {
 
-        Returns JWT
-        */
+            setError("Please select a branch.");
+            return;
 
-        navigate("/dashboard");
+        }
+
+        try {
+
+            setLoading(true);
+            setError("");
+
+            const response = await login({
+                staffId: company.staffId,
+                companyId: company.companyId,
+                branchId: selectedBranch.branchId
+            });
+
+            console.log("Login Response:", response);
+
+            // Save JWT
+            localStorage.setItem("accessToken", response.accessToken);
+
+            // Navigate to Dashboard
+            navigate("/dashboard");
+
+        }
+        catch (err) {
+
+            console.error(err);
+            setError("Unable to login.");
+
+        }
+        finally {
+
+            setLoading(false);
+
+        }
 
     };
 
@@ -30,7 +67,11 @@ function BranchSelection() {
 
                 <h2>Select Branch</h2>
 
-                {branches.map(branch => (
+                <p>{company.companyName}</p>
+
+                <p>{email}</p>
+
+                {branches.map((branch) => (
 
                     <div
                         key={branch.branchId}
@@ -39,7 +80,7 @@ function BranchSelection() {
                                 ? "selected"
                                 : ""
                         }`}
-                        onClick={()=>setSelectedBranch(branch)}
+                        onClick={() => setSelectedBranch(branch)}
                     >
 
                         {branch.branchName}
@@ -48,8 +89,17 @@ function BranchSelection() {
 
                 ))}
 
-                <button onClick={login}>
-                    Continue
+                {error && (
+                    <p className="error">
+                        {error}
+                    </p>
+                )}
+
+                <button
+                    onClick={handleLogin}
+                    disabled={loading}
+                >
+                    {loading ? "Please wait..." : "Login"}
                 </button>
 
             </div>

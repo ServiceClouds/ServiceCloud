@@ -1,10 +1,18 @@
+import "./Dashboard.css";
+
 function Dashboard() {
 
     return (
 
-        <div style={{ padding: 40 }}>
+        <div className="dashboard">
 
-            <h1>Welcome to ServiceCloud</h1>
+            <h1 className="dashboard-title">
+                ServiceCloud Dashboard
+            </h1>
+
+            <h2 className="welcome-text">
+                Welcome Back!
+            </h2>
 
         </div>
 

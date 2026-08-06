@@ -10,3 +10,16 @@ export const getCompanies = async (email) => {
 
     return response.data;
 };
+export const verifyLogin = async (request) => {
+
+    const response = await api.post(API_ENDPOINTS.AUTH.VERIFY_LOGIN, request);
+
+    return response.data;
+};
+export const login = async (request) => {
+
+    const response = await api.post(API_ENDPOINTS.AUTH.LOGIN, request);
+
+    return response.data;
+
+};

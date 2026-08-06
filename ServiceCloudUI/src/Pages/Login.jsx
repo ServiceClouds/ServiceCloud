@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { getCompanies } from "../api/authApi";
 import LoginView from "./LoginView";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
     const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+        const navigate = useNavigate();
 
     const handleContinue = async () => {
         //test 
@@ -20,9 +22,15 @@ function Login() {
             setError("");
 
             const companies = await getCompanies(email);
+        
 
              console.log("3. API Success");
-            console.log(companies);
+            navigate("/companies", {
+    state: {
+        email,
+        companies
+    }
+});
 
         }
         catch (err) {

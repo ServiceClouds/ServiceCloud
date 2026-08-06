@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Outfit",sans-serif;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+.dashboard{
+
+    min-height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #312e81,
+        #6d28d9
+    );
+
+    background-size:300% 300%;
+
+    animation:gradientMove 15s ease infinite;
+
+}
+
+.dashboard-title {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -4px;
+    
+    /* 1. Explicit line-height and padding gives the clipping engine vertical room */
+    line-height: 1.2;
+    padding: 15px 0;
+    
+    background: linear-gradient(
+        90deg,
+        #ffffff,
+        #c084fc,
+        #60a5fa
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* 2. Completely removed text-shadow / drop-shadow here to test the pure text clip */
+    filter: none; 
+
+    animation: slideDown .8s ease forwards; /* Added 'forwards' to prevent animation state resetting */
+}
+
+
+.welcome-text{
+
+    margin-top:20px;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:white;
+
+    letter-spacing:-1px;
+
+    animation:fadeUp 1s ease;
+
+    transition:.35s;
+
+}
+
+.welcome-text:hover{
+
+    transform:scale(1.05);
+
+    color:#c084fc;
+
+}
+
+/* Animations */
+
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+@keyframes slideDown{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
