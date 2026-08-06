@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Data;
-using Domain.Entities;
+using Domain.Entities.ServiceCloud;
 using Microsoft.EntityFrameworkCore;
-
+using Persistence.Configurations;
 
 namespace Persistence.Data.MasterDbContext
 {
@@ -72,7 +72,13 @@ namespace Persistence.Data.MasterDbContext
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(MasterTenantDbContext).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(MasterTenantDbContext).Assembly);
+
+            // ✅ APPLY ONLY MASTER CONFIGURATIONS (ServiceCloud)
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                typeof(MasterTenantDbContext).Assembly,
+                ConfigurationScanner.IsMasterConfiguration  // Filter for Master only
+            );
 
             base.OnModelCreating(modelBuilder);
 

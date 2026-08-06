@@ -1,6 +1,6 @@
 ﻿using Application.Abstractions.Commands.Login.GetCompanies;
 using Application.Abstractions.Commands.Login.VefityLogin;
-using Domain.Entities;
+using Domain.Entities.ServiceCloud;
 
 public interface IAuthRepository
 {

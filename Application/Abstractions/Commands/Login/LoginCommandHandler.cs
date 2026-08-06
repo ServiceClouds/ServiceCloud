@@ -2,7 +2,7 @@
 using Application.Abstractions.Commands;
 using Application.Abstractions.Commands.Login;
 using Application.Abstractions.Repositories;
-using Domain.Entities;
+using Domain.Entities.ServiceCloud;
 using Shared.Response;
 
 namespace Application.Commands.Login;

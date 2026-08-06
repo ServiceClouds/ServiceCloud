@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Domain.Entities;
+using Domain.Entities.ServiceCloud;
 
-namespace Persistence.Data.Configurations
+namespace Persistence.Configurations.ServiceCloud
 {
     public class BranchIntegrationConfiguration : IEntityTypeConfiguration<BranchIntegration>
     {

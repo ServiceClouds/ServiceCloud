@@ -1,9 +1,9 @@
-﻿using Domain.Entities;
+﻿using Domain.Entities.ServiceCloud;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 
-namespace Persistence.Configurations.Master
+namespace Persistence.Configurations.ServiceCloud
 {
     public class StaffTokenConfiguration : IEntityTypeConfiguration<StaffToken>
     {

@@ -1,4 +1,4 @@
-﻿namespace Domain.Entities;
+﻿namespace Domain.Entities.ServiceCloud;
 
 public class Branch
 {

@@ -2,6 +2,7 @@
 using Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
 using Domain.Tenant.ServiceCloudTenant.Entities;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Configurations;
 
 namespace Persistence.Data
 {
@@ -30,7 +31,14 @@ namespace Persistence.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+
+            // ✅ APPLY ONLY TENANT CONFIGURATIONS
+            modelBuilder.ApplyConfigurationsFromAssembly(
+                typeof(ApplicationDbContext).Assembly,
+                ConfigurationScanner.IsTenantConfiguration  // Filter for Tenant only
+            );
             base.OnModelCreating(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }

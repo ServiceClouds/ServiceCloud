@@ -1,4 +1,4 @@
-﻿using Domain.Entities;
+﻿using Domain.Entities.ServiceCloud;
 using System;
 using System.Collections.Generic;
 using System.Text;

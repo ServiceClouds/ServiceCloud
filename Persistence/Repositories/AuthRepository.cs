@@ -1,7 +1,7 @@
 ﻿using Application.Abstractions.Commands.Login.GetCompanies;
 using Application.Abstractions.Commands.Login.VefityLogin;
 using Application.Abstractions.Repositories;
-using Domain.Entities;
+using Domain.Entities.ServiceCloud;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.MasterDbContext;
 

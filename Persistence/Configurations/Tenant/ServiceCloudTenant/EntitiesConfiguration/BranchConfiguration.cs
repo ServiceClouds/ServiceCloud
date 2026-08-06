@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Persistence.Configurations.Tenant.ServiceCloudTenant
+namespace Persistence.Configurations.Tenant.ServiceCloudTenant.EntitiesConfiguration
 {
     public class BranchConfiguration : IEntityTypeConfiguration<Branch>
     {
