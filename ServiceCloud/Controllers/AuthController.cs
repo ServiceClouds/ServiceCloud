@@ -1,10 +1,7 @@
 ﻿using Application.Abstractions.Commands.Login;
 using Application.Abstractions.Commands.Login.GetCompanies;
 using Application.Abstractions.Commands.Login.VefityLogin;
-using Application.Commands.Login;
-using Infrastructure.Authentication;
 using MediatR;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
 
@@ -28,12 +25,9 @@ public class AuthController : ControllerBase
     {
         var result = await _sender.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return BadRequest(result.ToApiResponse());
-        }
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 
     [HttpPost("get-companies")]
@@ -45,12 +39,9 @@ public class AuthController : ControllerBase
             new GetCompaniesByEmailQuery(request.Email),
             cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return BadRequest(result.ToApiResponse());
-        }
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 
     [HttpPost("verify-login")]
@@ -60,11 +51,8 @@ public class AuthController : ControllerBase
     {
         var result = await _sender.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-        {
-            return BadRequest(result.ToApiResponse());
-        }
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 }

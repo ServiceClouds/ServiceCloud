@@ -1,6 +1,4 @@
-﻿// Shared/Presentation/ResultMapper.cs
-using Shared.Response;
-using System.Text.Json;
+﻿using Shared.Response;
 
 namespace Shared.Presentation;
 
@@ -21,8 +19,7 @@ public static class ResultMapper
             {
                 MessageCode = 200,
                 MessageText = "Success",
-                MessageData = data,
-                Result = result.Value
+                MessageData = data
             };
         }
 
@@ -34,8 +31,7 @@ public static class ResultMapper
             {
                 Error = result.Error.Description,
                 Type = result.Error.GetType().Name
-            },
-            Result = null
+            }
         };
     }
 
@@ -50,8 +46,7 @@ public static class ResultMapper
             {
                 MessageCode = 200,
                 MessageText = "Success",
-                MessageData = result.Value,
-                Result = result.Value
+                MessageData = result.Value
             };
         }
 
@@ -59,8 +54,7 @@ public static class ResultMapper
         {
             MessageCode = GetStatusCode(result.Error),
             MessageText = result.Error.Description,
-            MessageData = errorMapper(result.Error),
-            Result = null
+            MessageData = errorMapper(result.Error)
         };
     }
 

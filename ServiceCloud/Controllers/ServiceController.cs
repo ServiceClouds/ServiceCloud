@@ -21,7 +21,6 @@ public class ServiceController : ControllerBase
         _sender = sender;
     }
 
-    // Create Endpoint
     [HttpPost]
     public async Task<IActionResult> Create(
         CreateServiceCommand command,
@@ -29,13 +28,11 @@ public class ServiceController : ControllerBase
     {
         var result = await _sender.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-            return BadRequest(result.ToApiResponse());
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 
-    // Get by Id Endpoint
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(
         int id,
@@ -45,13 +42,11 @@ public class ServiceController : ControllerBase
             new GetServiceByIdQuery(id),
             cancellationToken);
 
-        if (result.IsFailure)
-            return BadRequest(result.ToApiResponse());
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 
-    // Get Paged Endpoint
     [HttpGet]
     public async Task<IActionResult> GetPaged(
         [FromQuery] PaginationRequest request,
@@ -61,13 +56,11 @@ public class ServiceController : ControllerBase
             new GetPagedServicesQuery(request),
             cancellationToken);
 
-        if (result.IsFailure)
-            return BadRequest(result.ToApiResponse());
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 
-    // Update Endpoint
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
         int id,
@@ -81,25 +74,22 @@ public class ServiceController : ControllerBase
 
         var result = await _sender.Send(command, cancellationToken);
 
-        if (result.IsFailure)
-            return BadRequest(result.ToApiResponse());
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 
-    // Delete (Archive) Endpoint
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Archive(
         int id,
         CancellationToken cancellationToken)
     {
-        var command = new ArchiveServiceCommand(id);
+        var result = await _sender.Send(
+            new ArchiveServiceCommand(id),
+            cancellationToken);
 
-        var result = await _sender.Send(command, cancellationToken);
-
-        if (result.IsFailure)
-            return BadRequest(result.ToApiResponse());
-
-        return Ok(result.ToApiResponse());
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
     }
 }
