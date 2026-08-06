@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.Configurations.Tenant.ServiceCloudTenant.Service;
 
-public sealed class ServiceConfiguration : IEntityTypeConfiguration<Service>
+public sealed class ServiceConfiguration : IEntityTypeConfiguration<Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities.Service>
 {
-    public void Configure(EntityTypeBuilder<Service> builder)
+    public void Configure(EntityTypeBuilder<Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities.Service> builder)
     {
         builder.ToTable("Service");
 
