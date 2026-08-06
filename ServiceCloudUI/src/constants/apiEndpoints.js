@@ -5,3 +5,5 @@ const API_ENDPOINTS = {
         LOGIN: "/auth/login"
     }
 };
+
+export default API_ENDPOINTS;

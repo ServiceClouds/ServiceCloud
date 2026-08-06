@@ -9,19 +9,25 @@ function Login() {
     const [error, setError] = useState("");
 
     const handleContinue = async () => {
+        //test 
+        console.log("1. Continue clicked");
+
 
         try {
 
+             console.log("2. Calling getCompanies");
             setLoading(true);
             setError("");
 
             const companies = await getCompanies(email);
 
+             console.log("3. API Success");
             console.log(companies);
 
         }
         catch (err) {
-
+   
+              console.log("4. API Failed");
             setError("Unable to find companies.");
 
         }
