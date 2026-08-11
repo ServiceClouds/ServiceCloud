@@ -6,16 +6,16 @@ public static class ApiResponseFactory
 {
     public static ApiResponse CreateResponse<T>(Result<T> result)
     {
-        return result.ToApiResponse();
+        return ResultExtensions.ToApiResponse(result);
     }
 
     public static ApiResponse CreateResponse(Result result)
     {
-        return result.ToApiResponse();
+        return ResultExtensions.ToApiResponse(result);
     }
 
     public static ApiResponseLegacy CreateLegacyResponse<T>(Result<T> result)
     {
-        return result.ToLegacyApiResponse();
+        return ResultExtensions.ToLegacyApiResponse(result);
     }
 }

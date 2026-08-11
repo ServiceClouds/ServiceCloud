@@ -67,5 +67,39 @@ public class Company
             CreatedBy = createdBy,
             CreatedOn = DateTime.UtcNow
         };
+
+    }
+    public void Update(
+    string companyCode,
+    string companyName,
+    int countryId,
+    string timeZone,
+    string currencySymbol,
+    string imagePath,
+    int modifiedBy,
+    bool allowMigration,
+    string? databaseConnectionCode,
+    int? accountTypeId)
+    {
+        CompanyCode = companyCode;
+        CompanyName = companyName;
+        CountryId = countryId;
+        TimeZone = timeZone;
+        CurrencySymbol = currencySymbol;
+        ImagePath = imagePath;
+        AllowMigration = allowMigration;
+        DatabaseConnectionCode = databaseConnectionCode;
+        AccountTypeId = accountTypeId;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+    public void Archive(int modifiedBy)
+    {
+        IsArchived = true;
+        IsActive = false;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
     }
 }

@@ -11,6 +11,7 @@ using Persistence.Configurations;
 using Persistence.Data;
 using Persistence.Data.MasterDbContext;
 using Persistence.Repositories;
+using Persistence.Repositories.Common;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,7 +33,11 @@ builder.Services.AddDbContext<MasterTenantDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration["AppOptions:ConnectionStrings:MasterDatabase"]);
 });
+builder.Services.AddScoped<IMasterUnitOfWork, MasterUnitOfWork>();
 
+builder.Services.AddScoped(
+    typeof(IGenericRepository<>),
+    typeof(MasterRepository<>));
 // ============================================================================
 // TENANT DATABASE SERVICES
 // ============================================================================
@@ -125,9 +130,12 @@ builder.Services.AddCors(options =>
     {
         policy
             .WithOrigins(
+            ("http://localhost:5177"),
                 "http://localhost:5173",
                 "http://localhost:5174",
-                "http://localhost:5175"
+                "http://localhost:5175",
+                  "http://localhost:5176"
+
             )
             .AllowAnyHeader()
             .AllowAnyMethod();

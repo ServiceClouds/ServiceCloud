@@ -22,9 +22,14 @@ function Login() {
             setError("");
 
             const companies = await getCompanies(email);
+            console.log("Companies:", companies);
+console.log("Type:", typeof companies);
+console.log("Is Array:", Array.isArray(companies));
         
 
              console.log("3. API Success");
+
+            //sending to next means navigating
             navigate("/companies", {
     state: {
         email,

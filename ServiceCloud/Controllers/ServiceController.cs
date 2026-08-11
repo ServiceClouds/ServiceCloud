@@ -92,4 +92,5 @@ public class ServiceController : ControllerBase
             ? BadRequest(result.ToApiResponse())
             : Ok(result.ToApiResponse());
     }
+
 }

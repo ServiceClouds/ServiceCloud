@@ -8,18 +8,18 @@ export const getCompanies = async (email) => {
         email
     });
 
-    return response.data;
+    return response.data.messageData;
 };
 export const verifyLogin = async (request) => {
 
     const response = await api.post(API_ENDPOINTS.AUTH.VERIFY_LOGIN, request);
 
-    return response.data;
+    return response.data.messageData;
 };
 export const login = async (request) => {
 
     const response = await api.post(API_ENDPOINTS.AUTH.LOGIN, request);
 
-    return response.data;
+    return response.data.messageData;
 
 };
