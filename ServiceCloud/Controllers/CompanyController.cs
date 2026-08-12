@@ -1,9 +1,9 @@
 ﻿using Application.Common;
-using Application.Features.Companies.Commands.ArchiveCompany;
-using Application.Features.Companies.Queries.GetAllCompanies;
-using Application.Features.Companies.Queries.GetCompanyById;
-using Application.Features.Companies.Queries.GetPagedCompanies;
-using Application.Features.Masterfeatures.Companies.Commands.CreateCompany;
+using Application.Features.Masterfeatures.Companies.Commands.ArchiveCompany;
+using Application.Features.Masterfeatures.Companies.Queries.GetAllCompanies;
+using Application.Features.Masterfeatures.Companies.Queries.GetCompanyById;
+using Application.Features.Masterfeatures.Companies.Queries.GetPagedCompanies;
+using Application.Features .Masterfeatures.Companies.Commands.CreateCompany;
 using Application.Features.Masterfeatures.Companies.Commands.UpdateCompany;
 using MediatR;
 using Microsoft.AspNetCore.Http;

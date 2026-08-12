@@ -1,32 +1,44 @@
 ﻿using Application.Common;
-using Application.Features.TenantFeatures.Services.Commands.DeleteService;
-using Application.Features.TenantFeatures.Services.Queries.GetPagedServices;
-using Application.Features.TenantFeatures.Services.Queries.GetServiceById;
-using Application.Features.TenantFeatures.Services.Commands.CreateService;
-using Application.Features.TenantFeatures.Services.Commands.UpdateService;
+using Application.Features.Masterfeatures.Branches.Commands.Archive_Branch;
+using Application.Features.Masterfeatures.Branches.Commands.CreateBranch;
+using Application.Features.Masterfeatures.Branches.Commands.UpdateBranch;
+using Application.Features.Masterfeatures.Branches.Queries.GetAllBranches;
+using Application.Features.Masterfeatures.Branches.Queries.GetBranchById;
+using Application.Features.Masterfeatures.Branches.Queries.GetPagedBranches;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
-
 namespace API.Controllers;
 
 [ApiController]
-[Route("api/services")]
-public class ServiceController : ControllerBase
+[Route("api/branches")]
+public class BranchController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public ServiceController(ISender sender)
+    public BranchController(ISender sender)
     {
         _sender = sender;
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateServiceCommand command,
+        CreateBranchCommand command,
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(command, cancellationToken);
+
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
+    }
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAll(
+    CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(
+            new GetAllBranchesQuery(),
+            cancellationToken);
 
         return result.IsFailure
             ? BadRequest(result.ToApiResponse())
@@ -39,7 +51,7 @@ public class ServiceController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetServiceByIdQuery(id),
+            new GetBranchByIdQuery(id),
             cancellationToken);
 
         return result.IsFailure
@@ -53,7 +65,7 @@ public class ServiceController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetPagedServicesQuery(request),
+            new GetPagedBranchesQuery(request),
             cancellationToken);
 
         return result.IsFailure
@@ -64,15 +76,17 @@ public class ServiceController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
         int id,
-        UpdateServiceCommand command,
+        UpdateBranchCommand command,
         CancellationToken cancellationToken)
     {
-        if (id != command.ServiceId)
+        if (id != command.BranchId)
         {
             return BadRequest("Route id does not match request id.");
         }
 
-        var result = await _sender.Send(command, cancellationToken);
+        var result = await _sender.Send(
+            command,
+            cancellationToken);
 
         return result.IsFailure
             ? BadRequest(result.ToApiResponse())
@@ -85,12 +99,11 @@ public class ServiceController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new ArchiveServiceCommand(id),
+            new ArchiveBranchCommand(id),
             cancellationToken);
 
         return result.IsFailure
             ? BadRequest(result.ToApiResponse())
             : Ok(result.ToApiResponse());
     }
-
 }

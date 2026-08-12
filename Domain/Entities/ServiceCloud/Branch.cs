@@ -109,5 +109,61 @@ public class Branch
             CreatedBy = createdBy,
             CreatedOn = DateTime.UtcNow
         };
+
     }
+    public void Update(
+    string branchCode,
+    int countryId,
+    int modifiedBy,
+    string? branchName = null,
+    string? stateCountyName = null,
+    string? cityName = null,
+    string? timeZone = null,
+    string? currency = null,
+    string? address1 = null,
+    string? address2 = null,
+    string? postalCode = null,
+    string? email = null,
+    string? mobile = null,
+    string? phone1 = null,
+    string? fax = null,
+    bool isOnline = false,
+    string? termsOfServiceUrl = null,
+    string? privacyPolicyUrl = null,
+    int? dateFormatId = null,
+    bool isActive = true)
+    {
+        BranchCode = branchCode;
+        BranchName = branchName;
+        CountryId = countryId;
+        StateCountyName = stateCountyName;
+        CityName = cityName;
+        TimeZone = timeZone;
+        Currency = currency;
+        Address1 = address1;
+        Address2 = address2;
+        PostalCode = postalCode;
+        Email = email;
+        Mobile = mobile;
+        Phone1 = phone1;
+        Fax = fax;
+        IsOnline = isOnline;
+        TermsOfServiceUrl = termsOfServiceUrl;
+        PrivacyPolicyUrl = privacyPolicyUrl;
+        DateFormatId = dateFormatId;
+        IsActive = isActive;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+    public void Archive(int modifiedBy)
+    {
+        IsArchived = true;
+        IsActive = false;
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+
 }
