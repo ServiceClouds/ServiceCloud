@@ -1,32 +1,34 @@
 ﻿using Application.Common;
-using Application.Features.TenantFeatures.Services.Commands.ArchiveService;
-using Application.Features.TenantFeatures.Services.Queries.GetPagedServices;
-using Application.Features.TenantFeatures.Services.Queries.GetServiceById;
-using Application.Features.TenantFeatures.Services.Commands.CreateService;
-using Application.Features.TenantFeatures.Services.Commands.UpdateService;
+using Application.Features.Masterfeatures.Staffs.Commands.CreateStaff;
+using Application.Features.Masterfeatures.Staffs.Commands.UpdateStaff;
+using Application.Features.Masterfeatures.Staffs.Queries.GetAllStaff;
+using Application.Features.Masterfeatures.Staffs.Queries.GetPagedStaff;
+using Application.Features.Masterfeatures.Staffs.Queries.GetStaffById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
 
-namespace API.Controllers;
+namespace Api.Controllers;
 
 [ApiController]
-[Route("api/services")]
-public class ServiceController : ControllerBase
+[Route("api/staff")]
+public class StaffController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public ServiceController(ISender sender)
+    public StaffController(ISender sender)
     {
         _sender = sender;
     }
 
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateServiceCommand command,
+        CreateStaffCommand command,
         CancellationToken cancellationToken)
     {
-        var result = await _sender.Send(command, cancellationToken);
+        var result = await _sender.Send(
+            command,
+            cancellationToken);
 
         return result.IsFailure
             ? BadRequest(result.ToApiResponse())
@@ -39,7 +41,7 @@ public class ServiceController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetServiceByIdQuery(id),
+            new GetStaffByIdQuery(id),
             cancellationToken);
 
         return result.IsFailure
@@ -53,7 +55,20 @@ public class ServiceController : ControllerBase
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(
-            new GetPagedServicesQuery(request),
+            new GetPagedStaffQuery(request),
+            cancellationToken);
+
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
+    }
+
+    [HttpGet("all")]
+    public async Task<IActionResult> GetAll(
+        CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(
+            new GetAllStaffQuery(),
             cancellationToken);
 
         return result.IsFailure
@@ -64,33 +79,21 @@ public class ServiceController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
         int id,
-        UpdateServiceCommand command,
+        UpdateStaffCommand command,
         CancellationToken cancellationToken)
     {
-        if (id != command.ServiceId)
+        if (id != command.StaffId)
         {
-            return BadRequest("Route id does not match request id.");
+            return BadRequest(
+                "Route id does not match request id.");
         }
 
-        var result = await _sender.Send(command, cancellationToken);
-
-        return result.IsFailure
-            ? BadRequest(result.ToApiResponse())
-            : Ok(result.ToApiResponse());
-    }
-
-    [HttpDelete("{id:int}")]
-    public async Task<IActionResult> Archive(
-        int id,
-        CancellationToken cancellationToken)
-    {
         var result = await _sender.Send(
-            new ArchiveServiceCommand(id),
+            command,
             cancellationToken);
 
         return result.IsFailure
             ? BadRequest(result.ToApiResponse())
             : Ok(result.ToApiResponse());
     }
-
 }
