@@ -1,9 +1,9 @@
 ﻿using Application.Common;
 using Application.Features.Services.Commands.ArchiveService;
-using Application.Features.Services.Commands.CreateService;
-using Application.Features.Services.Commands.UpdateService;
 using Application.Features.Services.Queries.GetPagedServices;
 using Application.Features.Services.Queries.GetServiceById;
+using Application.Features.TenantFeatures.Services.Commands.CreateService;
+using Application.Features.TenantFeatures.Services.Commands.UpdateService;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;

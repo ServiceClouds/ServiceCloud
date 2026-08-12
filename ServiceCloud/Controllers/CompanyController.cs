@@ -1,10 +1,10 @@
 ﻿using Application.Common;
 using Application.Features.Companies.Commands.ArchiveCompany;
-using Application.Features.Companies.Commands.CreateCompany;
-using Application.Features.Companies.Commands.UpdateCompany;
 using Application.Features.Companies.Queries.GetAllCompanies;
 using Application.Features.Companies.Queries.GetCompanyById;
 using Application.Features.Companies.Queries.GetPagedCompanies;
+using Application.Features.Masterfeatures.Companies.Commands.CreateCompany;
+using Application.Features.Masterfeatures.Companies.Commands.UpdateCompany;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
