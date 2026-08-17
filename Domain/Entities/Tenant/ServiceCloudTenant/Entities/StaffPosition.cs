@@ -2,32 +2,69 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Tenant.ServiceCloudTenant.Entities;
 
 [Table("StaffPosition")]
-[Index("IsActive", Name = "IX_StaffPosition_IsActive")]
 public partial class StaffPosition
 {
+    private StaffPosition()
+    {
+    }
+
     [Key]
-    public int StaffPositionId { get; set; }
+    public int StaffPositionId { get; private set; }
 
     [StringLength(100)]
-    public string PositionName { get; set; } = null!;
+    public string PositionName { get; private set; } = null!;
 
-    public bool IsActive { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime CreatedOn { get; set; }
-
-    public int CreatedBy { get; set; }
+    public bool IsActive { get; private set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime? ModifiedOn { get; set; }
+    public DateTime CreatedOn { get; private set; }
 
-    public int? ModifiedBy { get; set; }
+    public int CreatedBy { get; private set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? ModifiedOn { get; private set; }
+
+    public int? ModifiedBy { get; private set; }
+
 
     [InverseProperty("StaffPosition")]
-    public virtual ICollection<Staff> Staff { get; set; } = new List<Staff>();
+    public virtual ICollection<Staff> Staff { get; private set; }
+        = new List<Staff>();
+
+
+    public static StaffPosition Create(
+        string positionName,
+        int createdBy)
+    {
+        return new StaffPosition
+        {
+            PositionName = positionName,
+            IsActive = true,
+            CreatedOn = DateTime.UtcNow,
+            CreatedBy = createdBy
+        };
+    }
+
+
+    public void Update(
+        string positionName,
+        int modifiedBy)
+    {
+        PositionName = positionName;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+
+    public void Archive(int modifiedBy)
+    {
+        IsActive = false;
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
 }

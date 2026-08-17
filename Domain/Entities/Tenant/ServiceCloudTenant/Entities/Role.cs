@@ -2,31 +2,68 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+
 namespace Domain.Tenant.ServiceCloudTenant.Entities;
 
 [Table("Role")]
-[Index("IsActive", Name = "IX_Role_IsActive")]
 public partial class Role
 {
+    private Role()
+    {
+    }
+
     [Key]
-    public int RoleId { get; set; }
+    public int RoleId { get; private set; }
 
     [StringLength(100)]
-    public string RoleName { get; set; } = null!;
+    public string RoleName { get; private set; } = null!;
 
-    public bool IsActive { get; set; }
-
-    [Column(TypeName = "datetime")]
-    public DateTime CreatedOn { get; set; }
-
-    public int CreatedBy { get; set; }
+    public bool IsActive { get; private set; }
 
     [Column(TypeName = "datetime")]
-    public DateTime? ModifiedOn { get; set; }
+    public DateTime CreatedOn { get; private set; }
 
-    public int? ModifiedBy { get; set; }
+    public int CreatedBy { get; private set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime? ModifiedOn { get; private set; }
+
+    public int? ModifiedBy { get; private set; }
 
     [InverseProperty("Role")]
-    public virtual ICollection<StaffBranch> StaffBranches { get; set; } = new List<StaffBranch>();
+    public virtual ICollection<StaffBranch> StaffBranches { get; private set; }
+        = new List<StaffBranch>();
+
+
+    public static Role Create(
+        string roleName,
+        int createdBy)
+    {
+        return new Role
+        {
+            RoleName = roleName,
+            IsActive = true,
+            CreatedOn = DateTime.UtcNow,
+            CreatedBy = createdBy
+        };
+    }
+
+
+    public void Update(
+        string roleName,
+        int modifiedBy)
+    {
+        RoleName = roleName;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+
+    public void Archive(int modifiedBy)
+    {
+        IsActive = false;
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
 }
