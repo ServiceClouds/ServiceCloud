@@ -6,7 +6,6 @@ using Application.Features.Masterfeatures.Companies.Queries.GetPagedCompanies;
 using Application.Features.Masterfeatures.Companies.Commands.CreateCompany;
 using Application.Features.Masterfeatures.Companies.Commands.UpdateCompany;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
 

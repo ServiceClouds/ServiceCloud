@@ -7,197 +7,82 @@ function LoginView({
     error,
     handleContinue
 }) {
+
     return (
+
         <div className="login-page">
 
-            {/* LEFT BRANDING PANEL */}
-            <div className="login-brand-panel">
+            <div className="login-left">
 
-                <div className="brand-content">
+                <div className="brand">
+                    <h1>ServiceCloud</h1>
+                    <p>Multi-Tenant Management System</p>
+                </div>
 
-                    <div className="brand-logo">
-                        <span className="brand-logo-icon">S</span>
+                <div className="welcome">
+                    <h2>Welcome Back</h2>
+                    
+                    <p>Enter your email address to continue.</p>
+                </div>
 
-                        <div>
-                            <h1>ServiceCloud</h1>
-                            <span>Enterprise Management Platform</span>
-                        </div>
-                    </div>
+                <div className="form-group">
 
-                    <div className="brand-message">
-                        <span className="eyebrow">WELCOME TO SERVICECLOUD</span>
+                    <label>Email Address</label>
 
-                        <h2>
-                            Everything your business needs,
-                            <strong> in one place.</strong>
-                        </h2>
+                    <input
+                        type="email"
+                        placeholder="admin@servicecloud.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
 
-                        <p>
-                            Manage your companies, branches, staff and services
-                            through one secure and centralized platform.
+                    {error && (
+                        <p className="error">
+                            {error}
                         </p>
-                    </div>
-
-                    <div className="feature-list">
-
-                        <div className="feature-item">
-                            <div className="feature-icon">✓</div>
-                            <div>
-                                <strong>Centralized Management</strong>
-                                <span>Manage your entire organization from one platform.</span>
-                            </div>
-                        </div>
-
-                        <div className="feature-item">
-                            <div className="feature-icon">✓</div>
-                            <div>
-                                <strong>Secure Access</strong>
-                                <span>Enterprise-grade authentication and access control.</span>
-                            </div>
-                        </div>
-
-                        <div className="feature-item">
-                            <div className="feature-icon">✓</div>
-                            <div>
-                                <strong>Multi-Branch Support</strong>
-                                <span>Work with multiple companies and branches seamlessly.</span>
-                            </div>
-                        </div>
-
-                    </div>
+                    )}
 
                 </div>
 
-                <div className="brand-footer">
-                    © 2026 ServiceCloud. All rights reserved.
+                <button
+                    className="btn-login"
+                    onClick={handleContinue}
+                    disabled={loading}
+                >
+                    {loading ? "Please wait..." : "Continue"}
+                </button>
+
+                <div className="progress">
+                    <div className="circle active"></div>
+                    <div className="line"></div>
+                    <div className="circle"></div>
+                    <div className="line"></div>
+                    <div className="circle"></div>
+                </div>
+
+                <div className="progress-text">
+                    <span>Email</span>
+                    <span>Company</span>
+                    <span>Branch</span>
                 </div>
 
             </div>
 
+            <div className="login-right">
 
-            {/* RIGHT LOGIN PANEL */}
-            <div className="login-form-panel">
+                <h2>Secure Enterprise Platform</h2>
 
-                <div className="login-form-wrapper">
-
-                    <div className="mobile-brand">
-                        <div className="brand-logo">
-                            <span className="brand-logo-icon">S</span>
-
-                            <div>
-                                <h1>ServiceCloud</h1>
-                                <span>Enterprise Platform</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="login-heading">
-
-                        <span className="form-eyebrow">
-                            ACCOUNT ACCESS
-                        </span>
-
-                        <h2>Welcome back</h2>
-
-                        <p>
-                            Enter your email address to continue to your workspace.
-                        </p>
-
-                    </div>
-
-                    <div className="login-form">
-
-                        <div className="form-group">
-
-                            <label htmlFor="email">
-                                Email address
-                            </label>
-
-                            <div className="input-wrapper">
-
-                                <span className="input-icon">
-                                    @
-                                </span>
-
-                                <input
-                                    id="email"
-                                    type="email"
-                                    placeholder="name@company.com"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter") {
-                                            handleContinue();
-                                        }
-                                    }}
-                                />
-
-                            </div>
-
-                        </div>
-
-                        {error && (
-                            <div className="login-error">
-                                <span>!</span>
-                                {error}
-                            </div>
-                        )}
-
-                        <button
-                            className="btn-login"
-                            onClick={handleContinue}
-                            disabled={loading || !email.trim()}
-                        >
-                            {loading ? (
-                                <>
-                                    <span className="spinner"></span>
-                                    Checking account...
-                                </>
-                            ) : (
-                                <>
-                                    Continue
-                                    <span className="button-arrow">→</span>
-                                </>
-                            )}
-                        </button>
-
-                    </div>
-
-
-                    {/* LOGIN PROGRESS */}
-                    <div className="login-progress">
-
-                        <div className="progress-step active">
-                            <div className="progress-circle">1</div>
-                            <span>Email</span>
-                        </div>
-
-                        <div className="progress-line"></div>
-
-                        <div className="progress-step">
-                            <div className="progress-circle">2</div>
-                            <span>Company</span>
-                        </div>
-
-                        <div className="progress-line"></div>
-
-                        <div className="progress-step">
-                            <div className="progress-circle">3</div>
-                            <span>Branch</span>
-                        </div>
-
-                    </div>
-
-                    <p className="security-note">
-                        🔒 Your information is securely encrypted and protected.
-                    </p>
-
-                </div>
+                <p>
+                    Access your company workspace securely using
+                    ServiceCloud Authentication.
+                </p>
 
             </div>
 
         </div>
+
     );
+
 }
 
 export default LoginView;
