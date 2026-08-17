@@ -38,10 +38,11 @@ function BranchSelection() {
 
             console.log("Login Response:", response);
 
-            // Save JWT
-            localStorage.setItem("accessToken", response.accessToken);
+            localStorage.setItem(
+                "accessToken",
+                response.accessToken
+            );
 
-            // Navigate to Dashboard
             navigate("/dashboard");
 
         }
@@ -65,11 +66,13 @@ function BranchSelection() {
 
             <div className="login-card">
 
-                <h2>Select Branch</h2>
+                <h2>Select your branch</h2>
 
-                <p>{company.companyName}</p>
-
-                <p>{email}</p>
+                <p>
+                    {company?.companyName}
+                    <br />
+                    {email}
+                </p>
 
                 {branches.map((branch) => (
 
@@ -82,9 +85,7 @@ function BranchSelection() {
                         }`}
                         onClick={() => setSelectedBranch(branch)}
                     >
-
                         {branch.branchName}
-
                     </div>
 
                 ))}
@@ -97,9 +98,9 @@ function BranchSelection() {
 
                 <button
                     onClick={handleLogin}
-                    disabled={loading}
+                    disabled={loading || !selectedBranch}
                 >
-                    {loading ? "Please wait..." : "Login"}
+                    {loading ? "Signing in..." : "Enter Workspace →"}
                 </button>
 
             </div>

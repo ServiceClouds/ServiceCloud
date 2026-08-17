@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Auth.css";
 
 function CompanySelection() {
+
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -12,6 +13,7 @@ function CompanySelection() {
     const [selectedCompany, setSelectedCompany] = useState(null);
 
     const handleContinue = () => {
+
         if (!selectedCompany) return;
 
         navigate("/password", {
@@ -20,16 +22,22 @@ function CompanySelection() {
                 company: selectedCompany
             }
         });
+
     };
 
     return (
+
         <div className="login-container">
 
             <div className="login-card">
 
-                <h2>Select Company</h2>
+                <h2>Select your company</h2>
 
-                <p>{email}</p>
+                <p>
+                    Choose the company you want to access.
+                    <br />
+                    {email}
+                </p>
 
                 {companies.map(company => (
 
@@ -47,14 +55,19 @@ function CompanySelection() {
 
                 ))}
 
-                <button onClick={handleContinue}>
-                    Continue
+                <button
+                    onClick={handleContinue}
+                    disabled={!selectedCompany}
+                >
+                    Continue →
                 </button>
 
             </div>
 
         </div>
+
     );
+
 }
 
 export default CompanySelection;

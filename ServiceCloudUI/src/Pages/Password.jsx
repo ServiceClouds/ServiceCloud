@@ -59,15 +59,24 @@ function Password() {
 
             <div className="login-card">
 
-                <h2>{company.companyName}</h2>
+                <h2>Enter your password</h2>
 
-                <p>{email}</p>
+                <p>
+                    {company?.companyName}
+                    <br />
+                    {email}
+                </p>
 
                 <input
                     type="password"
-                    placeholder="Enter Password"
+                    placeholder="Enter your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && password) {
+                            login();
+                        }
+                    }}
                 />
 
                 {error && (
@@ -78,9 +87,9 @@ function Password() {
 
                 <button
                     onClick={login}
-                    disabled={loading}
+                    disabled={loading || !password}
                 >
-                    {loading ? "Please wait..." : "Continue"}
+                    {loading ? "Verifying..." : "Continue →"}
                 </button>
 
             </div>
