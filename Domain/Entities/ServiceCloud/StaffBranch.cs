@@ -29,5 +29,9 @@ public class StaffBranch
             CreatedOn = DateTime.UtcNow
         };
     }
+    public void SetActive(bool isActive)
+    {
+        IsActive = isActive;
+    }
 
 }
