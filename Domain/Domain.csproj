@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Entities\Tenant\ServiceCloudTenant\ProductEntities\" />
     <Folder Include="Exceptions\" />
     <Folder Include="ValueObjects\" />
   </ItemGroup>
