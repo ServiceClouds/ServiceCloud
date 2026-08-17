@@ -1,11 +1,10 @@
 ﻿using Application.Abstractions.Data;
+using Application.Abstractions.Repositories.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace Persistence.Repositories.Common { 
+namespace Persistence.Repositories.Common;
+
 public abstract class ReadRepository<TContext, TEntity>
     : IReadRepository<TEntity>
     where TContext : IDbContext
@@ -20,7 +19,15 @@ public abstract class ReadRepository<TContext, TEntity>
 
     public IQueryable<TEntity> GetAll(bool asNoTracking = true)
     {
-        return _context.Query<TEntity>(asNoTracking);
+        IQueryable<TEntity> query = _context
+            .GetDbSet<TEntity>();
+
+        if (asNoTracking)
+        {
+            query = query.AsNoTracking();
+        }
+
+        return query;
     }
 
     public async Task<TEntity?> FirstOrDefaultAsync(
@@ -29,7 +36,9 @@ public abstract class ReadRepository<TContext, TEntity>
         CancellationToken cancellationToken = default)
     {
         return await GetAll(asNoTracking)
-            .FirstOrDefaultAsync(predicate, cancellationToken);
+            .FirstOrDefaultAsync(
+                predicate,
+                cancellationToken);
     }
 
     public async Task<bool> ExistsAsync(
@@ -37,7 +46,9 @@ public abstract class ReadRepository<TContext, TEntity>
         CancellationToken cancellationToken = default)
     {
         return await GetAll()
-            .AnyAsync(predicate, cancellationToken);
+            .AnyAsync(
+                predicate,
+                cancellationToken);
     }
 
     public async Task<int> CountAsync(
@@ -46,9 +57,11 @@ public abstract class ReadRepository<TContext, TEntity>
     {
         IQueryable<TEntity> query = GetAll();
 
-        if (predicate != null)
+        if (predicate is not null)
+        {
             query = query.Where(predicate);
+        }
 
         return await query.CountAsync(cancellationToken);
     }
-} }
+}

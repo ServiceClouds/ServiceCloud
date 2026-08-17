@@ -1,8 +1,8 @@
 ﻿using Application.Common;
 using MediatR;
-using Persistence.Repositories.Common;
 using Shared.Response;
 using Domain.Entities.ServiceCloud;
+using Application.Abstractions.Repositories.Common;
 
 namespace Application.Features.Masterfeatures.Branches.Commands.CreateBranch
 {

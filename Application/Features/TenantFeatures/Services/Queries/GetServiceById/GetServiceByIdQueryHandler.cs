@@ -9,7 +9,8 @@ public sealed class GetServiceByIdQueryHandler
 {
     private readonly IServiceRepository _repository;
 
-    public GetServiceByIdQueryHandler(IServiceRepository repository)
+    public GetServiceByIdQueryHandler(
+        IServiceRepository repository)
     {
         _repository = repository;
     }
@@ -18,17 +19,29 @@ public sealed class GetServiceByIdQueryHandler
         GetServiceByIdQuery request,
         CancellationToken cancellationToken)
     {
-        var result = await _repository.GetByIdAsync(
-            
-            request.ServiceId,
-            cancellationToken);
+        // ============================================================
+        // 1. Get the active service
+        // ============================================================
 
-        if (result.IsFailure)
+        var service = await _repository.FirstOrDefaultAsync(
+            x =>
+                x.ServiceId == request.ServiceId &&
+                !x.IsArchived,
+            cancellationToken: cancellationToken);
+
+        // ============================================================
+        // 2. Service not found
+        // ============================================================
+
+        if (service is null)
         {
-            return Result<GetServiceByIdResponse>.Failure(result.Error);
+            return Result<GetServiceByIdResponse>.Failure(
+                Error.NotFound("Service not found."));
         }
 
-        var service = result.Value!;
+        // ============================================================
+        // 3. Map entity to response
+        // ============================================================
 
         var response = new GetServiceByIdResponse(
             service.ServiceId,
@@ -39,6 +52,10 @@ public sealed class GetServiceByIdQueryHandler
             service.HasBranchPermission,
             service.AllowBranchEditPrice
         );
+
+        // ============================================================
+        // 4. Return successful result
+        // ============================================================
 
         return Result<GetServiceByIdResponse>.Success(response);
     }

@@ -2,7 +2,7 @@
 using Domain.Entities.ServiceCloud;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories.Common;
+using Application.Abstractions.Repositories.Common;
 using Shared.Response;
 
 namespace Application.Features.Masterfeatures.Branches.Queries.GetPagedBranches

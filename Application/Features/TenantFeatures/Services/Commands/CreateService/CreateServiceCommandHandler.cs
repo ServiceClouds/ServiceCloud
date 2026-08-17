@@ -17,8 +17,7 @@ public sealed class CreateServiceCommandHandler
     public CreateServiceCommandHandler(
         IServiceRepository repository,
         IUnitOfWork unitOfWork,
-        IUserContext userContext
-        )
+        IUserContext userContext)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
@@ -29,21 +28,30 @@ public sealed class CreateServiceCommandHandler
         CreateServiceCommand request,
         CancellationToken cancellationToken)
     {
-        // 1. Check Category
+        // ============================================================
+        // 1. Validate Service Category
+        // ============================================================
 
-        var categoryExists = await _repository.CategoryExistsAsync(
-            
-            request.ServiceCategoryId,
-            cancellationToken);
+        var categoryExistsResult =
+            await _repository.CategoryExistsAsync(
+                request.ServiceCategoryId,
+                cancellationToken);
 
-        if (categoryExists.IsFailure)
-            return Result<CreateServiceResponse>.Failure(categoryExists.Error);
+        if (categoryExistsResult.IsFailure)
+        {
+            return Result<CreateServiceResponse>
+                .Failure(categoryExistsResult.Error);
+        }
 
-        if (!categoryExists.Value)
+        if (!categoryExistsResult.Value)
+        {
             return Result<CreateServiceResponse>.Failure(
                 Error.NotFound("Service Category not found."));
+        }
 
-        // 2. Create Entity
+        // ============================================================
+        // 2. Create Domain Entity
+        // ============================================================
 
         var service = Service.Create(
             request.ServiceCategoryId,
@@ -56,29 +64,36 @@ public sealed class CreateServiceCommandHandler
             request.AllowBranchEditPrice,
             request.AppSourceTypeId);
 
-        // 3. Add
+        // ============================================================
+        // 3. Add Entity
+        // ============================================================
+        // Generic repository handles adding the entity.
+        // No database context is accessed directly here.
 
-        var addResult = await _repository.AddAsync(
-      
-            service,
-            cancellationToken);
+        _repository.Add(service);
 
-        if (addResult.IsFailure)
-            return Result<CreateServiceResponse>.Failure(addResult.Error);
+        // ============================================================
+        // 4. Commit Transaction
+        // ============================================================
 
-        // 4. Save
-
-        var saveResult = await _unitOfWork.SaveChangesAsync(
-            cancellationToken);
+        var saveResult =
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         if (saveResult.IsFailure)
-            return Result<CreateServiceResponse>.Failure(saveResult.Error);
+        {
+            return Result<CreateServiceResponse>
+                .Failure(saveResult.Error);
+        }
 
-        // 5. Return response
+        // ============================================================
+        // 5. Return Response
+        // ============================================================
+
         var response = new CreateServiceResponse(
-        service.ServiceId,
-        service.ServiceName!
-);
-        return Result<CreateServiceResponse>.Success(response);
+            service.ServiceId,
+            service.ServiceName!);
+
+        return Result<CreateServiceResponse>
+            .Success(response);
     }
 }

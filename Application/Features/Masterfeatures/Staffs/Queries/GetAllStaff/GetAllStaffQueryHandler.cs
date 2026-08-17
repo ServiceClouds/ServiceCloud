@@ -1,7 +1,8 @@
-﻿using Domain.Entities.ServiceCloud;
+﻿using Application.Abstractions.Repositories.Common;
+using Domain.Entities.ServiceCloud;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Persistence.Repositories.Common;
+
 using Shared.Response;
 
 namespace Application.Features.Masterfeatures.Staffs.Queries.GetAllStaff;

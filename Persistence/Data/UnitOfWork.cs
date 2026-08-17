@@ -1,36 +1,25 @@
 ﻿using Application.Abstractions.Data;
-using Application.Common;
 using Shared.Response;
 
-namespace Persistence.Data
+namespace Persistence.Data;
+
+public sealed class UnitOfWork : IUnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    private readonly IApplicationDbContext _context;
+
+    public UnitOfWork(
+        IApplicationDbContext context)
     {
-        private readonly LazyApplicationDbContext _lazyContext;
-        private readonly IUserContext _userContext;
+        _context = context;
+    }
 
-        public UnitOfWork(
-            LazyApplicationDbContext lazyContext, IUserContext userContext)
-        {
-            _lazyContext = lazyContext;
-            _userContext = userContext;
-        }
+    public async Task<Result<int>> SaveChangesAsync(
+        CancellationToken cancellationToken = default)
+    {
+        var affectedRows =
+            await _context.SaveChangesAsync(
+                cancellationToken);
 
-        public async Task<Result<int>> SaveChangesAsync(
-         
-            CancellationToken cancellationToken = default)
-        {
-            var contextResult = await _lazyContext.GetAsync(_userContext.CompanyId);
-
-            if (contextResult.IsFailure)
-            {
-                return Result<int>.Failure(contextResult.Error);
-            }
-
-            var affectedRows = await contextResult.Value
-                .SaveChangesAsync(cancellationToken);
-
-            return Result<int>.Success(affectedRows);
-        }
+        return Result<int>.Success(affectedRows);
     }
 }

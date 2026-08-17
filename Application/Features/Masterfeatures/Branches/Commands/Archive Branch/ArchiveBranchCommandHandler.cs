@@ -1,6 +1,6 @@
 ﻿using Application.Common;
 using MediatR;
-using Persistence.Repositories.Common;
+using Application.Abstractions.Repositories.Common;
 using Shared.Response;
 using Domain.Entities.ServiceCloud;
 

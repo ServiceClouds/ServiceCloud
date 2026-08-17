@@ -8,8 +8,7 @@ namespace Application.Features.TenantFeatures.Services.Commands.DeleteService;
 
 public sealed class ArchiveServiceCommandHandler
     : ICommandHandler<ArchiveServiceCommand, ArchiveServiceResponse>
-
-    {
+{
     private readonly IServiceRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserContext _userContext;
@@ -17,8 +16,7 @@ public sealed class ArchiveServiceCommandHandler
     public ArchiveServiceCommandHandler(
         IServiceRepository repository,
         IUnitOfWork unitOfWork,
-        IUserContext userContext
-        )
+        IUserContext userContext)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
@@ -29,41 +27,54 @@ public sealed class ArchiveServiceCommandHandler
         ArchiveServiceCommand request,
         CancellationToken cancellationToken)
     {
-        // 1. Get existing service
-        var serviceResult = await _repository.GetByIdAsync(
-            
-            request.ServiceId,
-            cancellationToken);
+        // ============================================================
+        // 1. Get the existing active service
+        // ============================================================
 
-        if (serviceResult.IsFailure)
-            return Result<ArchiveServiceResponse>.Failure(serviceResult.Error);
+        var service = await _repository.FirstOrDefaultAsync(
+            x =>
+                x.ServiceId == request.ServiceId &&
+                !x.IsArchived,
+            cancellationToken: cancellationToken);
 
-        var service = serviceResult.Value!;
+        if (service is null)
+        {
+            return Result<ArchiveServiceResponse>.Failure(
+                Error.NotFound("Service not found."));
+        }
 
-        // 2. Archive entity
+        // ============================================================
+        // 2. Archive the entity through the domain method
+        // ============================================================
+
         service.Archive(_userContext.StaffId);
 
-        // 3. Mark entity as modified
-        var updateResult = await _repository.UpdateAsync(
-     
-            service);
+        // ============================================================
+        // 3. Mark the entity as modified
+        // ============================================================
 
-        if (updateResult.IsFailure)
-            return Result<ArchiveServiceResponse>.Failure(updateResult.Error);
+        _repository.Update(service);
 
+        // ============================================================
         // 4. Save changes
-        var saveResult = await _unitOfWork.SaveChangesAsync(
-            
-            cancellationToken);
+        // ============================================================
+
+        var saveResult =
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         if (saveResult.IsFailure)
-            return Result<ArchiveServiceResponse>.Failure(saveResult.Error);
+        {
+            return Result<ArchiveServiceResponse>.Failure(
+                saveResult.Error);
+        }
 
-        // 5. Response
+        // ============================================================
+        // 5. Return response
+        // ============================================================
+
         var response = new ArchiveServiceResponse(
             service.ServiceId,
-            service.ServiceName!
-        );
+            service.ServiceName!);
 
         return Result<ArchiveServiceResponse>.Success(response);
     }

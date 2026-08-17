@@ -1,11 +1,12 @@
 ﻿using Application.Common;
 using MediatR;
-using Persistence.Repositories.Common;
+
 using Shared.Response;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Domain.Entities.ServiceCloud;
+using Application.Abstractions.Repositories.Common;
 
 namespace Application.Features.Masterfeatures.Branches.Commands.UpdateBranch
 {

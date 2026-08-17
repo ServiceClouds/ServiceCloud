@@ -6,11 +6,14 @@ using Shared.Response;
 namespace Application.Features.TenantFeatures.Services.Queries.GetPagedServices;
 
 public sealed class GetPagedServicesQueryHandler
-    : IQueryHandler<GetPagedServicesQuery, PagedResponse<GetPagedServicesResponse>>
+    : IQueryHandler<
+        GetPagedServicesQuery,
+        PagedResponse<GetPagedServicesResponse>>
 {
     private readonly IServiceRepository _repository;
 
-    public GetPagedServicesQueryHandler(IServiceRepository repository)
+    public GetPagedServicesQueryHandler(
+        IServiceRepository repository)
     {
         _repository = repository;
     }
@@ -19,8 +22,11 @@ public sealed class GetPagedServicesQueryHandler
         GetPagedServicesQuery request,
         CancellationToken cancellationToken)
     {
+        // ============================================================
+        // 1. Get paginated services from the tenant repository
+        // ============================================================
+
         var result = await _repository.GetPagedAsync(
-      
             request.Pagination,
             cancellationToken);
 
@@ -30,23 +36,28 @@ public sealed class GetPagedServicesQueryHandler
                 .Failure(result.Error);
         }
 
+        // ============================================================
+        // 2. Map domain entities to query response DTOs
+        // ============================================================
+
         var response = new PagedResponse<GetPagedServicesResponse>
         {
             Items = result.Value.Items
-                .Select(x => new GetPagedServicesResponse(
-                    x.ServiceId,
-                    x.ServiceName,
-                    x.Description))
+                .Select(service => new GetPagedServicesResponse(
+                    service.ServiceId,
+                    service.ServiceName,
+                    service.Description))
                 .ToList(),
 
             PageNumber = result.Value.PageNumber,
-
             PageSize = result.Value.PageSize,
-
             TotalRecords = result.Value.TotalRecords,
-
             TotalPages = result.Value.TotalPages
         };
+
+        // ============================================================
+        // 3. Return successful response
+        // ============================================================
 
         return Result<PagedResponse<GetPagedServicesResponse>>
             .Success(response);

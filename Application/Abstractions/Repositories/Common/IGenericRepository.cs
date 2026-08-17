@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Persistence.Repositories.Common;
+namespace Application.Abstractions.Repositories.Common;
 
 public interface IGenericRepository<TEntity>
     : IReadRepository<TEntity>

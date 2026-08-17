@@ -1,14 +1,9 @@
 ﻿using Shared.Response;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Application.Abstractions.Data
+namespace Application.Abstractions.Data;
+
+public interface IUnitOfWork
 {
-    public interface IUnitOfWork
-    {
-        Task<Result<int>> SaveChangesAsync(
-       
+    Task<Result<int>> SaveChangesAsync(
         CancellationToken cancellationToken = default);
-    }
 }

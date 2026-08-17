@@ -1,6 +1,6 @@
 ﻿using Domain.Entities.ServiceCloud;
 using MediatR;
-using Persistence.Repositories.Common;
+using Application.Abstractions.Repositories.Common;
 using Shared.Response;
 
 namespace Application.Features.Masterfeatures.Staffs.Queries.GetStaffById;

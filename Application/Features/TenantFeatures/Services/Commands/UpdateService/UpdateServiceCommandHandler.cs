@@ -8,7 +8,7 @@ namespace Application.Features.TenantFeatures.Services.Commands.UpdateService;
 
 public sealed class UpdateServiceCommandHandler
     : ICommandHandler<UpdateServiceCommand, UpdateServiceResponse>
-    {
+{
     private readonly IServiceRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserContext _userContext;
@@ -16,8 +16,7 @@ public sealed class UpdateServiceCommandHandler
     public UpdateServiceCommandHandler(
         IServiceRepository repository,
         IUnitOfWork unitOfWork,
-        IUserContext userContext
-        )
+        IUserContext userContext)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
@@ -28,31 +27,47 @@ public sealed class UpdateServiceCommandHandler
         UpdateServiceCommand request,
         CancellationToken cancellationToken)
     {
-        // 1. Check service exists
-        var serviceResult = await _repository.GetByIdAsync(
-            
-            request.ServiceId,
-            cancellationToken);
+        // ============================================================
+        // 1. Get Existing Service
+        // ============================================================
 
-        if (serviceResult.IsFailure)
-            return Result<UpdateServiceResponse>.Failure(serviceResult.Error);
+        var service = await _repository.FirstOrDefaultAsync(
+            x =>
+                x.ServiceId == request.ServiceId &&
+                !x.IsArchived,
+            cancellationToken: cancellationToken);
 
-        // 2. Check category exists
-        var categoryResult = await _repository.CategoryExistsAsync(
-           
-            request.ServiceCategoryId,
-            cancellationToken);
+        if (service is null)
+        {
+            return Result<UpdateServiceResponse>.Failure(
+                Error.NotFound("Service not found."));
+        }
 
-        if (categoryResult.IsFailure)
-            return Result<UpdateServiceResponse>.Failure(categoryResult.Error);
+        // ============================================================
+        // 2. Validate Service Category
+        // ============================================================
 
-        if (!categoryResult.Value)
+        var categoryExistsResult =
+            await _repository.CategoryExistsAsync(
+                request.ServiceCategoryId,
+                cancellationToken);
+
+        if (categoryExistsResult.IsFailure)
+        {
+            return Result<UpdateServiceResponse>
+                .Failure(categoryExistsResult.Error);
+        }
+
+        if (!categoryExistsResult.Value)
+        {
             return Result<UpdateServiceResponse>.Failure(
                 Error.NotFound("Service Category not found."));
+        }
 
-        var service = serviceResult.Value!;
+        // ============================================================
+        // 3. Update Domain Entity
+        // ============================================================
 
-        // 3. Update entity
         service.Update(
             request.ServiceCategoryId,
             request.ServiceName,
@@ -60,29 +75,36 @@ public sealed class UpdateServiceCommandHandler
             request.SpecialInstruction,
             request.HasBranchPermission,
             request.AllowBranchEditPrice,
-            request.ModifiedBy);
+            _userContext.StaffId);
 
-        // 4. Mark entity as modified
-        var updateResult = await _repository.UpdateAsync(
-           
-            service);
+        // ============================================================
+        // 4. Mark Entity as Modified
+        // ============================================================
 
-        if (updateResult.IsFailure)
-            return Result<UpdateServiceResponse>.Failure(updateResult.Error);
+        _repository.Update(service);
 
-        // 5. Save changes
-        var saveResult = await _unitOfWork.SaveChangesAsync(
-         
-            cancellationToken);
+        // ============================================================
+        // 5. Commit Changes
+        // ============================================================
+
+        var saveResult =
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         if (saveResult.IsFailure)
-            return Result<UpdateServiceResponse>.Failure(saveResult.Error);
+        {
+            return Result<UpdateServiceResponse>
+                .Failure(saveResult.Error);
+        }
 
-        // 6. Return response
+        // ============================================================
+        // 6. Return Response
+        // ============================================================
+
         var response = new UpdateServiceResponse(
             service.ServiceId,
             service.ServiceName!);
 
-        return Result<UpdateServiceResponse>.Success(response);
+        return Result<UpdateServiceResponse>
+            .Success(response);
     }
 }
