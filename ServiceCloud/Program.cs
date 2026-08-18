@@ -263,6 +263,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
+builder.Services.AddScoped<
+    IServiceCategoryRepository,
+    ServiceCategoryRepository>();
 
 
 // ============================================================================
