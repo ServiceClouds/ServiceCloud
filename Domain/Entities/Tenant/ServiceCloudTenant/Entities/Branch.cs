@@ -68,12 +68,12 @@ public partial class Branch
 
     public int? DateFormatId { get; private set; }
 
-    [Column("TermsOfServiceURL")]
+ 
     [StringLength(250)]
     [Column(TypeName = "varchar")]
     public string? TermsOfServiceUrl { get; private set; }
 
-    [Column("PrivacyPolicyURL")]
+
     [StringLength(250)]
     [Column(TypeName = "varchar")]
     public string? PrivacyPolicyUrl { get; private set; }

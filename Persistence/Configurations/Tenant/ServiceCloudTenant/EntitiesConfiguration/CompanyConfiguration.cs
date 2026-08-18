@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Domain.Tenant.ServiceCloudTenant.Entities;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Entities.Tenant.ServiceCloudTenant.Entities;
 
 namespace Persistence.Configurations.Tenant.ServiceCloudTenant.EntitiesConfiguration
 {

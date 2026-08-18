@@ -1,8 +1,11 @@
 ﻿using Application.Abstractions.Data;
+using Domain.Entities.Tenant.ServiceCloudTenant.Products;
 using Domain.Entities.Tenant.ServiceCloudTenant.ServiceEntities;
 using Domain.Tenant.ServiceCloudTenant.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configurations;
+using Domain.Entities.Tenant.ServiceCloudTenant.Entities;
+
 
 namespace Persistence.Data
 {
@@ -28,6 +31,23 @@ namespace Persistence.Data
         public virtual DbSet<Service> Services { get; set; }
         public virtual DbSet<ServiceCategory> ServiceCategories { get; set; }
         public virtual DbSet<ServiceCategoryBranch> ServiceCategoryBranches { get; set; }
+
+        //Products
+        public virtual DbSet<Product> Products { get; set; }
+
+        public virtual DbSet<ProductAttribute> ProductAttributes { get; set; }
+
+        public virtual DbSet<ProductAttributeValue> ProductAttributeValues { get; set; }
+
+        public virtual DbSet<ProductBranchPermission> ProductBranchPermissions { get; set; }
+
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+
+        public virtual DbSet<ProductVariant> ProductVariants { get; set; }
+
+        public virtual DbSet<ProductVariantBranch> ProductVariantBranches { get; set; }
+
+        public virtual DbSet<ProductVariantPackaging> ProductVariantPackagings { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

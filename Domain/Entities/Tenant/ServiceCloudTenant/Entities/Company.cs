@@ -70,12 +70,11 @@ public partial class Company
     [Column(TypeName = "varchar")]
     public string? ImagePath { get; private set; }
 
-    [Column("AppleStoreURL")]
+    
     [StringLength(200)]
     [Column(TypeName = "varchar")]
     public string? AppleStoreUrl { get; private set; }
 
-    [Column("GooglePlayStoreURL")]
     [StringLength(200)]
     [Column(TypeName = "varchar")]
     public string? GooglePlayStoreUrl { get; private set; }

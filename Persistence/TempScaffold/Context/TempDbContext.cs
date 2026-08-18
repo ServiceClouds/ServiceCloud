@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Domain.Entities.Tenant.ServiceCloudTenant.Products;
 using Microsoft.EntityFrameworkCore;
-using Persistence.TempScaffold.Models;
+using Domain.Entities.Tenant.ServiceCloudTenant;
+using System;
+using System.Collections.Generic;
 
 namespace Persistence.TempScaffold.Context;
 
@@ -271,3 +272,8 @@ public partial class TempDbContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+
+
+
+
+
