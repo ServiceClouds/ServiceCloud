@@ -1,9 +1,9 @@
 ﻿using Application.Common;
-using Application.Features.TenantFeatures.Companies.Commands.ArchiveCompany;
-using Application.Features.TenantFeatures.Companies.Commands.CreateCompany;
-using Application.Features.TenantFeatures.Companies.Commands.UpdateCompany;
-using Application.Features.TenantFeatures.Companies.Queries.GetCompanyById;
-using Application.Features.TenantFeatures.Companies.Queries.GetPagedCompanies;
+using Application.Features.TenantFeatures.Branches.Commands.ArchiveBranch;
+using Application.Features.TenantFeatures.Branches.Commands.CreateBranch;
+using Application.Features.TenantFeatures.Branches.Commands.UpdateBranch;
+using Application.Features.TenantFeatures.Branches.Queries.GetBranchById;
+using Application.Features.TenantFeatures.Branches.Queries.GetPagedBranches;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
@@ -11,13 +11,13 @@ using Shared.Response;
 namespace API.Controllers.Tenant;
 
 [ApiController]
-[Route("api/company")]
+[Route("api/branch")]
 [ApiExplorerSettings(GroupName = "tenant")]
-public sealed class CompanyController : ControllerBase
+public sealed class BranchController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public CompanyController(ISender sender)
+    public BranchController(ISender sender)
     {
         _sender = sender;
     }
@@ -28,7 +28,7 @@ public sealed class CompanyController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateCompanyCommand command,
+        CreateBranchCommand command,
         CancellationToken cancellationToken)
     {
         var result =
@@ -52,7 +52,7 @@ public sealed class CompanyController : ControllerBase
     {
         var result =
             await _sender.Send(
-                new GetCompanyByIdQuery(id),
+                new GetBranchByIdQuery(id),
                 cancellationToken);
 
         return result.IsFailure
@@ -71,7 +71,7 @@ public sealed class CompanyController : ControllerBase
     {
         var result =
             await _sender.Send(
-                new GetPagedCompaniesQuery(request),
+                new GetPagedBranchesQuery(request),
                 cancellationToken);
 
         return result.IsFailure
@@ -86,13 +86,13 @@ public sealed class CompanyController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
         int id,
-        UpdateCompanyCommand command,
+        UpdateBranchCommand command,
         CancellationToken cancellationToken)
     {
-        if (id != command.CompanyId)
+        if (id != command.BranchId)
         {
             return BadRequest(
-                "Route CompanyId does not match request CompanyId.");
+                "Route BranchId does not match request BranchId.");
         }
 
         var result =
@@ -116,7 +116,7 @@ public sealed class CompanyController : ControllerBase
     {
         var result =
             await _sender.Send(
-                new ArchiveCompanyCommand(id),
+                new ArchiveBranchCommand(id),
                 cancellationToken);
 
         return result.IsFailure

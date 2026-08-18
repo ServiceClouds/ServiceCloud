@@ -12,8 +12,17 @@ public partial class Staff
     {
     }
 
+    // ============================================================
+    // PRIMARY KEY
+    // ============================================================
+
     [Key]
     public int StaffId { get; private set; }
+
+
+    // ============================================================
+    // FOREIGN KEYS
+    // ============================================================
 
     public int CompanyId { get; private set; }
 
@@ -28,6 +37,11 @@ public partial class Staff
     public int? EmploymentTypeId { get; private set; }
 
     public int? ProbationDurationTypeId { get; private set; }
+
+
+    // ============================================================
+    // PERSONAL INFORMATION
+    // ============================================================
 
     [StringLength(30)]
     public string? Title { get; private set; }
@@ -53,6 +67,11 @@ public partial class Staff
     public string? Gender { get; private set; }
 
     public DateOnly? BirthDate { get; private set; }
+
+
+    // ============================================================
+    // CONTACT INFORMATION
+    // ============================================================
 
     [StringLength(15)]
     [Column(TypeName = "varchar")]
@@ -82,6 +101,11 @@ public partial class Staff
     [Column(TypeName = "varchar")]
     public string? ImagePath { get; private set; }
 
+
+    // ============================================================
+    // EMPLOYMENT INFORMATION
+    // ============================================================
+
     public DateOnly? JoiningDate { get; private set; }
 
     public int? ProbationMonths { get; private set; }
@@ -95,9 +119,32 @@ public partial class Staff
     [StringLength(3000)]
     public string? Notes { get; private set; }
 
+
+    // ============================================================
+    // LOGIN / ROLE
+    // ============================================================
+
     public bool AllowLogin { get; private set; }
 
     public bool IsSuperAdmin { get; private set; }
+
+
+    // ============================================================
+    // STATUS
+    // ============================================================
+
+    // true  = currently active/working
+    // false = currently inactive
+    public bool IsActive { get; private set; }
+
+    // true  = archived/deleted
+    // false = normal record
+    public bool IsArchived { get; private set; }
+
+
+    // ============================================================
+    // AUDIT
+    // ============================================================
 
     [Column(TypeName = "datetime")]
     public DateTime CreatedOn { get; private set; }
@@ -109,6 +156,10 @@ public partial class Staff
 
     public int? ModifiedBy { get; private set; }
 
+
+    // ============================================================
+    // NAVIGATION PROPERTIES
+    // ============================================================
 
     [ForeignKey("CompanyId")]
     [InverseProperty("Staff")]
@@ -130,6 +181,10 @@ public partial class Staff
     [InverseProperty("Staff")]
     public virtual StateCountry? StateCountry { get; private set; }
 
+
+    // ============================================================
+    // CREATE
+    // ============================================================
 
     public static Staff Create(
         int companyId,
@@ -174,6 +229,7 @@ public partial class Staff
             EnterpriseRoleId = enterpriseRoleId,
             EmploymentTypeId = employmentTypeId,
             ProbationDurationTypeId = probationDurationTypeId,
+
             Title = title,
             FirstName = firstName,
             LastName = lastName,
@@ -182,6 +238,7 @@ public partial class Staff
             Email = email,
             Gender = gender,
             BirthDate = birthDate,
+
             Phone = phone,
             Mobile = mobile,
             AddressLine1 = addressLine1,
@@ -190,19 +247,30 @@ public partial class Staff
             StateCountryName = stateCountryName,
             PostCode = postCode,
             ImagePath = imagePath,
+
             JoiningDate = joiningDate,
             ProbationMonths = probationMonths,
             ProbationValue = probationValue,
             OrganizationalDate = organizationalDate,
             EmploymentType = employmentType,
             Notes = notes,
+
             AllowLogin = allowLogin,
             IsSuperAdmin = isSuperAdmin,
+
+            // New staff starts active and is not archived.
+            IsActive = true,
+            IsArchived = false,
+
             CreatedOn = DateTime.UtcNow,
             CreatedBy = createdBy
         };
     }
 
+
+    // ============================================================
+    // UPDATE
+    // ============================================================
 
     public void Update(
         int staffPositionId,
@@ -243,6 +311,7 @@ public partial class Staff
         EnterpriseRoleId = enterpriseRoleId;
         EmploymentTypeId = employmentTypeId;
         ProbationDurationTypeId = probationDurationTypeId;
+
         Title = title;
         FirstName = firstName;
         LastName = lastName;
@@ -251,6 +320,7 @@ public partial class Staff
         Email = email;
         Gender = gender;
         BirthDate = birthDate;
+
         Phone = phone;
         Mobile = mobile;
         AddressLine1 = addressLine1;
@@ -259,14 +329,66 @@ public partial class Staff
         StateCountryName = stateCountryName;
         PostCode = postCode;
         ImagePath = imagePath;
+
         JoiningDate = joiningDate;
         ProbationMonths = probationMonths;
         ProbationValue = probationValue;
         OrganizationalDate = organizationalDate;
         EmploymentType = employmentType;
         Notes = notes;
+
         AllowLogin = allowLogin;
         IsSuperAdmin = isSuperAdmin;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+
+    // ============================================================
+    // ACTIVATE
+    // ============================================================
+
+    public void Activate(int modifiedBy)
+    {
+        if (IsArchived)
+        {
+            return;
+        }
+
+        IsActive = true;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+
+    // ============================================================
+    // DEACTIVATE
+    // ============================================================
+
+    public void Deactivate(int modifiedBy)
+    {
+        if (IsArchived)
+        {
+            return;
+        }
+
+        IsActive = false;
+
+        ModifiedBy = modifiedBy;
+        ModifiedOn = DateTime.UtcNow;
+    }
+
+
+    // ============================================================
+    // ARCHIVE / DELETE
+    // ============================================================
+
+    public void Archive(int modifiedBy)
+    {
+        IsActive = false;
+        IsArchived = true;
 
         ModifiedBy = modifiedBy;
         ModifiedOn = DateTime.UtcNow;

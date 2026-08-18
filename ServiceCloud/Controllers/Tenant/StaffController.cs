@@ -1,9 +1,11 @@
 ﻿using Application.Common;
-using Application.Features.TenantFeatures.Companies.Commands.ArchiveCompany;
-using Application.Features.TenantFeatures.Companies.Commands.CreateCompany;
-using Application.Features.TenantFeatures.Companies.Commands.UpdateCompany;
-using Application.Features.TenantFeatures.Companies.Queries.GetCompanyById;
-using Application.Features.TenantFeatures.Companies.Queries.GetPagedCompanies;
+using Application.Features.TenantFeatures.Staff.Commands.ActivateStaff;
+using Application.Features.TenantFeatures.Staff.Commands.ArchiveStaff;
+using Application.Features.TenantFeatures.Staff.Commands.CreateStaff;
+using Application.Features.TenantFeatures.Staff.Commands.DeactivateStaff;
+using Application.Features.TenantFeatures.Staff.Commands.UpdateStaff;
+using Application.Features.TenantFeatures.Staff.Queries.GetPagedStaff;
+using Application.Features.TenantFeatures.Staff.Queries.GetStaffById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Shared.Response;
@@ -11,13 +13,13 @@ using Shared.Response;
 namespace API.Controllers.Tenant;
 
 [ApiController]
-[Route("api/company")]
+[Route("api/staff")]
 [ApiExplorerSettings(GroupName = "tenant")]
-public sealed class CompanyController : ControllerBase
+public sealed class StaffController : ControllerBase
 {
     private readonly ISender _sender;
 
-    public CompanyController(ISender sender)
+    public StaffController(ISender sender)
     {
         _sender = sender;
     }
@@ -28,7 +30,7 @@ public sealed class CompanyController : ControllerBase
 
     [HttpPost]
     public async Task<IActionResult> Create(
-        CreateCompanyCommand command,
+        CreateStaffCommand command,
         CancellationToken cancellationToken)
     {
         var result =
@@ -52,7 +54,7 @@ public sealed class CompanyController : ControllerBase
     {
         var result =
             await _sender.Send(
-                new GetCompanyByIdQuery(id),
+                new GetStaffByIdQuery(id),
                 cancellationToken);
 
         return result.IsFailure
@@ -71,7 +73,7 @@ public sealed class CompanyController : ControllerBase
     {
         var result =
             await _sender.Send(
-                new GetPagedCompaniesQuery(request),
+                new GetPagedStaffQuery(request),
                 cancellationToken);
 
         return result.IsFailure
@@ -86,13 +88,13 @@ public sealed class CompanyController : ControllerBase
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(
         int id,
-        UpdateCompanyCommand command,
+        UpdateStaffCommand command,
         CancellationToken cancellationToken)
     {
-        if (id != command.CompanyId)
+        if (id != command.StaffId)
         {
             return BadRequest(
-                "Route CompanyId does not match request CompanyId.");
+                "Route StaffId does not match request StaffId.");
         }
 
         var result =
@@ -106,7 +108,7 @@ public sealed class CompanyController : ControllerBase
     }
 
     // ============================================================
-    // ARCHIVE
+    // ARCHIVE / DELETE
     // ============================================================
 
     [HttpDelete("{id:int}")]
@@ -116,7 +118,45 @@ public sealed class CompanyController : ControllerBase
     {
         var result =
             await _sender.Send(
-                new ArchiveCompanyCommand(id),
+                new ArchiveStaffCommand(id),
+                cancellationToken);
+
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
+    }
+
+    // ============================================================
+    // ACTIVATE
+    // ============================================================
+
+    [HttpPatch("{id:int}/activate")]
+    public async Task<IActionResult> Activate(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        var result =
+            await _sender.Send(
+                new ActivateStaffCommand(id),
+                cancellationToken);
+
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
+    }
+
+    // ============================================================
+    // DEACTIVATE
+    // ============================================================
+
+    [HttpPatch("{id:int}/deactivate")]
+    public async Task<IActionResult> Deactivate(
+        int id,
+        CancellationToken cancellationToken)
+    {
+        var result =
+            await _sender.Send(
+                new DeactivateStaffCommand(id),
                 cancellationToken);
 
         return result.IsFailure
