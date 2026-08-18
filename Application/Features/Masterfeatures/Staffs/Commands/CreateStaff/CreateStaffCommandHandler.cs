@@ -9,11 +9,11 @@ namespace Application.Features.Masterfeatures.Staffs.Commands.CreateStaff;
 public sealed class CreateStaffCommandHandler
     : IRequestHandler<CreateStaffCommand, Result<int>>
 {
-    private readonly IGenericRepository<Staff> _staffRepository;
+    private readonly IMasterRepository<Staff> _staffRepository;
     private readonly IMasterUnitOfWork _unitOfWork;
 
     public CreateStaffCommandHandler(
-        IGenericRepository<Staff> staffRepository,
+        IMasterRepository<Staff> staffRepository,
         IMasterUnitOfWork unitOfWork)
     {
         _staffRepository = staffRepository;

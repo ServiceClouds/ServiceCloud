@@ -12,6 +12,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/branches")]
+[ApiExplorerSettings(GroupName = "master")]
 public class BranchController : ControllerBase
 {
     private readonly ISender _sender;

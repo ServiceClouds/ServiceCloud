@@ -9,10 +9,10 @@ namespace Application.Features.Masterfeatures.Companies.Queries.GetAllCompanies;
 public sealed class GetAllCompaniesQueryHandler
     : IRequestHandler<GetAllCompaniesQuery, Result<List<Company>>>
 {
-    private readonly IGenericRepository<Company> _companyRepository;
+    private readonly IMasterRepository<Company> _companyRepository;
 
     public GetAllCompaniesQueryHandler(
-        IGenericRepository<Company> companyRepository)
+        IMasterRepository<Company> companyRepository)
     {
         _companyRepository = companyRepository;
     }

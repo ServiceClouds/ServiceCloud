@@ -13,14 +13,14 @@ public sealed class GetBranchStaffQueryHandler
     : IRequestHandler<GetBranchStaffQuery,
         Result<List<BranchStaffResponse>>>
 {
-    private readonly IGenericRepository<StaffBranch> _staffBranchRepository;
-    private readonly IGenericRepository<StaffLogin> _staffLoginRepository;
-    private readonly IGenericRepository<Staff> _staffRepository;
+    private readonly IMasterRepository<StaffBranch> _staffBranchRepository;
+    private readonly IMasterRepository<StaffLogin> _staffLoginRepository;
+    private readonly IMasterRepository<Staff> _staffRepository;
 
     public GetBranchStaffQueryHandler(
-        IGenericRepository<StaffBranch> staffBranchRepository,
-        IGenericRepository<StaffLogin> staffLoginRepository,
-        IGenericRepository<Staff> staffRepository)
+        IMasterRepository<StaffBranch> staffBranchRepository,
+        IMasterRepository<StaffLogin> staffLoginRepository,
+        IMasterRepository<Staff> staffRepository)
     {
         _staffBranchRepository = staffBranchRepository;
         _staffLoginRepository = staffLoginRepository;

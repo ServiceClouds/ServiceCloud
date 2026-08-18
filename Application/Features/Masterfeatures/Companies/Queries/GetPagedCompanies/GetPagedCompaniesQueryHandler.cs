@@ -12,10 +12,10 @@ public sealed class GetPagedCompaniesQueryHandler
         GetPagedCompaniesQuery,
         Result<PagedResponse<Company>>>
 {
-    private readonly IGenericRepository<Company> _companyRepository;
+    private readonly IMasterRepository<Company> _companyRepository;
 
     public GetPagedCompaniesQueryHandler(
-        IGenericRepository<Company> companyRepository)
+        IMasterRepository<Company> companyRepository)
     {
         _companyRepository = companyRepository;
     }

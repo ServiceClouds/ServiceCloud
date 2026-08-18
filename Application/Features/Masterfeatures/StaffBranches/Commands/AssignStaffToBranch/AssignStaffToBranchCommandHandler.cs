@@ -9,15 +9,15 @@ namespace Application.Features.Masterfeatures.StaffBranches.Commands.AssignStaff
     public sealed class AssignStaffToBranchCommandHandler
         : IRequestHandler<AssignStaffToBranchCommand, Result<int>>
     {
-        private readonly IGenericRepository<StaffBranch> _staffBranchRepository;
-        private readonly IGenericRepository<StaffLogin> _staffLoginRepository;
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<StaffBranch> _staffBranchRepository;
+        private readonly IMasterRepository<StaffLogin> _staffLoginRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
         private readonly IMasterUnitOfWork _unitOfWork;
 
         public AssignStaffToBranchCommandHandler(
-            IGenericRepository<StaffBranch> staffBranchRepository,
-            IGenericRepository<StaffLogin> staffLoginRepository,
-            IGenericRepository<Branch> branchRepository,
+            IMasterRepository<StaffBranch> staffBranchRepository,
+            IMasterRepository<StaffLogin> staffLoginRepository,
+            IMasterRepository<Branch> branchRepository,
             IMasterUnitOfWork unitOfWork)
         {
             _staffBranchRepository = staffBranchRepository;

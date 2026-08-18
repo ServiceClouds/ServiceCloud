@@ -9,12 +9,12 @@ namespace Application.Features.Masterfeatures.Branches.Commands.CreateBranch
     public sealed class CreateBranchCommandHandler
         : IRequestHandler<CreateBranchCommand, Result<int>>
     {
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
         private readonly IMasterUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public CreateBranchCommandHandler(
-            IGenericRepository<Branch> branchRepository,
+            IMasterRepository<Branch> branchRepository,
             IMasterUnitOfWork unitOfWork,
             IUserContext userContext)
         {

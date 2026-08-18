@@ -11,10 +11,10 @@ namespace Application.Features.Masterfeatures.Companies.Queries.GetCompanyById
     public sealed class GetCompanyByIdQueryHandler
      : IRequestHandler<GetCompanyByIdQuery, Result<Company>>
     {
-        private readonly IGenericRepository<Company> _companyRepository;
+        private readonly IMasterRepository<Company> _companyRepository;
 
         public GetCompanyByIdQueryHandler(
-            IGenericRepository<Company> companyRepository)
+            IMasterRepository<Company> companyRepository)
         {
             _companyRepository = companyRepository;
         }

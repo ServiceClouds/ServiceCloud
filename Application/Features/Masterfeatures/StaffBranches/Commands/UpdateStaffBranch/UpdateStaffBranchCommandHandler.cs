@@ -11,11 +11,11 @@ public sealed class UpdateStaffBranchCommandHandler
         UpdateStaffBranchCommand,
         Result<bool>>
 {
-    private readonly IGenericRepository<StaffBranch> _staffBranchRepository;
+    private readonly IMasterRepository<StaffBranch> _staffBranchRepository;
     private readonly IMasterUnitOfWork _unitOfWork;
 
     public UpdateStaffBranchCommandHandler(
-        IGenericRepository<StaffBranch> staffBranchRepository,
+        IMasterRepository<StaffBranch> staffBranchRepository,
         IMasterUnitOfWork unitOfWork)
     {
         _staffBranchRepository = staffBranchRepository;

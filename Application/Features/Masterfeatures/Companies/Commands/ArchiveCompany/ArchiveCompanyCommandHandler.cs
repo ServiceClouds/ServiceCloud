@@ -10,11 +10,11 @@ namespace Application.Features.Masterfeatures.Companies.Commands.ArchiveCompany;
 public sealed class ArchiveCompanyCommandHandler
     : IRequestHandler<ArchiveCompanyCommand, Result>
 {
-    private readonly IGenericRepository<Company> _companyRepository;
+    private readonly IMasterRepository<Company> _companyRepository;
     private readonly IMasterUnitOfWork  _unitOfWork;
 
     public ArchiveCompanyCommandHandler(
-        IGenericRepository<Company> companyRepository,
+        IMasterRepository<Company> companyRepository,
         IMasterUnitOfWork  unitOfWork)
     {
         _companyRepository = companyRepository;

@@ -9,12 +9,12 @@ namespace Application.Features.Masterfeatures.Branches.Commands.Archive_Branch
     public sealed class ArchiveBranchCommandHandler
     : IRequestHandler<ArchiveBranchCommand, Result>
     {
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
         private readonly IMasterUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public ArchiveBranchCommandHandler(
-            IGenericRepository<Branch> branchRepository,
+           IMasterRepository<Branch> branchRepository,
             IMasterUnitOfWork unitOfWork,
             IUserContext userContext)
         {

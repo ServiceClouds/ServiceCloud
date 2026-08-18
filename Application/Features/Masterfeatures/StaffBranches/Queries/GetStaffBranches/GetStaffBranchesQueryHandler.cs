@@ -12,12 +12,12 @@ public sealed class GetStaffBranchesQueryHandler
         GetStaffBranchesQuery,
         Result<List<StaffBranchResponse>>>
 {
-    private readonly IGenericRepository<StaffBranch> _staffBranchRepository;
-    private readonly IGenericRepository<Branch> _branchRepository;
+    private readonly IMasterRepository<StaffBranch> _staffBranchRepository;
+    private readonly IMasterRepository<Branch> _branchRepository;
 
     public GetStaffBranchesQueryHandler(
-        IGenericRepository<StaffBranch> staffBranchRepository,
-        IGenericRepository<Branch> branchRepository)
+        IMasterRepository<StaffBranch> staffBranchRepository,
+        IMasterRepository<Branch> branchRepository)
     {
         _staffBranchRepository = staffBranchRepository;
         _branchRepository = branchRepository;

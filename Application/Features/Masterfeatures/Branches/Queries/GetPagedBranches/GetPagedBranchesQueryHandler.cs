@@ -12,10 +12,10 @@ namespace Application.Features.Masterfeatures.Branches.Queries.GetPagedBranches
         GetPagedBranchesQuery,
         Result<PagedResponse<Branch>>>
     {
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
 
         public GetPagedBranchesQueryHandler(
-            IGenericRepository<Branch> branchRepository)
+            IMasterRepository<Branch> branchRepository)
         {
             _branchRepository = branchRepository;
         }

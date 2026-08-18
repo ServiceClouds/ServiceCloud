@@ -12,10 +12,10 @@ namespace Application.Features.Masterfeatures.Branches.Queries.GetAllBranches
     public sealed class GetAllBranchesQueryHandler
         : IRequestHandler<GetAllBranchesQuery, Result<List<Branch>>>
     {
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
 
         public GetAllBranchesQueryHandler(
-            IGenericRepository<Branch> branchRepository)
+            IMasterRepository<Branch> branchRepository)
         {
             _branchRepository = branchRepository;
         }

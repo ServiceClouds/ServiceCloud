@@ -10,11 +10,11 @@ namespace Application.Features.Masterfeatures.Companies.Commands.UpdateCompany;
 public sealed class UpdateCompanyCommandHandler
     : IRequestHandler<UpdateCompanyCommand, Result>
 {
-    private readonly IGenericRepository<Company> _companyRepository;
+    private readonly IMasterRepository<Company> _companyRepository;
     private readonly IMasterUnitOfWork  _unitOfWork;
 
     public UpdateCompanyCommandHandler(
-        IGenericRepository<Company> companyRepository,
+        IMasterRepository<Company> companyRepository,
         IMasterUnitOfWork unitOfWork)
     {
         _companyRepository = companyRepository;

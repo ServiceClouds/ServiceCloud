@@ -14,6 +14,7 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("api/companies")]
+    [ApiExplorerSettings(GroupName = "master")]
     public class CompanyController : ControllerBase
     {
         private readonly ISender _sender;

@@ -9,11 +9,11 @@ namespace Application.Features.Masterfeatures.Staffs.Commands.UpdateStaff;
 public sealed class UpdateStaffCommandHandler
     : IRequestHandler<UpdateStaffCommand, Result>
 {
-    private readonly IGenericRepository<Staff> _staffRepository;
+    private readonly IMasterRepository<Staff> _staffRepository;
     private readonly IMasterUnitOfWork _unitOfWork;
 
     public UpdateStaffCommandHandler(
-        IGenericRepository<Staff> staffRepository,
+        IMasterRepository<Staff> staffRepository,
         IMasterUnitOfWork unitOfWork)
     {
         _staffRepository = staffRepository;

@@ -10,10 +10,10 @@ namespace Application.Features.Masterfeatures.Staffs.Queries.GetAllStaff;
 public sealed class GetAllStaffQueryHandler
     : IRequestHandler<GetAllStaffQuery, Result<List<Staff>>>
 {
-    private readonly IGenericRepository<Staff> _staffRepository;
+    private readonly IMasterRepository<Staff> _staffRepository;
 
     public GetAllStaffQueryHandler(
-        IGenericRepository<Staff> staffRepository)
+        IMasterRepository<Staff> staffRepository)
     {
         _staffRepository = staffRepository;
     }

@@ -31,7 +31,35 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen();
+//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("master", new()
+    {
+        Title = "ServiceCloud Master API",
+        Version = "v1"
+    });
+
+    options.SwaggerDoc("tenant", new()
+    {
+        Title = "ServiceCloud Tenant API",
+        Version = "v1"
+    });
+
+    // Prevent duplicate schema names such as
+    // Master CreateCompanyCommand
+    // Tenant CreateCompanyCommand
+    options.CustomSchemaIds(type => type.FullName);
+
+    // Put each controller into its assigned Swagger document
+    options.DocInclusionPredicate((documentName, apiDescription) =>
+    {
+        return string.Equals(
+            apiDescription.GroupName,
+            documentName,
+            StringComparison.OrdinalIgnoreCase);
+    });
+});
 
 
 // ============================================================================
@@ -93,8 +121,12 @@ builder.Services.AddScoped<IMasterUnitOfWork, MasterUnitOfWork>();
 // ============================================================================
 
 builder.Services.AddScoped(
-    typeof(IGenericRepository<>),
+    typeof(IMasterRepository<>),
     typeof(MasterRepository<>));
+
+builder.Services.AddScoped(
+    typeof(ITenantRepository<>),
+    typeof(TenantRepository<>));
 
 
 // ============================================================================
@@ -375,7 +407,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
 
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint(
+            "/swagger/master/swagger.json",
+            "ServiceCloud Master API v1");
+
+        options.SwaggerEndpoint(
+            "/swagger/tenant/swagger.json",
+            "ServiceCloud Tenant API v1");
+    });
 }
 
 

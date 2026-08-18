@@ -13,12 +13,12 @@ namespace Application.Features.Masterfeatures.Branches.Commands.UpdateBranch
     public sealed class UpdateBranchCommandHandler
     : IRequestHandler<UpdateBranchCommand, Result>
     {
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
         private readonly IMasterUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public UpdateBranchCommandHandler(
-            IGenericRepository<Branch> branchRepository,
+            IMasterRepository<Branch> branchRepository,
             IMasterUnitOfWork unitOfWork,
             IUserContext userContext)
         {

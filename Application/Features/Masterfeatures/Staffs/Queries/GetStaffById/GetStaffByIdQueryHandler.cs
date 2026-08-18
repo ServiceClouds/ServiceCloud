@@ -8,10 +8,10 @@ namespace Application.Features.Masterfeatures.Staffs.Queries.GetStaffById;
 public sealed class GetStaffByIdQueryHandler
     : IRequestHandler<GetStaffByIdQuery, Result<Staff>>
 {
-    private readonly IGenericRepository<Staff> _staffRepository;
+    private readonly IMasterRepository<Staff> _staffRepository;
 
     public GetStaffByIdQueryHandler(
-        IGenericRepository<Staff> staffRepository)
+        IMasterRepository<Staff> staffRepository)
     {
         _staffRepository = staffRepository;
     }

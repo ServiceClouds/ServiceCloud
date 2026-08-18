@@ -12,12 +12,12 @@ namespace Application.Features.Masterfeatures.Companies.Commands.CreateCompany
     public sealed class CreateCompanyCommandHandler
     : IRequestHandler<CreateCompanyCommand, Result<int>>
     {
-        private readonly IGenericRepository<Company> _companyRepository;
+        private readonly IMasterRepository<Company> _companyRepository;
         private readonly IMasterUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public CreateCompanyCommandHandler(
-            IGenericRepository<Company> companyRepository,
+            IMasterRepository<Company> companyRepository,
             IMasterUnitOfWork unitOfWork,
             IUserContext userContext)
         {

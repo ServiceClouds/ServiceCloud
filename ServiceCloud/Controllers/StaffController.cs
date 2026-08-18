@@ -12,6 +12,7 @@ namespace Api.Controllers;
 
 [ApiController]
 [Route("api/staff")]
+[ApiExplorerSettings(GroupName = "master")]
 public class StaffController : ControllerBase
 {
     private readonly ISender _sender;

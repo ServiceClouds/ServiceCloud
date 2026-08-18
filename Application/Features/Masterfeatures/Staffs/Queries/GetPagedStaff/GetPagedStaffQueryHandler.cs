@@ -12,10 +12,10 @@ public sealed class GetPagedStaffQueryHandler
         GetPagedStaffQuery,
         Result<PagedResponse<Staff>>>
 {
-    private readonly IGenericRepository<Staff> _staffRepository;
+    private readonly IMasterRepository<Staff> _staffRepository;
 
     public GetPagedStaffQueryHandler(
-        IGenericRepository<Staff> staffRepository)
+        IMasterRepository<Staff> staffRepository)
     {
         _staffRepository = staffRepository;
     }

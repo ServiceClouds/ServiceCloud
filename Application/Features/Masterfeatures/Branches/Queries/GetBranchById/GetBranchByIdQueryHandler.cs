@@ -11,10 +11,10 @@ namespace Application.Features.Masterfeatures.Branches.Queries.GetBranchById
     public sealed class GetBranchByIdQueryHandler
          : IRequestHandler<GetBranchByIdQuery, Result<Branch>>
     {
-        private readonly IGenericRepository<Branch> _branchRepository;
+        private readonly IMasterRepository<Branch> _branchRepository;
 
         public GetBranchByIdQueryHandler(
-            IGenericRepository<Branch> branchRepository)
+            IMasterRepository<Branch> branchRepository)
         {
             _branchRepository = branchRepository;
         }
