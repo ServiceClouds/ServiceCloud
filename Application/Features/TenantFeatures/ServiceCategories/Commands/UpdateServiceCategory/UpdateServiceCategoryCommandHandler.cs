@@ -15,12 +15,12 @@ namespace Application.Features.TenantFeatures.ServiceCategories.Commands.UpdateS
     public sealed class UpdateServiceCategoryCommandHandler
         : ICommandHandler<UpdateServiceCategoryCommand, UpdateServiceCategoryResponse>
     {
-        private readonly IGenericRepository<ServiceCategory> _repository;
+        private readonly ITenantRepository<ServiceCategory> _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public UpdateServiceCategoryCommandHandler(
-            IGenericRepository<ServiceCategory> repository,
+            ITenantRepository<ServiceCategory> repository,
             IUnitOfWork unitOfWork,
             IUserContext userContext)
         {

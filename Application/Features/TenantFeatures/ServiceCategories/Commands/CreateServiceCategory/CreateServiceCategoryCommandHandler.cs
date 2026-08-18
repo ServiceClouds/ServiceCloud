@@ -15,12 +15,12 @@ namespace Application.Features.TenantFeatures.ServiceCategories.Commands.CreateS
     public sealed class CreateServiceCategoryCommandHandler
         : ICommandHandler<CreateServiceCategoryCommand, CreateServiceCategoryResponse>
     {
-        private readonly IGenericRepository<ServiceCategory> _repository;
+        private readonly ITenantRepository<ServiceCategory> _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public CreateServiceCategoryCommandHandler(
-            IGenericRepository<ServiceCategory> repository,
+            ITenantRepository<ServiceCategory> repository,
             IUnitOfWork unitOfWork,
             IUserContext userContext)
         {

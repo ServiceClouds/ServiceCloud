@@ -12,11 +12,11 @@ namespace Application.Features.TenantFeatures.ServiceCategories.Queries.GetServi
     public sealed class GetServiceCategoryByIdQueryHandler
         : IQueryHandler<GetServiceCategoryByIdQuery, GetServiceCategoryByIdResponse>
     {
-        private readonly IGenericRepository<ServiceCategory> _repository;
+        private readonly ITenantRepository<ServiceCategory> _repository;
         private readonly IUserContext _userContext;
 
         public GetServiceCategoryByIdQueryHandler(
-            IGenericRepository<ServiceCategory> repository,
+            ITenantRepository<ServiceCategory> repository,
             IUserContext userContext)
         {
             _repository = repository;

@@ -12,6 +12,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/service-categories")]
+[ApiExplorerSettings(GroupName = "tenant")]
 public class ServiceCategoryController : ControllerBase
 {
     private readonly ISender _sender;

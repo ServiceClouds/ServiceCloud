@@ -9,6 +9,7 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/auth")]
+[ApiExplorerSettings(GroupName = "master")]
 public class AuthController : ControllerBase
 {
     private readonly ISender _sender;

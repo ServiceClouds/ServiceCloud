@@ -18,24 +18,41 @@ public sealed class TenantDbContextMiddleware
         ITenantDbContextAccessor accessor,
         IUserContext userContext)
     {
-        // Tenant database is only required for authenticated users.
+        Console.WriteLine(
+            "===== TenantDbContextMiddleware START =====");
+
+        Console.WriteLine(
+            $"Authenticated: {httpContext.User.Identity?.IsAuthenticated}");
+
         if (httpContext.User.Identity?.IsAuthenticated == true)
         {
-            // CompanyId comes from the authenticated JWT.
-            var companyId = userContext.CompanyId;
+            Console.WriteLine(
+                $"CompanyId: {userContext.CompanyId}");
 
-            // Create and store the tenant DbContext
-            // inside the scoped TenantDbContextAccessor.
-            var result = await accessor.GetAsync(companyId);
+            var result = await accessor.GetAsync(
+                userContext.CompanyId);
+
+            Console.WriteLine(
+                $"Tenant Context Result: {result.IsSuccess}");
 
             if (result.IsFailure)
             {
                 throw new InvalidOperationException(
                     $"Unable to create Tenant DbContext: {result.Error}");
             }
+
+            Console.WriteLine(
+                "Tenant DbContext initialized successfully.");
+        }
+        else
+        {
+            Console.WriteLine(
+                "User is NOT authenticated. Tenant DbContext was NOT created.");
         }
 
-        // Continue the request pipeline.
+        Console.WriteLine(
+            "===== TenantDbContextMiddleware END =====");
+
         await _next(httpContext);
     }
 }

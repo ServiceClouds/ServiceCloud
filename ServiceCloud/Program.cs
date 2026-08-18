@@ -12,16 +12,18 @@ using Infrastructure.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
 using Persistence.Configurations;
 using Persistence.Data;
 using Persistence.Data.MasterDbContext;
 using Persistence.Repositories;
-
-
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
 
+
+
+
+var builder = WebApplication.CreateBuilder(args);
 
 // ============================================================================
 // 1. API SERVICES
@@ -31,27 +33,27 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-//builder.Services.AddSwaggerGen();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("master", new()
+    options.SwaggerDoc("master", new OpenApiInfo
     {
         Title = "ServiceCloud Master API",
         Version = "v1"
     });
 
-    options.SwaggerDoc("tenant", new()
+    options.SwaggerDoc("tenant", new OpenApiInfo
     {
         Title = "ServiceCloud Tenant API",
         Version = "v1"
     });
 
-    // Prevent duplicate schema names such as
-    // Master CreateCompanyCommand
-    // Tenant CreateCompanyCommand
+    // Prevent duplicate schema names
+    // Example:
+    // Master.CreateCompanyCommand
+    // Tenant.CreateCompanyCommand
     options.CustomSchemaIds(type => type.FullName);
 
-    // Put each controller into its assigned Swagger document
+    // Put controllers into their assigned Swagger document
     options.DocInclusionPredicate((documentName, apiDescription) =>
     {
         return string.Equals(
@@ -59,6 +61,25 @@ builder.Services.AddSwaggerGen(options =>
             documentName,
             StringComparison.OrdinalIgnoreCase);
     });
+
+    // JWT Authentication
+    options.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Description = "Enter JWT token."
+        });
+
+    options.AddSecurityRequirement(document =>
+        new OpenApiSecurityRequirement
+        {
+            [new OpenApiSecuritySchemeReference("Bearer", document)] = []
+        });
 });
 
 

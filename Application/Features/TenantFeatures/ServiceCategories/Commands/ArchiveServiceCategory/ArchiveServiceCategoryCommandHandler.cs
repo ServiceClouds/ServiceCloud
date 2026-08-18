@@ -13,12 +13,12 @@ namespace Application.Features.TenantFeatures.ServiceCategories.Commands.Archive
     public sealed class ArchiveServiceCategoryCommandHandler
         : ICommandHandler<ArchiveServiceCategoryCommand>
     {
-        private readonly IGenericRepository<ServiceCategory> _repository;
+        private readonly ITenantRepository<ServiceCategory> _repository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public ArchiveServiceCategoryCommandHandler(
-            IGenericRepository<ServiceCategory> repository,
+            ITenantRepository<ServiceCategory> repository,
             IUnitOfWork unitOfWork,
             IUserContext userContext)
         {

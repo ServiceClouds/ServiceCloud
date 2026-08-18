@@ -16,14 +16,14 @@ namespace Application.Features.TenantFeatures.ServiceCategoryBranches.Commands.C
             CreateServiceCategoryBranchCommand,
             CreateServiceCategoryBranchResponse>
     {
-        private readonly IGenericRepository<ServiceCategoryBranch> _repository;
-        private readonly IGenericRepository<ServiceCategory> _categoryRepository;
+        private readonly ITenantRepository<ServiceCategoryBranch> _repository;
+        private readonly ITenantRepository<ServiceCategory> _categoryRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserContext _userContext;
 
         public CreateServiceCategoryBranchCommandHandler(
-            IGenericRepository<ServiceCategoryBranch> repository,
-            IGenericRepository<ServiceCategory> categoryRepository,
+            ITenantRepository <ServiceCategoryBranch> repository,
+            ITenantRepository<ServiceCategory> categoryRepository,
             IUnitOfWork unitOfWork,
             IUserContext userContext)
         {
