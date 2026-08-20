@@ -14,3 +14,5 @@ public sealed record CreateProductCommand(
     int? BrandId,
     int? AppSourceTypeId
 ) : ICommand<CreateProductResponse>;
+
+

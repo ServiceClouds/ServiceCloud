@@ -3,7 +3,7 @@ using Application.Abstractions.Data;
 using Application.Abstractions.Repositories.Common;
 using Application.Common;
 using Domain.Entities.Tenant.ServiceCloudTenant.Products;
-//sing Domain.Entities.Tenant.ServiceCloudTenant.Products.ProductCategory;
+
 using Shared.Response;
 
 namespace Application.Features.TenantFeatures.Products.Commands.UpdateProduct;
@@ -37,11 +37,11 @@ public sealed class UpdateProductCommandHandler
         // ------------------------------------------------------------
 
         var product =
-     await _repository.FirstOrDefaultAsync(
-         x =>
-             x.ProductId == request.ProductId &&
-             x.IsArchived != true,
-         cancellationToken: cancellationToken);
+            await _repository.FirstOrDefaultAsync(
+                x =>
+                    x.ProductId == request.ProductId &&
+                    x.IsArchived!=true,
+                cancellationToken: cancellationToken);
 
         if (product is null)
         {
@@ -71,12 +71,13 @@ public sealed class UpdateProductCommandHandler
         // ------------------------------------------------------------
 
         var duplicateProduct =
-    await _repository.ExistsAsync(
-        x =>
-            x.ProductId != request.ProductId &&
-            x.ProductName == request.ProductName &&
-            x.IsArchived != true,
-        cancellationToken);
+            await _repository.ExistsAsync(
+                x =>
+                    x.ProductId != request.ProductId &&
+                    x.ProductName == request.ProductName &&
+                    x.IsArchived!=true,
+                cancellationToken);
+
         if (duplicateProduct)
         {
             return Result<UpdateProductResponse>.Failure(

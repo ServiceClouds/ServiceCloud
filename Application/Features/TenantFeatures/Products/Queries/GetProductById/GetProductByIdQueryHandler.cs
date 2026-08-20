@@ -25,7 +25,8 @@ public sealed class GetProductByIdQueryHandler
             await _repository.FirstOrDefaultAsync(
                 x =>
                     x.ProductId == request.ProductId &&
-                    x.IsArchived!=true);
+                    x.IsArchived!=true,
+               cancellationToken: cancellationToken);
 
         if (product is null)
         {

@@ -3,7 +3,7 @@ using Application.Abstractions.Data;
 using Application.Abstractions.Repositories.Common;
 using Application.Common;
 using Domain.Entities.Tenant.ServiceCloudTenant.Products;
-
+//using Domain.Entities.Tenant.ServiceCloudTenant.Products.ProductCategory;
 using Shared.Response;
 
 namespace Application.Features.TenantFeatures.Products.Commands.CreateProduct;
@@ -52,11 +52,12 @@ public sealed class CreateProductCommandHandler
         // ------------------------------------------------------------
         // 2. Check duplicate Product Name
         // ------------------------------------------------------------
+
         var productExists =
             await _repository.ExistsAsync(
                 x =>
                     x.ProductName == request.ProductName &&
-                    x.IsArchived != true,
+                    x.IsArchived!=true,
                 cancellationToken);
 
         if (productExists)

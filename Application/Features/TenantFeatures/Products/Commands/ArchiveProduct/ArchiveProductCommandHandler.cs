@@ -5,6 +5,7 @@ using Application.Common;
 using Domain.Entities.Tenant.ServiceCloudTenant.Products;
 using Shared.Response;
 
+
 namespace Application.Features.TenantFeatures.Products.Commands.ArchiveProduct;
 
 public sealed class ArchiveProductCommandHandler
@@ -33,11 +34,11 @@ public sealed class ArchiveProductCommandHandler
         // ------------------------------------------------------------
 
         var product =
-        await _repository.FirstOrDefaultAsync(
-            x =>
-                x.ProductId == request.ProductId &&
-                x.IsArchived != true,
-            cancellationToken: cancellationToken);
+            await _repository.FirstOrDefaultAsync(
+                x =>
+                    x.ProductId == request.ProductId &&
+                    x.IsArchived!=true,
+                cancellationToken:cancellationToken);
 
         if (product is null)
         {

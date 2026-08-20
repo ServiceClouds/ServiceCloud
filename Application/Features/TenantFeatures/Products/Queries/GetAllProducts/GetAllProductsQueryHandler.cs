@@ -23,23 +23,23 @@ public sealed class GetAllProductsQueryHandler
         CancellationToken cancellationToken)
     {
         var products =
-     await _repository
-         .GetAll()
-         .Where(x => x.IsArchived != true)
-         .OrderBy(x => x.ProductName)
-         .Select(x => new ProductResponse(
-             x.ProductId,
-             x.ProductCategoryId,
-             x.ProductName,
-             x.Description,
-             x.IsActive,
-             x.AllowBranchTrackInventory,
-             x.HasBranchPermission,
-             x.AllowBranchEditPrice,
-             x.ProductClassificationId,
-             x.BrandId,
-             x.AppSourceTypeId))
-         .ToListAsync(cancellationToken);
+            await _repository
+                .GetAll()
+                .Where(x => x.IsArchived!=true)
+                .OrderBy(x => x.ProductName)
+                .Select(x => new ProductResponse(
+                    x.ProductId,
+                    x.ProductCategoryId,
+                    x.ProductName,
+                    x.Description,
+                    x.IsActive,
+                    x.AllowBranchTrackInventory,
+                    x.HasBranchPermission,
+                    x.AllowBranchEditPrice,
+                    x.ProductClassificationId,
+                    x.BrandId,
+                    x.AppSourceTypeId))
+                .ToListAsync(cancellationToken);
 
         return Result<List<ProductResponse>>.Success(products);
     }
