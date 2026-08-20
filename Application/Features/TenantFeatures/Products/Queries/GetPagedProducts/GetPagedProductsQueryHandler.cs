@@ -53,21 +53,7 @@ public sealed class GetPagedProductsQueryHandler
         // Sorting
         // ------------------------------------------------------------
 
-        query = request.Request.SortBy?.ToLower() switch
-        {
-            "productname" =>
-                request.Request.SortDescending
-                    ? query.OrderByDescending(x => x.ProductName)
-                    : query.OrderBy(x => x.ProductName),
-
-            "createdon" =>
-                request.Request.SortDescending
-                    ? query.OrderByDescending(x => x.CreatedOn)
-                    : query.OrderBy(x => x.CreatedOn),
-
-            _ =>
-                query.OrderBy(x => x.ProductId)
-        };
+       
 
         // ------------------------------------------------------------
         // Pagination

@@ -53,10 +53,7 @@ public sealed class GetPagedProductAttributesQueryHandler
         // Sorting
         // ------------------------------------------------------------
 
-        query = request.Request.SortDescending
-            ? query.OrderByDescending(x => x.SortOrder)
-            : query.OrderBy(x => x.SortOrder);
-
+        
         // ------------------------------------------------------------
         // Paging
         // ------------------------------------------------------------

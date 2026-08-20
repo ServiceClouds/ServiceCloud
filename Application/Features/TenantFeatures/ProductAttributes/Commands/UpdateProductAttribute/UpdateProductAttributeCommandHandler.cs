@@ -31,7 +31,7 @@ public sealed class UpdateProductAttributeCommandHandler
         var productAttribute =
             await _repository.FirstOrDefaultAsync(
                 x => x.ProductAttributeId == request.ProductAttributeId,
-                cancellationToken);
+                cancellationToken:cancellationToken);
 
         if (productAttribute is null)
         {

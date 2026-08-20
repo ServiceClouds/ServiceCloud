@@ -35,7 +35,7 @@ public sealed class CreateProductAttributeCommandHandler
             await _productRepository.ExistsAsync(
                 x =>
                     x.ProductId == request.ProductId &&
-                    !x.IsArchived,
+                    x.IsArchived!=true,
                 cancellationToken);
 
         if (!productExists)
