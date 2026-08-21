@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+
 import { login } from "../api/authApi";
+import { useAuth } from "../context/AuthContext";
+
 import "./Auth.css";
 
 function BranchSelection() {
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const { loginSession } = useAuth();
 
     const email = location.state?.email;
     const company = location.state?.company;
@@ -21,8 +26,8 @@ function BranchSelection() {
         if (!selectedBranch) {
 
             setError("Please select a branch.");
-            return;
 
+            return;
         }
 
         try {
@@ -38,18 +43,25 @@ function BranchSelection() {
 
             console.log("Login Response:", response);
 
-            localStorage.setItem(
-                "accessToken",
-                response.accessToken
-            );
+            /*
+             * Store the JWT through AuthContext.
+             * AuthContext handles localStorage internally.
+             */
+            loginSession(response.accessToken);
 
-            navigate("/dashboard");
+            navigate("/dashboard", {
+                replace: true
+            });
 
         }
         catch (err) {
 
             console.error(err);
-            setError("Unable to login.");
+
+            setError(
+                err?.response?.data?.message ||
+                "Unable to login."
+            );
 
         }
         finally {
@@ -100,7 +112,10 @@ function BranchSelection() {
                     onClick={handleLogin}
                     disabled={loading || !selectedBranch}
                 >
-                    {loading ? "Signing in..." : "Enter Workspace →"}
+                    {loading
+                        ? "Signing in..."
+                        : "Enter Workspace →"
+                    }
                 </button>
 
             </div>

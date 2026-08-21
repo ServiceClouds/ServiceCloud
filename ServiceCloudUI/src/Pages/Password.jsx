@@ -30,7 +30,7 @@ function Password() {
 
             console.log("Verify Login Response:", response);
 
-            navigate("/branches", {
+            navigate("/auth/branches", {
                 state: {
                     email,
                     company,
@@ -59,27 +59,18 @@ function Password() {
 
             <div className="login-card">
 
-                <h2>Enter your password</h2>
+                <h2>{company.companyName}</h2>
 
-                <p>
-                    {company?.companyName}
-                    <br />
-                    {email}
-                </p>
+                <p>{email}</p>
 
                 <input
                     type="password"
-                    placeholder="Enter your password"
+                    placeholder="Enter Password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter" && password) {
-                            login();
-                        }
-                    }}
                 />
 
-                {error && (
+                {error && (//means if error not allowed if directly
                     <p className="error">
                         {error}
                     </p>
@@ -87,9 +78,9 @@ function Password() {
 
                 <button
                     onClick={login}
-                    disabled={loading || !password}
+                    disabled={loading}
                 >
-                    {loading ? "Verifying..." : "Continue →"}
+                    {loading ? "Please wait..." : "Continue"}
                 </button>
 
             </div>

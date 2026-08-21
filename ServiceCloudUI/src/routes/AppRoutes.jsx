@@ -4,30 +4,71 @@ import Login from "../Pages/Login";
 import CompanySelection from "../Pages/CompanySelection";
 import Password from "../Pages/Password";
 import BranchSelection from "../Pages/BranchSelection";
-import Dashboard from "../Pages/Dashboard";
+
+import DashboardLayout from "../layouts/DashboardLayout";
+import ProtectedRoute from "./ProtectedRoute";
+
+import Dashboard from "../Pages/Dashboard/Dashboard";
 
 function AppRoutes() {
-
     return (
-
         <Routes>
 
-            <Route path="/" element={<Navigate to="/login" />} />
+            {/* Authentication */}
+            <Route
+                path="/"
+                element={<Navigate to="/login" replace />}
+            />
 
-            <Route path="/login" element={<Login />} />
+            <Route
+                path="/login"
+                element={<Login />}
+            />
 
-            <Route path="/companies" element={<CompanySelection />} />
+            <Route
+                path="/companies"
+                element={<CompanySelection />}
+            />
 
-            <Route path="/password" element={<Password />} />
+            <Route
+                path="/password"
+                element={<Password />}
+            />
 
-            <Route path="/branches" element={<BranchSelection />} />
+            <Route
+                path="/auth/branches"
+                element={<BranchSelection />}
+            />
 
-            <Route path="/dashboard" element={<Dashboard />} />
+
+            {/* Protected Application */}
+            <Route
+                element={
+                    <ProtectedRoute>
+                        <DashboardLayout />
+                    </ProtectedRoute>
+                }
+            >
+                <Route
+                    path="/dashboard"
+                    element={<Dashboard />}
+                />
+            </Route>
+
+
+            {/* Unknown route */}
+            <Route
+                path="*"
+                element={
+                    <Navigate
+                        to="/login"
+                        replace
+                    />
+                }
+            />
 
         </Routes>
-
     );
-
 }
 
 export default AppRoutes;

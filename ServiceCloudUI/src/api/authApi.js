@@ -2,24 +2,33 @@ import API_ENDPOINTS from "../constants/apiEndpoints";
 import api from "./axios";
 
 export const getCompanies = async (email) => {
-    console.log("Inside getCompanies");
 
-    const response = await api.post(API_ENDPOINTS.AUTH.GET_COMPANIES, {
-        email
-    });
+    const response = await api.post(
+        API_ENDPOINTS.AUTH.GET_COMPANIES,
+        {
+            email
+        }
+    );
 
     return response.data.messageData;
 };
+
 export const verifyLogin = async (request) => {
 
-    const response = await api.post(API_ENDPOINTS.AUTH.VERIFY_LOGIN, request);
+    const response = await api.post(
+        API_ENDPOINTS.AUTH.VERIFY_LOGIN,
+        request
+    );
 
     return response.data.messageData;
 };
+
 export const login = async (request) => {
 
-    const response = await api.post(API_ENDPOINTS.AUTH.LOGIN, request);
+    const response = await api.post(
+        API_ENDPOINTS.AUTH.LOGIN,
+        request
+    );
 
     return response.data.messageData;
-
 };
