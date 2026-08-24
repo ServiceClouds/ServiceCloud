@@ -7,16 +7,16 @@ function Sidebar() {
     const { logout } = useAuth();
 
     const handleLogout = () => {
-
         logout();
-
     };
 
     return (
 
         <aside className="dashboard-sidebar">
 
-            {/* BRAND */}
+            {/* =====================================================
+                BRAND
+            ====================================================== */}
 
             <div className="dashboard-brand">
 
@@ -26,7 +26,9 @@ function Sidebar() {
 
                 <div>
 
-                    <h2>ServiceCloud</h2>
+                    <h2>
+                        ServiceCloud
+                    </h2>
 
                     <span>
                         Enterprise Platform
@@ -37,9 +39,15 @@ function Sidebar() {
             </div>
 
 
-            {/* NAVIGATION */}
+            {/* =====================================================
+                NAVIGATION
+            ====================================================== */}
 
             <nav className="dashboard-nav">
+
+                {/* =================================================
+                    MAIN
+                ================================================== */}
 
                 <span className="nav-section">
                     MAIN
@@ -57,12 +65,16 @@ function Sidebar() {
                 </NavLink>
 
 
+                {/* =================================================
+                    ORGANIZATION
+                ================================================== */}
+
                 <span className="nav-section">
                     ORGANIZATION
                 </span>
 
                 <NavLink
-                    to="/companies"
+                    to="/dashboard/companies"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
@@ -72,7 +84,7 @@ function Sidebar() {
                 </NavLink>
 
                 <NavLink
-                    to="/branches"
+                    to="/dashboard/branches"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
@@ -82,7 +94,7 @@ function Sidebar() {
                 </NavLink>
 
                 <NavLink
-                    to="/staff"
+                    to="/dashboard/staff"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
@@ -92,12 +104,16 @@ function Sidebar() {
                 </NavLink>
 
 
+                {/* =================================================
+                    BUSINESS
+                ================================================== */}
+
                 <span className="nav-section">
                     BUSINESS
                 </span>
 
                 <NavLink
-                    to="/products"
+                    to="/dashboard/products"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
@@ -107,7 +123,7 @@ function Sidebar() {
                 </NavLink>
 
                 <NavLink
-                    to="/services"
+                    to="/dashboard/services"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
@@ -117,12 +133,58 @@ function Sidebar() {
                 </NavLink>
 
 
+                {/* =================================================
+                    SYSTEM
+                ================================================== */}
+
                 <span className="nav-section settings-section">
                     SYSTEM
                 </span>
 
+
+                {/* COUNTRIES */}
+
                 <NavLink
-                    to="/settings"
+                    to="/dashboard/countries"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>◎</span>
+                    Countries
+                </NavLink>
+
+
+                {/* CURRENCIES */}
+
+                <NavLink
+                    to="/dashboard/currencies"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>¤</span>
+                    Currencies
+                </NavLink>
+
+
+                {/* ROLES */}
+
+                <NavLink
+                    to="/dashboard/roles"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>♙</span>
+                    Roles
+                </NavLink>
+
+
+                {/* SETTINGS */}
+
+                <NavLink
+                    to="/dashboard/settings"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
@@ -134,7 +196,9 @@ function Sidebar() {
             </nav>
 
 
-            {/* BOTTOM */}
+            {/* =====================================================
+                BOTTOM USER AREA
+            ====================================================== */}
 
             <div className="sidebar-bottom">
 
@@ -160,6 +224,7 @@ function Sidebar() {
 
 
                 <button
+                    type="button"
                     className="logout-button"
                     onClick={handleLogout}
                 >
@@ -169,9 +234,7 @@ function Sidebar() {
             </div>
 
         </aside>
-
     );
-
 }
 
 export default Sidebar;
