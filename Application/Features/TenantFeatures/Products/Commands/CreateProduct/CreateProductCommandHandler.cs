@@ -71,6 +71,7 @@ public sealed class CreateProductCommandHandler
         // ------------------------------------------------------------
 
         var product = Product.Create(
+            request.ProductId,
             request.ProductCategoryId,
             _userContext.StaffId,
             request.ProductName,

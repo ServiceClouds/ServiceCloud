@@ -54,6 +54,7 @@ public class Product
         = new List<ProductVariant>();
 
     public static Product Create(
+        int productId,
         int productCategoryId,
         int createdBy,
         string? productName = null,
@@ -70,6 +71,7 @@ public class Product
     {
         return new Product
         {
+            ProductId = productId,
             ProductCategoryId = productCategoryId,
             ProductName = productName,
             Description = description,

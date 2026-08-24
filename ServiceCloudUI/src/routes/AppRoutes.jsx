@@ -9,6 +9,9 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import ProductList from "../features/products/ProductList";
+import ProductForm from "../features/products/ProductForm";
+import ProductDetails from "../features/products/ProductDetails";
 
 function AppRoutes() {
     return (
@@ -66,8 +69,25 @@ function AppRoutes() {
                     />
                 }
             />
+            <Route path="/products" element={<ProductList />} />
+
+<Route
+    path="/products/new"
+    element={<ProductForm />}
+/>
+
+<Route
+    path="/products/:id"
+    element={<ProductDetails />}
+/>
+
+<Route
+    path="/products/:id/edit"
+    element={<ProductForm />}
+/>
 
         </Routes>
+        
     );
 }
 

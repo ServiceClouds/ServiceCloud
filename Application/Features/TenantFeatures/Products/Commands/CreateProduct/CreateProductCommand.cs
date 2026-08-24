@@ -3,6 +3,7 @@ using Application.Abstractions.Commands;
 namespace Application.Features.TenantFeatures.Products.Commands.CreateProduct;
 
 public sealed record CreateProductCommand(
+       int ProductId,
     int ProductCategoryId,
     string? ProductName,
     string? Description,
