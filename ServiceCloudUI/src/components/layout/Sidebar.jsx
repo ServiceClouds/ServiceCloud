@@ -1,365 +1,194 @@
 import { NavLink } from "react-router-dom";
-
 import { useAuth } from "../../context/AuthContext";
 
-
 function Sidebar() {
-
     const { logout } = useAuth();
 
-
     const handleLogout = () => {
-
         logout();
-
     };
 
-
     return (
-
         <aside className="dashboard-sidebar">
-
-
             {/* =====================================================
                 BRAND
             ====================================================== */}
-
             <div className="dashboard-brand">
-
-                <div className="dashboard-logo">
-                    S
-                </div>
-
+                <div className="dashboard-logo">S</div>
                 <div>
-
-                    <h2>
-                        ServiceCloud
-                    </h2>
-
-                    <span>
-                        Enterprise Platform
-                    </span>
-
+                    <h2>ServiceCloud</h2>
+                    <span>Enterprise Platform</span>
                 </div>
-
             </div>
-
 
             {/* =====================================================
                 NAVIGATION
             ====================================================== */}
-
             <nav className="dashboard-nav">
-
-
                 {/* =================================================
                     MAIN
                 ================================================== */}
-
-                <span className="nav-section">
-                    MAIN
-                </span>
-
+                <span className="nav-section">MAIN</span>
 
                 <NavLink
                     to="/dashboard"
                     end
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>▦</span>
-
                     Dashboard
-
                 </NavLink>
 
-
-
                 {/* =================================================
                     ORGANIZATION
                 ================================================== */}
-
-                <span className="nav-section">
-                    ORGANIZATION
-                </span>
-
-
-                {/* =================================================
-                    COMPANIES
-                ================================================== */}
+                <span className="nav-section">ORGANIZATION</span>
 
                 <NavLink
                     to="/dashboard/companies"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>▣</span>
-
                     Companies
-
                 </NavLink>
-
-
-                {/* =================================================
-                    BRANCHES
-                ================================================== */}
 
                 <NavLink
                     to="/dashboard/branches"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>⌂</span>
-
                     Branches
-
                 </NavLink>
-
-
-                {/* =================================================
-                    STAFF
-                ================================================== */}
 
                 <NavLink
                     to="/dashboard/staff"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>♙</span>
-
                     Staff
-
                 </NavLink>
 
-
-
                 {/* =================================================
                     BUSINESS
                 ================================================== */}
-
-                <span className="nav-section">
-                    BUSINESS
-                </span>
-
-
-                {/* =================================================
-                    PRODUCTS
-                ================================================== */}
+                <span className="nav-section">BUSINESS</span>
 
                 <NavLink
                     to="/dashboard/products"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>◈</span>
-
                     Products
-
                 </NavLink>
-                 <NavLink
-                    to="/product-variants"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+
+                <NavLink
+                    to="/dashboard/product-variants"
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
                     <span>◇</span>
                     Product Variants
                 </NavLink>
-               <NavLink
-    to="/product-variant-branches"
-    className={({ isActive }) =>
-        `nav-item ${isActive ? "active" : ""}`
-    }
->
-    <span>◇</span>
-    Product Variant Branches
-</NavLink>
-<NavLink
-    to="/product-variant-packagings"
-    className={({ isActive }) =>
-        `nav-item ${isActive ? "active" : ""}`
-    }
->
-    <span>◇</span>
-    Product Variant Packagings
-</NavLink>
+
                 <NavLink
-                    to="/product-categories"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    to="/dashboard/product-variant-branches"
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
+                    <span>◇</span>
+                    Product Variant Branches
+                </NavLink>
 
-<<<<<<< HEAD
+                <NavLink
+                    to="/dashboard/product-variant-packagings"
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+                >
+                    <span>◇</span>
+                    Product Variant Packagings
+                </NavLink>
 
-                {/* =================================================
-                    SERVICES
-                ================================================== */}
-
-=======
+                <NavLink
+                    to="/dashboard/product-categories"
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+                >
                     <span>◇</span>
                     Product Categories
                 </NavLink>
->>>>>>> ae1af464c59483a12c15e7328b2949e356e9eb1f
+
                 <NavLink
-                    to="/dashboard/services"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    to="/dashboard/product-attributes"
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>◇</span>
-
-                    Services
-
+                    Product Attributes
                 </NavLink>
 
-
+                <NavLink
+                    to="/dashboard/services"
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+                >
+                    <span>◇</span>
+                    Services
+                </NavLink>
 
                 {/* =================================================
                     SYSTEM
                 ================================================== */}
-
-                <span className="nav-section settings-section">
-                    SYSTEM
-                </span>
-
-
-                {/* =================================================
-                    COUNTRIES
-                ================================================== */}
+                <span className="nav-section settings-section">SYSTEM</span>
 
                 <NavLink
                     to="/dashboard/countries"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>◎</span>
-
                     Countries
-
                 </NavLink>
-
-
-                {/* =================================================
-                    CURRENCIES
-                ================================================== */}
 
                 <NavLink
                     to="/dashboard/currencies"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>¤</span>
-
                     Currencies
-
                 </NavLink>
-
-
-                {/* =================================================
-                    ROLES
-                ================================================== */}
 
                 <NavLink
                     to="/dashboard/roles"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>♙</span>
-
                     Roles
-
                 </NavLink>
-
-
-                {/* =================================================
-                    SETTINGS
-                ================================================== */}
 
                 <NavLink
                     to="/dashboard/settings"
-                    className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                    }
+                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
-
                     <span>⚙</span>
-
                     Settings
-
                 </NavLink>
-
             </nav>
-
-
 
             {/* =====================================================
                 BOTTOM USER AREA
             ====================================================== */}
-
             <div className="sidebar-bottom">
-
-
                 <div className="sidebar-user">
-
-                    <div className="user-avatar">
-                        A
-                    </div>
-
-
+                    <div className="user-avatar">A</div>
                     <div>
-
-                        <strong>
-                            Administrator
-                        </strong>
-
-                        <span>
-                            Admin
-                        </span>
-
+                        <strong>Administrator</strong>
+                        <span>Admin</span>
                     </div>
-
                 </div>
-
-
-                {/* =================================================
-                    LOGOUT
-                ================================================== */}
 
                 <button
                     type="button"
                     className="logout-button"
                     onClick={handleLogout}
                 >
-
                     Logout
-
                 </button>
-
             </div>
-
         </aside>
-
     );
-
 }
-
 
 export default Sidebar;
