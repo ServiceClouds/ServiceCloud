@@ -22,12 +22,13 @@ public class ProductAttribute
         = new List<ProductAttributeValue>();
 
     public static ProductAttribute Create(
+        int productAttributeId,
         int productId,
         int eAttributeId,
         int sortOrder)
     {
         return new ProductAttribute
-        {
+        {ProductAttributeId = productAttributeId,
             ProductId = productId,
             EAttributeId = eAttributeId,
             SortOrder = sortOrder

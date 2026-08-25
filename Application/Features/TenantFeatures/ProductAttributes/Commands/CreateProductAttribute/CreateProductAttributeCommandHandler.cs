@@ -66,6 +66,7 @@ public sealed class CreateProductAttributeCommandHandler
         // ------------------------------------------------------------
 
         var productAttribute = ProductAttribute.Create(
+            request.productAttributeId,
             request.ProductId,
             request.EAttributeId,
             request.SortOrder);

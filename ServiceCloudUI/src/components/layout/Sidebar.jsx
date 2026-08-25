@@ -138,6 +138,15 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+                    <NavLink
+    to="/product-attributes"
+    className={({ isActive }) =>
+        `nav-item ${isActive ? "active" : ""}`
+    }
+>
+    <span>◇</span>
+    Product Attributes
+</NavLink>
 
                     <span>◇</span>
                     Product Categories
