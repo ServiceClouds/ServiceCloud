@@ -1,0 +1,261 @@
+.crud-page {
+    padding: 28px 32px;
+    background: #f8fafc;
+    min-height: 100%;
+}
+
+.crud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 20px;
+}
+
+.crud-header h1 {
+    margin: 0;
+    color: #0f172a;
+    font-size: 26px;
+}
+
+.crud-header p {
+    margin: 7px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.primary-button,
+.secondary-button,
+.view-button,
+.edit-button,
+.pagination-button {
+    padding: 9px 15px;
+    border-radius: 7px;
+    border: 1px solid transparent;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.primary-button {
+    background: #2563eb;
+    color: white;
+}
+
+.secondary-button {
+    background: white;
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.view-button {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.edit-button {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.table-container,
+.crud-form,
+.details-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 9px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+.crud-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1000px;
+}
+
+.crud-table th,
+.crud-table td {
+    padding: 13px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f1f5f9;
+    white-space: nowrap;
+}
+
+.crud-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 12px;
+}
+
+.crud-table td {
+    color: #334155;
+    font-size: 13px;
+}
+
+.crud-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 7px;
+}
+
+.empty-row {
+    text-align: center !important;
+    padding: 40px !important;
+    color: #94a3b8 !important;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.pagination-container span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.pagination-button {
+    background: white;
+    color: #334155;
+    border-color: #cbd5e1;
+}
+
+.pagination-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.crud-form {
+    padding: 26px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    color: #334155;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input {
+    height: 40px;
+    padding: 0 11px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    outline: none;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group input:disabled {
+    background: #f8fafc;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.details-card {
+    padding: 26px;
+}
+
+.details-section {
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.details-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.details-section h2 {
+    margin: 0 0 18px;
+    font-size: 17px;
+    color: #0f172a;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.detail-item span {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.detail-item strong {
+    color: #1e293b;
+    font-size: 14px;
+}
+
+.error-message {
+    margin-bottom: 18px;
+    padding: 12px 15px;
+    border-radius: 7px;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #b91c1c;
+}
+
+.loading-message {
+    padding: 40px;
+    text-align: center;
+    color: #64748b;
+}
+
+@media (max-width: 800px) {
+    .crud-page {
+        padding: 20px 16px;
+    }
+
+    .crud-header {
+        flex-direction: column;
+    }
+
+    .form-grid,
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .crud-form,
+    .details-card {
+        padding: 20px;
+    }
+}

@@ -9,6 +9,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
 import Dashboard from "../Pages/Dashboard/Dashboard";
+<<<<<<< HEAD
 
 // ============================================================
 // COMPANIES
@@ -48,10 +49,11 @@ import RoleList from "../features/roles/RoleList";
 // PRODUCTS
 // ============================================================
 
+=======
+>>>>>>> ae1af464c59483a12c15e7328b2949e356e9eb1f
 import ProductList from "../features/products/ProductList";
 import ProductForm from "../features/products/ProductForm";
 import ProductDetails from "../features/products/ProductDetails";
-
 
 function AppRoutes() {
 
@@ -59,10 +61,7 @@ function AppRoutes() {
 
         <Routes>
 
-            {/* =====================================================
-                ROOT
-            ====================================================== */}
-
+            {/* Authentication */}
             <Route
                 path="/"
                 element={
@@ -99,10 +98,6 @@ function AppRoutes() {
             />
 
 
-            {/* =====================================================
-                PROTECTED APPLICATION
-            ====================================================== */}
-
             <Route
                 element={
                     <ProtectedRoute>
@@ -110,15 +105,11 @@ function AppRoutes() {
                     </ProtectedRoute>
                 }
             >
-
-                {/* =================================================
-                    DASHBOARD
-                ================================================== */}
-
                 <Route
                     path="/dashboard"
                     element={<Dashboard />}
                 />
+<<<<<<< HEAD
 
 
                 {/* =================================================
@@ -164,74 +155,16 @@ function AppRoutes() {
                     path="/dashboard/countries"
                     element={<CountryList />}
                 />
+=======
+            </Route>
+>>>>>>> ae1af464c59483a12c15e7328b2949e356e9eb1f
 
                 <Route
                     path="/dashboard/countries/new"
                     element={<CountryForm />}
                 />
 
-                <Route
-                    path="/dashboard/countries/:id"
-                    element={<CountryDetails />}
-                />
-
-                <Route
-                    path="/dashboard/countries/:id/edit"
-                    element={<CountryForm />}
-                />
-
-
-                {/* =================================================
-                    CURRENCY CRUD
-                ================================================== */}
-
-                <Route
-                    path="/dashboard/currencies"
-                    element={<CurrencyList />}
-                />
-
-
-                {/* =================================================
-                    ROLE CRUD
-                ================================================== */}
-
-                <Route
-                    path="/dashboard/roles"
-                    element={<RoleList />}
-                />
-
-
-                {/* =================================================
-                    PRODUCT CRUD
-                ================================================== */}
-
-                <Route
-                    path="/dashboard/products"
-                    element={<ProductList />}
-                />
-
-                <Route
-                    path="/dashboard/products/new"
-                    element={<ProductForm />}
-                />
-
-                <Route
-                    path="/dashboard/products/:id"
-                    element={<ProductDetails />}
-                />
-
-                <Route
-                    path="/dashboard/products/:id/edit"
-                    element={<ProductForm />}
-                />
-
-            </Route>
-
-
-            {/* =====================================================
-                UNKNOWN ROUTE
-            ====================================================== */}
-
+            {/* Unknown route */}
             <Route
                 path="*"
                 element={
@@ -241,6 +174,22 @@ function AppRoutes() {
                     />
                 }
             />
+            <Route path="/products" element={<ProductList />} />
+
+<Route
+    path="/products/new"
+    element={<ProductForm />}
+/>
+
+<Route
+    path="/products/:id"
+    element={<ProductDetails />}
+/>
+
+<Route
+    path="/products/:id/edit"
+    element={<ProductForm />}
+/>
 
         </Routes>
 

@@ -31,6 +31,7 @@ public sealed class CreateProductCategoryCommandHandler
         CancellationToken cancellationToken)
     {
         var category = ProductCategory.Create(
+            request.ProductCategoryId,
             _userContext.StaffId,
             request.ProductCategoryName,
             request.Description,

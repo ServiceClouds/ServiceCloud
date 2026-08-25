@@ -1,4 +1,5 @@
 ﻿using Application.Abstractions.Commands;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -6,6 +7,7 @@ using System.Text;
 namespace Application.Features.TenantFeatures.ProductVariantBranches.Commands.CreateProductVariantBranch
 {
     public sealed record CreateProductVariantBranchCommand(
+      long productVariantBranchId,
      long ProductVariantId,
      int BranchId,
      bool IsActive,

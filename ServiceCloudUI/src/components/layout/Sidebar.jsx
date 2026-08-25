@@ -166,12 +166,51 @@ function Sidebar() {
                     Products
 
                 </NavLink>
+                 <NavLink
+                    to="/product-variants"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>◇</span>
+                    Product Variants
+                </NavLink>
+               <NavLink
+    to="/product-variant-branches"
+    className={({ isActive }) =>
+        `nav-item ${isActive ? "active" : ""}`
+    }
+>
+    <span>◇</span>
+    Product Variant Branches
+</NavLink>
+<NavLink
+    to="/product-variant-packagings"
+    className={({ isActive }) =>
+        `nav-item ${isActive ? "active" : ""}`
+    }
+>
+    <span>◇</span>
+    Product Variant Packagings
+</NavLink>
+                <NavLink
+                    to="/product-categories"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
 
+<<<<<<< HEAD
 
                 {/* =================================================
                     SERVICES
                 ================================================== */}
 
+=======
+                    <span>◇</span>
+                    Product Categories
+                </NavLink>
+>>>>>>> ae1af464c59483a12c15e7328b2949e356e9eb1f
                 <NavLink
                     to="/dashboard/services"
                     className={({ isActive }) =>

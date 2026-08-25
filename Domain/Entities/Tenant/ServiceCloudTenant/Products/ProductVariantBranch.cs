@@ -49,6 +49,7 @@ public class ProductVariantBranch
     public ProductVariant ProductVariant { get; private set; } = null!;
 
     public static ProductVariantBranch Create(
+        long productVariantbranchId,
         long productVariantId,
         int branchId,
         int createdBy,
@@ -66,7 +67,7 @@ public class ProductVariantBranch
         decimal totalPrice = 0)
     {
         return new ProductVariantBranch
-        {
+        {ProductVariantBranchId=productVariantbranchId,
             ProductVariantId = productVariantId,
             BranchId = branchId,
             IsActive = isActive,

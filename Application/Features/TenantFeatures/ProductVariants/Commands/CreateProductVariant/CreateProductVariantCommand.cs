@@ -6,6 +6,7 @@ using System.Text;
 namespace Application.Features.TenantFeatures.ProductVariants.Commands.CreateProductVariant
 {
     public sealed record CreateProductVariantCommand(
+        int productvariantid,
     int ProductId,
     string ProductVariantName,
     string? AttributeValueIds,
