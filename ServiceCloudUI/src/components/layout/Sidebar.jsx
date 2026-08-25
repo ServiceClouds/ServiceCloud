@@ -89,6 +89,13 @@ function Sidebar() {
                     Product Variants
                 </NavLink>
 
+                    <NavLink to="/product-attributes" className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                        >
+    <span>◇</span>
+    Product Attributes
+</NavLink>
                 <NavLink
                     to="/dashboard/product-variant-branches"
                     className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
@@ -113,13 +120,7 @@ function Sidebar() {
                     Product Categories
                 </NavLink>
 
-                <NavLink
-                    to="/dashboard/product-attributes"
-                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
-                >
-                    <span>◇</span>
-                    Product Attributes
-                </NavLink>
+               
 
                 <NavLink
                     to="/dashboard/services"

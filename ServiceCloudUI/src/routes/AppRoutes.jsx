@@ -77,10 +77,15 @@ import ProductVariantPackagingDetails from "../features/productVariantPackagings
 // ============================================================
 // PRODUCT ATTRIBUTES
 // ============================================================
-// import ProductAttributeList from "../features/productAttributes/ProductAttributeList";
-// import ProductAttributeForm from "../features/productAttributes/ProductAttributeForm";
-// import ProductAttributeDetails from "../features/productAttributes/ProductAttributeDetails";
 
+import ProductAttributeList
+    from "../features/productAttributes/ProductAttributeList";
+
+import ProductAttributeForm
+    from "../features/productAttributes/ProductAttributeForm";
+
+import ProductAttributeDetails
+    from "../features/productAttributes/ProductAttributeDetails";
 
 function AppRoutes() {
     return (
@@ -190,12 +195,15 @@ function AppRoutes() {
                 {/* =================================================
                     PRODUCT ATTRIBUTE CRUD
                 ================================================== */}
-                {/* <Route path="/dashboard/product-attributes" element={<ProductAttributeList />} />
-                <Route path="/dashboard/product-attributes/new" element={<ProductAttributeForm />} />
-                <Route path="/dashboard/product-attributes/:id" element={<ProductAttributeDetails />} />
-                <Route path="/dashboard/product-attributes/:id/edit" element={<ProductAttributeForm />} /> */}
+                <Route path="/product-attributes" element={<ProductAttributeList />}/>
 
-            </Route>
+                <Route path="/product-attributes/new" element={<ProductAttributeForm />}/>
+
+                <Route path="/product-attributes/:id" element={<ProductAttributeDetails />}/>
+
+                <Route path="/product-attributes/:id/edit" element={<ProductAttributeForm />}/>
+                
+                </Route>
 
             {/* =====================================================
                 UNKNOWN ROUTE
