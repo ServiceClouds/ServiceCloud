@@ -17,6 +17,14 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import CompanyList from "../features/companies/CompanyList";
 
 // ============================================================
+// STAFF
+// ============================================================
+
+import StaffList from "../features/staff/StaffList";
+import StaffForm from "../features/staff/StaffForm";
+import StaffDetails from "../features/staff/StaffDetails";
+
+// ============================================================
 // COUNTRIES
 // ============================================================
 
@@ -120,6 +128,31 @@ function AppRoutes() {
                 <Route
                     path="/dashboard/companies"
                     element={<CompanyList />}
+                />
+
+
+                {/* =================================================
+                    STAFF CRUD
+                ================================================== */}
+
+                <Route
+                    path="/dashboard/staff"
+                    element={<StaffList />}
+                />
+
+                <Route
+                    path="/dashboard/staff/new"
+                    element={<StaffForm />}
+                />
+
+                <Route
+                    path="/dashboard/staff/:id"
+                    element={<StaffDetails />}
+                />
+
+                <Route
+                    path="/dashboard/staff/:id/edit"
+                    element={<StaffForm />}
                 />
 
 

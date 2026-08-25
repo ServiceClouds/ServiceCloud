@@ -2,17 +2,23 @@ import { NavLink } from "react-router-dom";
 
 import { useAuth } from "../../context/AuthContext";
 
+
 function Sidebar() {
 
     const { logout } = useAuth();
 
+
     const handleLogout = () => {
+
         logout();
+
     };
+
 
     return (
 
         <aside className="dashboard-sidebar">
+
 
             {/* =====================================================
                 BRAND
@@ -45,6 +51,7 @@ function Sidebar() {
 
             <nav className="dashboard-nav">
 
+
                 {/* =================================================
                     MAIN
                 ================================================== */}
@@ -52,6 +59,7 @@ function Sidebar() {
                 <span className="nav-section">
                     MAIN
                 </span>
+
 
                 <NavLink
                     to="/dashboard"
@@ -60,9 +68,13 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>▦</span>
+
                     Dashboard
+
                 </NavLink>
+
 
 
                 {/* =================================================
@@ -72,6 +84,11 @@ function Sidebar() {
                 <span className="nav-section">
                     ORGANIZATION
                 </span>
+
+
+                {/* =================================================
+                    COMPANIES
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/companies"
@@ -79,9 +96,17 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>▣</span>
+
                     Companies
+
                 </NavLink>
+
+
+                {/* =================================================
+                    BRANCHES
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/branches"
@@ -89,9 +114,17 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>⌂</span>
+
                     Branches
+
                 </NavLink>
+
+
+                {/* =================================================
+                    STAFF
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/staff"
@@ -99,9 +132,13 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>♙</span>
+
                     Staff
+
                 </NavLink>
+
 
 
                 {/* =================================================
@@ -112,15 +149,28 @@ function Sidebar() {
                     BUSINESS
                 </span>
 
+
+                {/* =================================================
+                    PRODUCTS
+                ================================================== */}
+
                 <NavLink
                     to="/dashboard/products"
                     className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>◈</span>
+
                     Products
+
                 </NavLink>
+
+
+                {/* =================================================
+                    SERVICES
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/services"
@@ -128,9 +178,13 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>◇</span>
+
                     Services
+
                 </NavLink>
+
 
 
                 {/* =================================================
@@ -142,7 +196,9 @@ function Sidebar() {
                 </span>
 
 
-                {/* COUNTRIES */}
+                {/* =================================================
+                    COUNTRIES
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/countries"
@@ -150,12 +206,17 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>◎</span>
+
                     Countries
+
                 </NavLink>
 
 
-                {/* CURRENCIES */}
+                {/* =================================================
+                    CURRENCIES
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/currencies"
@@ -163,12 +224,17 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>¤</span>
+
                     Currencies
+
                 </NavLink>
 
 
-                {/* ROLES */}
+                {/* =================================================
+                    ROLES
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/roles"
@@ -176,12 +242,17 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>♙</span>
+
                     Roles
+
                 </NavLink>
 
 
-                {/* SETTINGS */}
+                {/* =================================================
+                    SETTINGS
+                ================================================== */}
 
                 <NavLink
                     to="/dashboard/settings"
@@ -189,11 +260,15 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                 >
+
                     <span>⚙</span>
+
                     Settings
+
                 </NavLink>
 
             </nav>
+
 
 
             {/* =====================================================
@@ -202,11 +277,13 @@ function Sidebar() {
 
             <div className="sidebar-bottom">
 
+
                 <div className="sidebar-user">
 
                     <div className="user-avatar">
                         A
                     </div>
+
 
                     <div>
 
@@ -223,18 +300,27 @@ function Sidebar() {
                 </div>
 
 
+                {/* =================================================
+                    LOGOUT
+                ================================================== */}
+
                 <button
                     type="button"
                     className="logout-button"
                     onClick={handleLogout}
                 >
+
                     Logout
+
                 </button>
 
             </div>
 
         </aside>
+
     );
+
 }
+
 
 export default Sidebar;
