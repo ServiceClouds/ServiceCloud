@@ -9,44 +9,9 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
 import Dashboard from "../Pages/Dashboard/Dashboard";
-
 import ProductList from "../features/products/ProductList";
 import ProductForm from "../features/products/ProductForm";
 import ProductDetails from "../features/products/ProductDetails";
-
-import ProductCategoryList
-    from "../features/productCategories/ProductCategoryList";
-import ProductCategoryForm
-    from "../features/productCategories/ProductCategoryForm";
-import ProductCategoryDetails
-    from "../features/productCategories/ProductCategoryDetails";
-
-import ProductVariantList
-    from "../features/productVariants/ProductVariantList";
-
-import ProductVariantForm
-    from "../features/productVariants/ProductVariantForm";
-
-import ProductVariantDetails
-    from "../features/productVariants/ProductVariantDetails";
-
-    import ProductVariantBranchList
-    from "../features/productVariantBranches/ProductVariantBranchList";
-
-import ProductVariantBranchForm
-    from "../features/productVariantBranches/ProductVariantBranchForm";
-
-import ProductVariantBranchDetails
-    from "../features/productVariantBranches/ProductVariantBranchDetails";
-
-    import ProductVariantPackagingList
-    from "../features/productVariantPackagings/ProductVariantPackagingList";
-
-import ProductVariantPackagingForm
-    from "../features/productVariantPackagings/ProductVariantPackagingForm";
-
-import ProductVariantPackagingDetails
-    from "../features/productVariantPackagings/ProductVariantPackagingDetails";
 
 function AppRoutes() {
 
@@ -54,10 +19,7 @@ function AppRoutes() {
 
         <Routes>
 
-            {/* ================================================== */}
-            {/* AUTHENTICATION */}
-            {/* ================================================== */}
-
+            {/* Authentication */}
             <Route
                 path="/"
                 element={
@@ -67,6 +29,11 @@ function AppRoutes() {
                     />
                 }
             />
+
+
+            {/* =====================================================
+                AUTHENTICATION
+            ====================================================== */}
 
             <Route
                 path="/login"
@@ -89,10 +56,6 @@ function AppRoutes() {
             />
 
 
-            {/* ================================================== */}
-            {/* PROTECTED APPLICATION */}
-            {/* ================================================== */}
-
             <Route
                 element={
                     <ProtectedRoute>
@@ -100,71 +63,18 @@ function AppRoutes() {
                     </ProtectedRoute>
                 }
             >
-
-                {/* Dashboard */}
-
                 <Route
                     path="/dashboard"
                     element={<Dashboard />}
                 />
-
-
-                {/* ================================================== */}
-                {/* PRODUCTS */}
-                {/* ================================================== */}
-
-                <Route
-                    path="/products"
-                    element={<ProductList />}
-                />
-
-                <Route
-                    path="/products/new"
-                    element={<ProductForm />}
-                />
-
-                <Route
-                    path="/products/:id"
-                    element={<ProductDetails />}
-                />
-
-                <Route
-                    path="/products/:id/edit"
-                    element={<ProductForm />}
-                />
-
-
-                {/* ================================================== */}
-                {/* PRODUCT CATEGORIES */}
-                {/* ================================================== */}
-
-                <Route
-                    path="/product-categories"
-                    element={<ProductCategoryList />}
-                />
-
-                <Route
-                    path="/product-categories/new"
-                    element={<ProductCategoryForm />}
-                />
-
-                <Route
-                    path="/product-categories/:id"
-                    element={<ProductCategoryDetails />}
-                />
-
-                <Route
-                    path="/product-categories/:id/edit"
-                    element={<ProductCategoryForm />}
-                />
-
             </Route>
 
+                <Route
+                    path="/dashboard/countries/new"
+                    element={<CountryForm />}
+                />
 
-            {/* ================================================== */}
-            {/* UNKNOWN ROUTE */}
-            {/* ================================================== */}
-
+            {/* Unknown route */}
             <Route
                 path="*"
                 element={
@@ -174,69 +84,27 @@ function AppRoutes() {
                     />
                 }
             />
+            <Route path="/products" element={<ProductList />} />
 
-            <Route
-    path="/product-variants"
-    element={<ProductVariantList />}
+<Route
+    path="/products/new"
+    element={<ProductForm />}
 />
 
 <Route
-    path="/product-variants/new"
-    element={<ProductVariantForm />}
+    path="/products/:id"
+    element={<ProductDetails />}
 />
 
 <Route
-    path="/product-variants/:id"
-    element={<ProductVariantDetails />}
+    path="/products/:id/edit"
+    element={<ProductForm />}
 />
 
-<Route
-    path="/product-variants/:id/edit"
-    element={<ProductVariantForm />}
-/>
-
-<Route
-    path="/product-variant-branches"
-    element={<ProductVariantBranchList />}
-/>
-
-<Route
-    path="/product-variant-branches/new"
-    element={<ProductVariantBranchForm />}
-/>
-
-<Route
-    path="/product-variant-branches/:id"
-    element={<ProductVariantBranchDetails />}
-/>
-
-<Route
-    path="/product-variant-branches/:id/edit"
-    element={<ProductVariantBranchForm />}
-/>
-
-<Route
-    path="/product-variant-packagings"
-    element={<ProductVariantPackagingList />}
-/>
-
-<Route
-    path="/product-variant-packagings/new"
-    element={<ProductVariantPackagingForm />}
-/>
-
-<Route
-    path="/product-variant-packagings/:id"
-    element={<ProductVariantPackagingDetails />}
-/>
-
-<Route
-    path="/product-variant-packagings/:id/edit"
-    element={<ProductVariantPackagingForm />}
-/>
         </Routes>
 
     );
+
 }
 
 export default AppRoutes;
