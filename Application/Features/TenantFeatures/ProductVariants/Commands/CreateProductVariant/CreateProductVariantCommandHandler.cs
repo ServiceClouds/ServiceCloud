@@ -66,6 +66,7 @@ namespace Application.Features.TenantFeatures.ProductVariants.Commands.CreatePro
 
             var productVariant =
                 ProductVariant.Create(
+                    request.productvariantid,
                     request.ProductId,
                     request.ProductVariantName,
                     _userContext.StaffId,

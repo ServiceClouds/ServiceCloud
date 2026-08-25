@@ -67,6 +67,7 @@ public sealed class CreateProductVariantBranchCommandHandler
 
         var productVariantBranch =
             ProductVariantBranch.Create(
+                request.productVariantBranchId,
                 request.ProductVariantId,
                 request.BranchId,
                 _userContext.StaffId,

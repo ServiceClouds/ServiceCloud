@@ -44,6 +44,7 @@ public sealed class CreateProductVariantPackagingCommandHandler
 
         var packaging = ProductVariantPackaging.Create(
             request.ProductVariantId,
+            request.ProductVariantId,
             request.Weight,
             request.WeightUnitId,
             request.DimensionUnitId,

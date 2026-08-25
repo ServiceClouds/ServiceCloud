@@ -41,6 +41,7 @@ public class ProductVariant
         = new List<ProductVariantPackaging>();
 
     public static ProductVariant Create(
+        int productvariantid,
         int productId,
         string productVariantName,
         int createdBy,
@@ -51,6 +52,7 @@ public class ProductVariant
     {
         return new ProductVariant
         {
+            ProductVariantId = productvariantid,
             ProductId = productId,
             ProductVariantName = productVariantName,
             AttributeValueIds = attributeValueIds,

@@ -29,6 +29,7 @@ public class ProductVariantPackaging
     public ProductVariant ProductVariant { get; private set; } = null!;
 
     public static ProductVariantPackaging Create(
+        long productVariantPackagingId,
         long productVariantId,
         decimal? weight = null,
         int? weightUnitId = null,
@@ -41,6 +42,7 @@ public class ProductVariantPackaging
     {
         return new ProductVariantPackaging
         {
+            ProductVariantPackagingId= productVariantPackagingId,
             ProductVariantId = productVariantId,
             Weight = weight,
             WeightUnitId = weightUnitId,

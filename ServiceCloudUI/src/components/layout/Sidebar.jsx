@@ -105,7 +105,43 @@ function Sidebar() {
                     <span>◈</span>
                     Products
                 </NavLink>
+                 <NavLink
+                    to="/product-variants"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>◇</span>
+                    Product Variants
+                </NavLink>
+               <NavLink
+    to="/product-variant-branches"
+    className={({ isActive }) =>
+        `nav-item ${isActive ? "active" : ""}`
+    }
+>
+    <span>◇</span>
+    Product Variant Branches
+</NavLink>
+<NavLink
+    to="/product-variant-packagings"
+    className={({ isActive }) =>
+        `nav-item ${isActive ? "active" : ""}`
+    }
+>
+    <span>◇</span>
+    Product Variant Packagings
+</NavLink>
+                <NavLink
+                    to="/product-categories"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
 
+                    <span>◇</span>
+                    Product Categories
+                </NavLink>
                 <NavLink
                     to="/services"
                     className={({ isActive }) =>

@@ -34,6 +34,7 @@ public class ProductCategory
         = new List<Product>();
 
     public static ProductCategory Create(
+        int productCategoryId,
         int createdBy,
         string? productCategoryName = null,
         string? description = null,
@@ -45,6 +46,7 @@ public class ProductCategory
     {
         return new ProductCategory
         {
+            ProductCategoryId= productCategoryId,
             ProductCategoryName = productCategoryName,
             Description = description,
             ImagePath = imagePath,
