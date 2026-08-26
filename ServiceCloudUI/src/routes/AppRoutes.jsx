@@ -122,6 +122,12 @@ import ProductBranchPermissionList from "../features/productBranchPermissions/Pr
 import ProductBranchPermissionForm from "../features/productBranchPermissions/ProductBranchPermissionForm";
 import ProductBranchPermissionDetails from "../features/productBranchPermissions/ProductBranchPermissionDetails";
 
+
+// ============================================================
+// Service 
+// ============================================================
+import ServicePage from "../features/Service/ServicePage";
+
 // ============================================================
 // Service Category
 // ============================================================
@@ -453,6 +459,12 @@ function AppRoutes() {
                 />
 
                 {/* =================================================
+                    Service  CRUD
+                ================================================= */}
+
+                <Route path="/dashboard/services" element={<ServicePage />} />
+
+                 {/* =================================================
                     Service Category CRUD
                 ================================================= */}
                 <Route

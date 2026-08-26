@@ -158,10 +158,12 @@ function Sidebar() {
 
                 <NavLink
                     to="/dashboard/services"
-                    className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
                 >
-                    <span>◇</span>
-                    Services
+                    <span className="nav-item-icon">⚙</span>
+                    <span>Services</span>
                 </NavLink>
 
                 <NavLink to="/dashboard/service-categories"
