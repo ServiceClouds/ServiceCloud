@@ -1,21 +1,22 @@
 import axios from "../axios";
 
 // ============================================================
-// PRODUCT ATTRIBUTE API
+// PRODUCT ATTRIBUTE VALUE API
 // ============================================================
 
-const PRODUCT_ATTRIBUTE_URL = "/product-attribute";
+const PRODUCT_ATTRIBUTE_VALUE_URL =
+    "/product-attribute-value";
 
 // ------------------------------------------------------------
-// GET PAGED PRODUCT ATTRIBUTES
+// GET PAGED PRODUCT ATTRIBUTE VALUES
 // ------------------------------------------------------------
 
-export const getPagedProductAttributes = async (
+export const getPagedProductAttributeValues = async (
     pageNumber = 1,
     pageSize = 10
 ) => {
     const response = await axios.get(
-        PRODUCT_ATTRIBUTE_URL,
+        PRODUCT_ATTRIBUTE_VALUE_URL,
         {
             params: {
                 pageNumber,
@@ -28,36 +29,36 @@ export const getPagedProductAttributes = async (
 };
 
 // ------------------------------------------------------------
-// GET ALL PRODUCT ATTRIBUTES
+// GET ALL PRODUCT ATTRIBUTE VALUES
 // ------------------------------------------------------------
 
-export const getAllProductAttributes = async () => {
+export const getAllProductAttributeValues = async () => {
     const response = await axios.get(
-        `${PRODUCT_ATTRIBUTE_URL}/all`
+        `${PRODUCT_ATTRIBUTE_VALUE_URL}/all`
     );
 
     return response.data;
 };
 
 // ------------------------------------------------------------
-// GET PRODUCT ATTRIBUTE BY ID
+// GET PRODUCT ATTRIBUTE VALUE BY ID
 // ------------------------------------------------------------
 
-export const getProductAttributeById = async (id) => {
+export const getProductAttributeValueById = async (id) => {
     const response = await axios.get(
-        `${PRODUCT_ATTRIBUTE_URL}/${id}`
+        `${PRODUCT_ATTRIBUTE_VALUE_URL}/${id}`
     );
 
     return response.data;
 };
 
 // ------------------------------------------------------------
-// CREATE PRODUCT ATTRIBUTE
+// CREATE PRODUCT ATTRIBUTE VALUE
 // ------------------------------------------------------------
 
-export const createProductAttribute = async (data) => {
+export const createProductAttributeValue = async (data) => {
     const response = await axios.post(
-        PRODUCT_ATTRIBUTE_URL,
+        PRODUCT_ATTRIBUTE_VALUE_URL,
         data
     );
 
@@ -65,12 +66,15 @@ export const createProductAttribute = async (data) => {
 };
 
 // ------------------------------------------------------------
-// UPDATE PRODUCT ATTRIBUTE
+// UPDATE PRODUCT ATTRIBUTE VALUE
 // ------------------------------------------------------------
 
-export const updateProductAttribute = async (id, data) => {
+export const updateProductAttributeValue = async (
+    id,
+    data
+) => {
     const response = await axios.put(
-        `${PRODUCT_ATTRIBUTE_URL}/${id}`,
+        `${PRODUCT_ATTRIBUTE_VALUE_URL}/${id}`,
         data
     );
 

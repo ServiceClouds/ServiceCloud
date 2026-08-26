@@ -1,29 +1,14 @@
 import axios from "../axios";
 
-export const createProductCategory = async (data) => {
-    const response = await axios.post(
-        "/product-categories",
-        data
-    );
+// ============================================================
+// PRODUCT CATEGORY API
+// ============================================================
 
-    return response.data;
-};
+const PRODUCT_CATEGORY_URL = "/product-categories";
 
-export const getProductCategoryById = async (id) => {
-    const response = await axios.get(
-        `/product-categories/${id}`
-    );
-
-    return response.data;
-};
-
-export const getAllProductCategories = async () => {
-    const response = await axios.get(
-        "/product-categories"
-    );
-
-    return response.data;
-};
+// ------------------------------------------------------------
+// GET PAGED PRODUCT CATEGORIES
+// ------------------------------------------------------------
 
 export const getPagedProductCategories = async (
     pageNumber = 1,
@@ -31,7 +16,7 @@ export const getPagedProductCategories = async (
     search = ""
 ) => {
     const response = await axios.get(
-        "/product-categories/paged",
+        `${PRODUCT_CATEGORY_URL}/paged`,
         {
             params: {
                 pageNumber,
@@ -44,21 +29,63 @@ export const getPagedProductCategories = async (
     return response.data;
 };
 
-export const updateProductCategory = async (
-    id,
-    data
-) => {
-    const response = await axios.put(
-        `/product-categories/${id}`,
+// ------------------------------------------------------------
+// GET ALL PRODUCT CATEGORIES
+// ------------------------------------------------------------
+
+export const getAllProductCategories = async () => {
+    const response = await axios.get(
+        PRODUCT_CATEGORY_URL
+    );
+
+    return response.data;
+};
+
+// ------------------------------------------------------------
+// GET PRODUCT CATEGORY BY ID
+// ------------------------------------------------------------
+
+export const getProductCategoryById = async (id) => {
+    const response = await axios.get(
+        `${PRODUCT_CATEGORY_URL}/${id}`
+    );
+
+    return response.data;
+};
+
+// ------------------------------------------------------------
+// CREATE PRODUCT CATEGORY
+// ------------------------------------------------------------
+
+export const createProductCategory = async (data) => {
+    const response = await axios.post(
+        PRODUCT_CATEGORY_URL,
         data
     );
 
     return response.data;
 };
 
+// ------------------------------------------------------------
+// UPDATE PRODUCT CATEGORY
+// ------------------------------------------------------------
+
+export const updateProductCategory = async (id, data) => {
+    const response = await axios.put(
+        `${PRODUCT_CATEGORY_URL}/${id}`,
+        data
+    );
+
+    return response.data;
+};
+
+// ------------------------------------------------------------
+// ARCHIVE PRODUCT CATEGORY
+// ------------------------------------------------------------
+
 export const archiveProductCategory = async (id) => {
     const response = await axios.delete(
-        `/product-categories/${id}`
+        `${PRODUCT_CATEGORY_URL}/${id}`
     );
 
     return response.data;

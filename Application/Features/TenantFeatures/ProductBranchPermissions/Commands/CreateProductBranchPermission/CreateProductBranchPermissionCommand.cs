@@ -6,6 +6,7 @@ using System.Text;
 namespace Application.Features.TenantFeatures.ProductBranchPermissions.Commands.CreateProductBranchPermission
 {
     public sealed record CreateProductBranchPermissionCommand(
+     int productBranchePrmissionId,
     int ProductId,
     int BranchId,
     bool IsActive,

@@ -35,6 +35,8 @@ public class ProductBranchPermission
     public Product Product { get; private set; } = null!;
 
     public static ProductBranchPermission Create(
+        int productBranchPermissionId,
+        
         int productId,
         int branchId,
         bool isActive = true,
@@ -49,7 +51,7 @@ public class ProductBranchPermission
         bool isSharedPrivately = false)
     {
         return new ProductBranchPermission
-        {
+        {ProductBranchPermissionId=productBranchPermissionId,
             ProductId = productId,
             BranchId = branchId,
             IsActive = isActive,

@@ -93,9 +93,30 @@ function Sidebar() {
                         `nav-item ${isActive ? "active" : ""}`
                     }
                         >
-    <span>◇</span>
-    Product Attributes
-</NavLink>
+                <span>◇</span>
+                Product Attributes
+                </NavLink>
+
+                <NavLink
+                    to="/product-attribute-values"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>◇</span>
+                    Product Attribute Values
+                </NavLink>
+
+                <NavLink
+                    to="/product-branch-permissions"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>◇</span>
+                    Product Branch Permissions
+                </NavLink>
+
                 <NavLink
                     to="/dashboard/product-variant-branches"
                     className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}

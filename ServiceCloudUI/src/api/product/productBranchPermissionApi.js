@@ -1,21 +1,22 @@
 import axios from "../axios";
 
 // ============================================================
-// PRODUCT ATTRIBUTE API
+// PRODUCT BRANCH PERMISSION API
 // ============================================================
 
-const PRODUCT_ATTRIBUTE_URL = "/product-attribute";
+const PRODUCT_BRANCH_PERMISSION_URL =
+    "/product-branch-permission";
 
 // ------------------------------------------------------------
-// GET PAGED PRODUCT ATTRIBUTES
+// GET PAGED PRODUCT BRANCH PERMISSIONS
 // ------------------------------------------------------------
 
-export const getPagedProductAttributes = async (
+export const getPagedProductBranchPermissions = async (
     pageNumber = 1,
     pageSize = 10
 ) => {
     const response = await axios.get(
-        PRODUCT_ATTRIBUTE_URL,
+        PRODUCT_BRANCH_PERMISSION_URL,
         {
             params: {
                 pageNumber,
@@ -28,36 +29,36 @@ export const getPagedProductAttributes = async (
 };
 
 // ------------------------------------------------------------
-// GET ALL PRODUCT ATTRIBUTES
+// GET ALL PRODUCT BRANCH PERMISSIONS
 // ------------------------------------------------------------
 
-export const getAllProductAttributes = async () => {
+export const getAllProductBranchPermissions = async () => {
     const response = await axios.get(
-        `${PRODUCT_ATTRIBUTE_URL}/all`
+        `${PRODUCT_BRANCH_PERMISSION_URL}/all`
     );
 
     return response.data;
 };
 
 // ------------------------------------------------------------
-// GET PRODUCT ATTRIBUTE BY ID
+// GET PRODUCT BRANCH PERMISSION BY ID
 // ------------------------------------------------------------
 
-export const getProductAttributeById = async (id) => {
+export const getProductBranchPermissionById = async (id) => {
     const response = await axios.get(
-        `${PRODUCT_ATTRIBUTE_URL}/${id}`
+        `${PRODUCT_BRANCH_PERMISSION_URL}/${id}`
     );
 
     return response.data;
 };
 
 // ------------------------------------------------------------
-// CREATE PRODUCT ATTRIBUTE
+// CREATE PRODUCT BRANCH PERMISSION
 // ------------------------------------------------------------
 
-export const createProductAttribute = async (data) => {
+export const createProductBranchPermission = async (data) => {
     const response = await axios.post(
-        PRODUCT_ATTRIBUTE_URL,
+        PRODUCT_BRANCH_PERMISSION_URL,
         data
     );
 
@@ -65,13 +66,28 @@ export const createProductAttribute = async (data) => {
 };
 
 // ------------------------------------------------------------
-// UPDATE PRODUCT ATTRIBUTE
+// UPDATE PRODUCT BRANCH PERMISSION
 // ------------------------------------------------------------
 
-export const updateProductAttribute = async (id, data) => {
+export const updateProductBranchPermission = async (
+    id,
+    data
+) => {
     const response = await axios.put(
-        `${PRODUCT_ATTRIBUTE_URL}/${id}`,
+        `${PRODUCT_BRANCH_PERMISSION_URL}/${id}`,
         data
+    );
+
+    return response.data;
+};
+
+// ------------------------------------------------------------
+// DEACTIVATE PRODUCT BRANCH PERMISSION
+// ------------------------------------------------------------
+
+export const deactivateProductBranchPermission = async (id) => {
+    const response = await axios.delete(
+        `${PRODUCT_BRANCH_PERMISSION_URL}/${id}`
     );
 
     return response.data;

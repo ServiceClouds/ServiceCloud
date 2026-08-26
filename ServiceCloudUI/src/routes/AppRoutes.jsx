@@ -87,6 +87,29 @@ import ProductAttributeForm
 import ProductAttributeDetails
     from "../features/productAttributes/ProductAttributeDetails";
 
+//=============================================================
+//     Product Attribute Values
+//=============================================================
+    import ProductAttributeValueList
+    from "../features/productAttributeValues/ProductAttributeValueList";
+
+import ProductAttributeValueForm
+    from "../features/productAttributeValues/ProductAttributeValueForm";
+
+import ProductAttributeValueDetails
+    from "../features/productAttributeValues/ProductAttributeValueDetails";
+//=============================================================
+//    Product Branch Permission 
+//=============================================================
+
+import ProductBranchPermissionList from "../features/productBranchPermissions/ProductBranchPermissionList";
+import ProductBranchPermissionForm from "../features/productBranchPermissions/ProductBranchPermissionForm";
+import ProductBranchPermissionDetails from "../features/productBranchPermissions/ProductBranchPermissionDetails";
+
+
+
+
+
 function AppRoutes() {
     return (
         <Routes>
@@ -202,6 +225,60 @@ function AppRoutes() {
                 <Route path="/product-attributes/:id" element={<ProductAttributeDetails />}/>
 
                 <Route path="/product-attributes/:id/edit" element={<ProductAttributeForm />}/>
+
+             //=============================================================
+            //     Product Attribute Values
+            //=============================================================
+
+            <Route
+                path="/product-attribute-values"
+                element={<ProductAttributeValueList />}
+            />
+
+            <Route
+                path="/product-attribute-values/new"
+                element={<ProductAttributeValueForm />}
+            />
+
+            <Route
+                path="/product-attribute-values/:id"
+                element={<ProductAttributeValueDetails />}
+            />
+
+            <Route
+                path="/product-attribute-values/:id/edit"
+                element={<ProductAttributeValueForm />}
+            />
+
+        //=============================================================
+        //    Product Branch Permission 
+        //=============================================================
+
+        <Route
+            path="/product-branch-permissions"
+            element={<ProductBranchPermissionList />}
+        />
+
+        <Route
+            path="/product-branch-permissions/new"
+            element={<ProductBranchPermissionForm />}
+        />
+
+        <Route
+            path="/product-branch-permissions/:id"
+            element={<ProductBranchPermissionDetails />}
+        />
+
+        <Route
+            path="/product-branch-permissions/:id/edit"
+            element={<ProductBranchPermissionForm />}
+        />
+
+
+
+
+
+
                 
                 </Route>
 

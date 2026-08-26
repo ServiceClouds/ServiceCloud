@@ -54,6 +54,7 @@ public sealed class CreateProductAttributeValueCommandHandler
 
         var productAttributeValue =
             ProductAttributeValue.Create(
+                request.productAttributeValueId,
                 request.ProductAttributeId,
                 request.AttributeValueId);
 

@@ -15,11 +15,12 @@ public class ProductAttributeValue
     public ProductAttribute ProductAttribute { get; private set; } = null!;
 
     public static ProductAttributeValue Create(
+        int productAttributeValueId,
         int productAttributeId,
         int attributeValueId)
     {
         return new ProductAttributeValue
-        {
+        {ProductAttributeValueId=productAttributeValueId,
             ProductAttributeId = productAttributeId,
             AttributeValueId = attributeValueId
         };

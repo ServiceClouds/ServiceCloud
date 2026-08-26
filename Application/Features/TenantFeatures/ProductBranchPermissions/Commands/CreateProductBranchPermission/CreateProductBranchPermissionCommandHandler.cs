@@ -74,6 +74,7 @@ public sealed class CreateProductBranchPermissionCommandHandler
 
         var permission =
             ProductBranchPermission.Create(
+                request.productBranchePrmissionId,
                 request.ProductId,
                 request.BranchId,
                 request.IsActive,
