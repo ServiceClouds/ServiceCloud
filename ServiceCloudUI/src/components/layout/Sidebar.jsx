@@ -172,6 +172,16 @@ function Sidebar() {
                     Service Categories
                 </NavLink>
 
+                <NavLink
+                to="/service-category-branches"
+                className={({ isActive }) =>
+                    `nav-item ${isActive ? "active" : ""}`
+                }
+            >
+                <span>◇</span>
+                Service Category Branches
+            </NavLink>
+
                 {/* =================================================
                     SYSTEM
                 ================================================== */}
