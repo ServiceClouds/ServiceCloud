@@ -16,6 +16,12 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import CompanyList from "../features/companies/CompanyList";
 
 // ============================================================
+// Branches
+// ============================================================
+import BranchList from "../features/branches/BranchList";
+
+
+// ============================================================
 // STAFF
 // ============================================================
 import StaffList from "../features/staff/StaffList";
@@ -23,11 +29,24 @@ import StaffForm from "../features/staff/StaffForm";
 import StaffDetails from "../features/staff/StaffDetails";
 
 // ============================================================
+// STAFF Branch
+// ============================================================
+import StaffBranchList from "../features/staffBranches/StaffBranchList";
+import StaffBranchForm from "../features/staffBranches/StaffBranchForm";
+import StaffBranchDetails from "../features/staffBranches/StaffBranchDetails";
+// ============================================================
 // COUNTRIES
 // ============================================================
 import CountryList from "../features/countries/CountryList";
 import CountryForm from "../features/countries/CountryForm";
 import CountryDetails from "../features/countries/CountryDetails";
+
+
+// ============================================================
+// STATE / COUNTRY
+// ============================================================
+import StateCountryList from "../features/stateCountries/StateCountryList";
+
 
 // ============================================================
 // CURRENCIES
@@ -77,6 +96,11 @@ import ProductVariantPackagingDetails from "../features/productVariantPackagings
 // ============================================================
 // PRODUCT ATTRIBUTES
 // ============================================================
+
+// ============================================================
+// Service Category
+// ============================================================
+import ServiceCategoryPage from "../features/ServiceCategory/ServiceCategoryPage";
 
 import ProductAttributeList
     from "../features/productAttributes/ProductAttributeList";
@@ -150,12 +174,37 @@ function AppRoutes() {
                 <Route path="/dashboard/companies" element={<CompanyList />} />
 
                 {/* =================================================
+                    BRANCH CRUD
+                ================================================== */}
+                <Route
+                    path="/dashboard/branches"
+                    element={<BranchList />}
+                />
+                {/* =================================================
                     STAFF CRUD
                 ================================================== */}
                 <Route path="/dashboard/staff" element={<StaffList />} />
                 <Route path="/dashboard/staff/new" element={<StaffForm />} />
                 <Route path="/dashboard/staff/:id" element={<StaffDetails />} />
                 <Route path="/dashboard/staff/:id/edit" element={<StaffForm />} />
+
+                {/* =================================================
+                    STAFFBranch  CRUD
+                ================================================== */}
+                <Route
+                    path="/dashboard/staff-branches"
+                    element={<StaffBranchList />}
+                />
+
+                <Route
+                    path="/dashboard/staff-branches/create"
+                    element={<StaffBranchForm />}
+                />
+
+                <Route
+                    path="/dashboard/staff-branches/details/:id"
+                    element={<StaffBranchDetails />}
+                />
 
                 {/* =================================================
                     COUNTRY CRUD
@@ -166,9 +215,17 @@ function AppRoutes() {
                 <Route path="/dashboard/countries/:id/edit" element={<CountryForm />} />
 
                 {/* =================================================
+                    STATE / COUNTRY CRUD
+                ================================================== */}
+                <Route
+                    path="/dashboard/state-countries" element={<StateCountryList />} />
+
+                {/* =================================================
                     CURRENCY CRUD
                 ================================================== */}
                 <Route path="/dashboard/currencies" element={<CurrencyList />} />
+
+                
 
                 {/* =================================================
                     ROLE CRUD
@@ -218,6 +275,16 @@ function AppRoutes() {
                 {/* =================================================
                     PRODUCT ATTRIBUTE CRUD
                 ================================================== */}
+                {/* <Route path="/dashboard/product-attributes" element={<ProductAttributeList />} />
+                <Route path="/dashboard/product-attributes/new" element={<ProductAttributeForm />} />
+                <Route path="/dashboard/product-attributes/:id" element={<ProductAttributeDetails />} />
+                <Route path="/dashboard/product-attributes/:id/edit" element={<ProductAttributeForm />} /> */}
+              
+                {/* =================================================
+                    Service Category CRUD
+                ================================================== */}
+                <Route path="/dashboard/service-categories" element={<ServiceCategoryPage />} />
+            </Route>
                 <Route path="/product-attributes" element={<ProductAttributeList />}/>
 
                 <Route path="/product-attributes/new" element={<ProductAttributeForm />}/>

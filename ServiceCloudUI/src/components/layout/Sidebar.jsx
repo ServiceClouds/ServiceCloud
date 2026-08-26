@@ -60,12 +60,25 @@ function Sidebar() {
                     Branches
                 </NavLink>
 
+                
+
                 <NavLink
                     to="/dashboard/staff"
                     className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
                 >
                     <span>♙</span>
                     Staff
+                </NavLink>
+
+
+                <NavLink
+                    to="/dashboard/staff-branches"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>♧</span>
+                    Staff Branches
                 </NavLink>
 
                 {/* =================================================
@@ -151,6 +164,12 @@ function Sidebar() {
                     Services
                 </NavLink>
 
+                <NavLink to="/dashboard/service-categories"
+                className={({ isActive }) => `nav-item ${isActive ? "active" : ""}`}
+                >
+                    Service Categories
+                </NavLink>
+
                 {/* =================================================
                     SYSTEM
                 ================================================== */}
@@ -162,6 +181,16 @@ function Sidebar() {
                 >
                     <span>◎</span>
                     Countries
+                </NavLink>
+
+                <NavLink
+                    to="/dashboard/state-countries"
+                    className={({ isActive }) =>
+                        `nav-item ${isActive ? "active" : ""}`
+                    }
+                >
+                    <span>◎</span>
+                    States / Provinces
                 </NavLink>
 
                 <NavLink
