@@ -127,6 +127,19 @@ import ProductBranchPermissionDetails from "../features/productBranchPermissions
 // ============================================================
 import ServiceCategoryPage from "../features/ServiceCategory/ServiceCategoryPage";
 
+// ============================================================
+// Service Category Branches
+// ============================================================
+
+import ServiceCategoryBranchList
+    from "../features/serviceCategoryBranches/ServiceCategoryBranchList";
+
+import ServiceCategoryBranchForm
+    from "../features/serviceCategoryBranches/ServiceCategoryBranchForm";
+
+import ServiceCategoryBranchDetails
+    from "../features/serviceCategoryBranches/ServiceCategoryBranchDetails";
+
 
 function AppRoutes() {
     return (
@@ -459,6 +472,32 @@ function AppRoutes() {
                     path="/dashboard/service-categories"
                     element={<ServiceCategoryPage />}
                 />
+
+
+                {/* =================================================
+                    Service Category Branches
+                ================================================= */}
+
+
+                <Route
+                path="/service-category-branches"
+                element={<ServiceCategoryBranchList />}
+            />
+
+            <Route
+                path="/service-category-branches/new"
+                element={<ServiceCategoryBranchForm />}
+            />
+
+            <Route
+                path="/service-category-branches/:id"
+                element={<ServiceCategoryBranchDetails />}
+            />
+
+            <Route
+                path="/service-category-branches/:id/edit"
+                element={<ServiceCategoryBranchForm />}
+/>
 
             </Route>
 
