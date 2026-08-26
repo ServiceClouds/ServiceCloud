@@ -20,7 +20,6 @@ import CompanyList from "../features/companies/CompanyList";
 // ============================================================
 import BranchList from "../features/branches/BranchList";
 
-
 // ============================================================
 // STAFF
 // ============================================================
@@ -34,6 +33,7 @@ import StaffDetails from "../features/staff/StaffDetails";
 import StaffBranchList from "../features/staffBranches/StaffBranchList";
 import StaffBranchForm from "../features/staffBranches/StaffBranchForm";
 import StaffBranchDetails from "../features/staffBranches/StaffBranchDetails";
+
 // ============================================================
 // COUNTRIES
 // ============================================================
@@ -41,12 +41,10 @@ import CountryList from "../features/countries/CountryList";
 import CountryForm from "../features/countries/CountryForm";
 import CountryDetails from "../features/countries/CountryDetails";
 
-
 // ============================================================
 // STATE / COUNTRY
 // ============================================================
 import StateCountryList from "../features/stateCountries/StateCountryList";
-
 
 // ============================================================
 // CURRENCIES
@@ -96,12 +94,6 @@ import ProductVariantPackagingDetails from "../features/productVariantPackagings
 // ============================================================
 // PRODUCT ATTRIBUTES
 // ============================================================
-
-// ============================================================
-// Service Category
-// ============================================================
-import ServiceCategoryPage from "../features/ServiceCategory/ServiceCategoryPage";
-
 import ProductAttributeList
     from "../features/productAttributes/ProductAttributeList";
 
@@ -111,10 +103,10 @@ import ProductAttributeForm
 import ProductAttributeDetails
     from "../features/productAttributes/ProductAttributeDetails";
 
-//=============================================================
-//     Product Attribute Values
-//=============================================================
-    import ProductAttributeValueList
+// =============================================================
+// Product Attribute Values
+// =============================================================
+import ProductAttributeValueList
     from "../features/productAttributeValues/ProductAttributeValueList";
 
 import ProductAttributeValueForm
@@ -122,21 +114,24 @@ import ProductAttributeValueForm
 
 import ProductAttributeValueDetails
     from "../features/productAttributeValues/ProductAttributeValueDetails";
-//=============================================================
-//    Product Branch Permission 
-//=============================================================
 
+// =============================================================
+// Product Branch Permission
+// =============================================================
 import ProductBranchPermissionList from "../features/productBranchPermissions/ProductBranchPermissionList";
 import ProductBranchPermissionForm from "../features/productBranchPermissions/ProductBranchPermissionForm";
 import ProductBranchPermissionDetails from "../features/productBranchPermissions/ProductBranchPermissionDetails";
 
-
-
+// ============================================================
+// Service Category
+// ============================================================
+import ServiceCategoryPage from "../features/ServiceCategory/ServiceCategoryPage";
 
 
 function AppRoutes() {
     return (
         <Routes>
+
             {/* =====================================================
                 ROOT
             ====================================================== */}
@@ -163,6 +158,7 @@ function AppRoutes() {
                     </ProtectedRoute>
                 }
             >
+
                 {/* =================================================
                     DASHBOARD
                 ================================================== */}
@@ -171,7 +167,10 @@ function AppRoutes() {
                 {/* =================================================
                     COMPANY CRUD
                 ================================================== */}
-                <Route path="/dashboard/companies" element={<CompanyList />} />
+                <Route
+                    path="/dashboard/companies"
+                    element={<CompanyList />}
+                />
 
                 {/* =================================================
                     BRANCH CRUD
@@ -180,16 +179,32 @@ function AppRoutes() {
                     path="/dashboard/branches"
                     element={<BranchList />}
                 />
+
                 {/* =================================================
                     STAFF CRUD
                 ================================================== */}
-                <Route path="/dashboard/staff" element={<StaffList />} />
-                <Route path="/dashboard/staff/new" element={<StaffForm />} />
-                <Route path="/dashboard/staff/:id" element={<StaffDetails />} />
-                <Route path="/dashboard/staff/:id/edit" element={<StaffForm />} />
+                <Route
+                    path="/dashboard/staff"
+                    element={<StaffList />}
+                />
+
+                <Route
+                    path="/dashboard/staff/new"
+                    element={<StaffForm />}
+                />
+
+                <Route
+                    path="/dashboard/staff/:id"
+                    element={<StaffDetails />}
+                />
+
+                <Route
+                    path="/dashboard/staff/:id/edit"
+                    element={<StaffForm />}
+                />
 
                 {/* =================================================
-                    STAFFBranch  CRUD
+                    STAFFBranch CRUD
                 ================================================== */}
                 <Route
                     path="/dashboard/staff-branches"
@@ -209,145 +224,243 @@ function AppRoutes() {
                 {/* =================================================
                     COUNTRY CRUD
                 ================================================== */}
-                <Route path="/dashboard/countries" element={<CountryList />} />
-                <Route path="/dashboard/countries/new" element={<CountryForm />} />
-                <Route path="/dashboard/countries/:id" element={<CountryDetails />} />
-                <Route path="/dashboard/countries/:id/edit" element={<CountryForm />} />
+                <Route
+                    path="/dashboard/countries"
+                    element={<CountryList />}
+                />
+
+                <Route
+                    path="/dashboard/countries/new"
+                    element={<CountryForm />}
+                />
+
+                <Route
+                    path="/dashboard/countries/:id"
+                    element={<CountryDetails />}
+                />
+
+                <Route
+                    path="/dashboard/countries/:id/edit"
+                    element={<CountryForm />}
+                />
 
                 {/* =================================================
                     STATE / COUNTRY CRUD
                 ================================================== */}
                 <Route
-                    path="/dashboard/state-countries" element={<StateCountryList />} />
+                    path="/dashboard/state-countries"
+                    element={<StateCountryList />}
+                />
 
                 {/* =================================================
                     CURRENCY CRUD
                 ================================================== */}
-                <Route path="/dashboard/currencies" element={<CurrencyList />} />
-
-                
+                <Route
+                    path="/dashboard/currencies"
+                    element={<CurrencyList />}
+                />
 
                 {/* =================================================
                     ROLE CRUD
                 ================================================== */}
-                <Route path="/dashboard/roles" element={<RoleList />} />
+                <Route
+                    path="/dashboard/roles"
+                    element={<RoleList />}
+                />
 
                 {/* =================================================
                     PRODUCT CRUD
                 ================================================== */}
-                <Route path="/dashboard/products" element={<ProductList />} />
-                <Route path="/dashboard/products/new" element={<ProductForm />} />
-                <Route path="/dashboard/products/:id" element={<ProductDetails />} />
-                <Route path="/dashboard/products/:id/edit" element={<ProductForm />} />
+                <Route
+                    path="/dashboard/products"
+                    element={<ProductList />}
+                />
+
+                <Route
+                    path="/dashboard/products/new"
+                    element={<ProductForm />}
+                />
+
+                <Route
+                    path="/dashboard/products/:id"
+                    element={<ProductDetails />}
+                />
+
+                <Route
+                    path="/dashboard/products/:id/edit"
+                    element={<ProductForm />}
+                />
 
                 {/* =================================================
                     PRODUCT CATEGORY CRUD
                 ================================================== */}
-                <Route path="/dashboard/product-categories" element={<ProductCategoryList />} />
-                <Route path="/dashboard/product-categories/new" element={<ProductCategoryForm />} />
-                <Route path="/dashboard/product-categories/:id" element={<ProductCategoryDetails />} />
-                <Route path="/dashboard/product-categories/:id/edit" element={<ProductCategoryForm />} />
+                <Route
+                    path="/dashboard/product-categories"
+                    element={<ProductCategoryList />}
+                />
+
+                <Route
+                    path="/dashboard/product-categories/new"
+                    element={<ProductCategoryForm />}
+                />
+
+                <Route
+                    path="/dashboard/product-categories/:id"
+                    element={<ProductCategoryDetails />}
+                />
+
+                <Route
+                    path="/dashboard/product-categories/:id/edit"
+                    element={<ProductCategoryForm />}
+                />
 
                 {/* =================================================
                     PRODUCT VARIANT CRUD
                 ================================================== */}
-                <Route path="/dashboard/product-variants" element={<ProductVariantList />} />
-                <Route path="/dashboard/product-variants/new" element={<ProductVariantForm />} />
-                <Route path="/dashboard/product-variants/:id" element={<ProductVariantDetails />} />
-                <Route path="/dashboard/product-variants/:id/edit" element={<ProductVariantForm />} />
+                <Route
+                    path="/dashboard/product-variants"
+                    element={<ProductVariantList />}
+                />
+
+                <Route
+                    path="/dashboard/product-variants/new"
+                    element={<ProductVariantForm />}
+                />
+
+                <Route
+                    path="/dashboard/product-variants/:id"
+                    element={<ProductVariantDetails />}
+                />
+
+                <Route
+                    path="/dashboard/product-variants/:id/edit"
+                    element={<ProductVariantForm />}
+                />
 
                 {/* =================================================
                     PRODUCT VARIANT BRANCH CRUD
                 ================================================== */}
-                <Route path="/dashboard/product-variant-branches" element={<ProductVariantBranchList />} />
-                <Route path="/dashboard/product-variant-branches/new" element={<ProductVariantBranchForm />} />
-                <Route path="/dashboard/product-variant-branches/:id" element={<ProductVariantBranchDetails />} />
-                <Route path="/dashboard/product-variant-branches/:id/edit" element={<ProductVariantBranchForm />} />
+                <Route
+                    path="/dashboard/product-variant-branches"
+                    element={<ProductVariantBranchList />}
+                />
+
+                <Route
+                    path="/dashboard/product-variant-branches/new"
+                    element={<ProductVariantBranchForm />}
+                />
+
+                <Route
+                    path="/dashboard/product-variant-branches/:id"
+                    element={<ProductVariantBranchDetails />}
+                />
+
+                <Route
+                    path="/dashboard/product-variant-branches/:id/edit"
+                    element={<ProductVariantBranchForm />}
+                />
 
                 {/* =================================================
                     PRODUCT VARIANT PACKAGING CRUD
                 ================================================== */}
-                <Route path="/dashboard/product-variant-packagings" element={<ProductVariantPackagingList />} />
-                <Route path="/dashboard/product-variant-packagings/new" element={<ProductVariantPackagingForm />} />
-                <Route path="/dashboard/product-variant-packagings/:id" element={<ProductVariantPackagingDetails />} />
-                <Route path="/dashboard/product-variant-packagings/:id/edit" element={<ProductVariantPackagingForm />} />
+                <Route
+                    path="/dashboard/product-variant-packagings"
+                    element={<ProductVariantPackagingList />}
+                />
+
+                <Route
+                    path="/dashboard/product-variant-packagings/new"
+                    element={<ProductVariantPackagingForm />}
+                />
+
+                <Route
+                    path="/dashboard/product-variant-packagings/:id"
+                    element={<ProductVariantPackagingDetails />}
+                />
+
+                <Route
+                    path="/dashboard/product-variant-packagings/:id/edit"
+                    element={<ProductVariantPackagingForm />}
+                />
 
                 {/* =================================================
                     PRODUCT ATTRIBUTE CRUD
                 ================================================== */}
-                {/* <Route path="/dashboard/product-attributes" element={<ProductAttributeList />} />
-                <Route path="/dashboard/product-attributes/new" element={<ProductAttributeForm />} />
-                <Route path="/dashboard/product-attributes/:id" element={<ProductAttributeDetails />} />
-                <Route path="/dashboard/product-attributes/:id/edit" element={<ProductAttributeForm />} /> */}
-              
+                <Route
+                    path="/product-attributes"
+                    element={<ProductAttributeList />}
+                />
+
+                <Route
+                    path="/product-attributes/new"
+                    element={<ProductAttributeForm />}
+                />
+
+                <Route
+                    path="/product-attributes/:id"
+                    element={<ProductAttributeDetails />}
+                />
+
+                <Route
+                    path="/product-attributes/:id/edit"
+                    element={<ProductAttributeForm />}
+                />
+
+                {/* =================================================
+                    Product Attribute Values
+                ================================================= */}
+                <Route
+                    path="/product-attribute-values"
+                    element={<ProductAttributeValueList />}
+                />
+
+                <Route
+                    path="/product-attribute-values/new"
+                    element={<ProductAttributeValueForm />}
+                />
+
+                <Route
+                    path="/product-attribute-values/:id"
+                    element={<ProductAttributeValueDetails />}
+                />
+
+                <Route
+                    path="/product-attribute-values/:id/edit"
+                    element={<ProductAttributeValueForm />}
+                />
+
+                {/* =================================================
+                    Product Branch Permission
+                ================================================= */}
+                <Route
+                    path="/product-branch-permissions"
+                    element={<ProductBranchPermissionList />}
+                />
+
+                <Route
+                    path="/product-branch-permissions/new"
+                    element={<ProductBranchPermissionForm />}
+                />
+
+                <Route
+                    path="/product-branch-permissions/:id"
+                    element={<ProductBranchPermissionDetails />}
+                />
+
+                <Route
+                    path="/product-branch-permissions/:id/edit"
+                    element={<ProductBranchPermissionForm />}
+                />
+
                 {/* =================================================
                     Service Category CRUD
-                ================================================== */}
-                <Route path="/dashboard/service-categories" element={<ServiceCategoryPage />} />
+                ================================================= */}
+                <Route
+                    path="/dashboard/service-categories"
+                    element={<ServiceCategoryPage />}
+                />
+
             </Route>
-                <Route path="/product-attributes" element={<ProductAttributeList />}/>
-
-                <Route path="/product-attributes/new" element={<ProductAttributeForm />}/>
-
-                <Route path="/product-attributes/:id" element={<ProductAttributeDetails />}/>
-
-                <Route path="/product-attributes/:id/edit" element={<ProductAttributeForm />}/>
-
-             //=============================================================
-            //     Product Attribute Values
-            //=============================================================
-
-            <Route
-                path="/product-attribute-values"
-                element={<ProductAttributeValueList />}
-            />
-
-            <Route
-                path="/product-attribute-values/new"
-                element={<ProductAttributeValueForm />}
-            />
-
-            <Route
-                path="/product-attribute-values/:id"
-                element={<ProductAttributeValueDetails />}
-            />
-
-            <Route
-                path="/product-attribute-values/:id/edit"
-                element={<ProductAttributeValueForm />}
-            />
-
-        //=============================================================
-        //    Product Branch Permission 
-        //=============================================================
-
-        <Route
-            path="/product-branch-permissions"
-            element={<ProductBranchPermissionList />}
-        />
-
-        <Route
-            path="/product-branch-permissions/new"
-            element={<ProductBranchPermissionForm />}
-        />
-
-        <Route
-            path="/product-branch-permissions/:id"
-            element={<ProductBranchPermissionDetails />}
-        />
-
-        <Route
-            path="/product-branch-permissions/:id/edit"
-            element={<ProductBranchPermissionForm />}
-        />
-
-
-
-
-
-
-                
-                </Route>
 
             {/* =====================================================
                 UNKNOWN ROUTE
@@ -356,6 +469,7 @@ function AppRoutes() {
                 path="*"
                 element={<Navigate to="/login" replace />}
             />
+
         </Routes>
     );
 }
