@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
     getPagedProductBranchPermissions,
     deactivateProductBranchPermission
 } from "../../api/product/productBranchPermissionApi";
+
 import "./productBranchPermission.css";
 
 const ProductBranchPermissionList = () => {
@@ -48,7 +50,9 @@ const ProductBranchPermissionList = () => {
             "Are you sure you want to deactivate this product branch permission?"
         );
 
-        if (!confirmed) return;
+        if (!confirmed) {
+            return;
+        }
 
         try {
             await deactivateProductBranchPermission(id);
@@ -63,7 +67,9 @@ const ProductBranchPermissionList = () => {
 
     return (
         <div className="product-branch-permission-page">
+
             <div className="page-header">
+
                 <div>
                     <h2>Product Branch Permissions</h2>
                     <p>Manage product branch permissions.</p>
@@ -75,6 +81,7 @@ const ProductBranchPermissionList = () => {
                 >
                     Add Permission
                 </Link>
+
             </div>
 
             {error && (
@@ -84,11 +91,16 @@ const ProductBranchPermissionList = () => {
             )}
 
             {loading ? (
-                <div className="loading">Loading...</div>
+                <div className="loading">
+                    Loading...
+                </div>
             ) : (
                 <>
+
                     <div className="table-container">
+
                         <table>
+
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -103,6 +115,7 @@ const ProductBranchPermissionList = () => {
                             </thead>
 
                             <tbody>
+
                                 {permissions.length === 0 ? (
                                     <tr>
                                         <td
@@ -119,6 +132,7 @@ const ProductBranchPermissionList = () => {
                                                 permission.productBranchPermissionId
                                             }
                                         >
+
                                             <td>
                                                 {
                                                     permission.productBranchPermissionId
@@ -158,7 +172,9 @@ const ProductBranchPermissionList = () => {
                                             </td>
 
                                             <td>
+
                                                 <div className="action-buttons">
+
                                                     <Link
                                                         to={`/product-branch-permissions/${permission.productBranchPermissionId}`}
                                                         className="btn btn-view"
@@ -184,16 +200,23 @@ const ProductBranchPermissionList = () => {
                                                     >
                                                         Deactivate
                                                     </button>
+
                                                 </div>
+
                                             </td>
+
                                         </tr>
                                     ))
                                 )}
+
                             </tbody>
+
                         </table>
+
                     </div>
 
                     <div className="pagination">
+
                         <button
                             type="button"
                             disabled={pageNumber === 1}
@@ -217,9 +240,12 @@ const ProductBranchPermissionList = () => {
                         >
                             Next
                         </button>
+
                     </div>
+
                 </>
             )}
+
         </div>
     );
 };

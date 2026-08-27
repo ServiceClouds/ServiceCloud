@@ -73,7 +73,7 @@ const ProductVariantPackagingList = () => {
                     className="primary-button"
                     onClick={() =>
                         navigate(
-                            "/product-variant-packagings/new"
+                            "/dashboard/product-variant-packagings/new"
                         )
                     }
                 >
@@ -174,7 +174,7 @@ const ProductVariantPackagingList = () => {
                                                 className="view-button"
                                                 onClick={() =>
                                                     navigate(
-                                                        `/product-variant-packagings/${item.productVariantPackagingId}`
+                                                        `/dashboard/product-variant-packagings/${item.productVariantPackagingId}`
                                                     )
                                                 }
                                             >
@@ -185,7 +185,7 @@ const ProductVariantPackagingList = () => {
                                                 className="edit-button"
                                                 onClick={() =>
                                                     navigate(
-                                                        `/product-variant-packagings/${item.productVariantPackagingId}/edit`
+                                                        `/dashboard/product-variant-packagings/${item.productVariantPackagingId}/edit`
                                                     )
                                                 }
                                             >

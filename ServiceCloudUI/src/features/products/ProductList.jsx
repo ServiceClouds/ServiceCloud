@@ -12,16 +12,12 @@ import ConfirmDialog from "../../components/common/ConfirmDialog";
 
 import "./product.css";
 
-import "./product.css";
-
 function ProductList() {
 
     const navigate = useNavigate();
 
     const [products, setProducts] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
 
     const [pageNumber, setPageNumber] = useState(1);
@@ -30,12 +26,7 @@ function ProductList() {
     const [totalPages, setTotalPages] = useState(1);
 
     const [selectedProduct, setSelectedProduct] = useState(null);
-
     const [archiving, setArchiving] = useState(false);
-
-    // ============================================================
-    // LOAD PRODUCTS
-    // ============================================================
 
     const loadProducts = async () => {
 
@@ -48,11 +39,6 @@ function ProductList() {
                 pageNumber,
                 pageSize
             );
-
-            /*
-             * Your Result<T> API normally returns messageData.
-             * We keep the extraction here so the UI stays clean.
-             */
 
             const data =
                 response?.messageData ??
@@ -80,8 +66,7 @@ function ProductList() {
                 );
             }
 
-        }
-        catch (err) {
+        } catch (err) {
 
             console.error(
                 "Failed to load products:",
@@ -94,8 +79,7 @@ function ProductList() {
                 "Unable to load products."
             );
 
-        }
-        finally {
+        } finally {
 
             setLoading(false);
 
@@ -103,14 +87,8 @@ function ProductList() {
     };
 
     useEffect(() => {
-
         loadProducts();
-
     }, [pageNumber]);
-
-    // ============================================================
-    // ARCHIVE
-    // ============================================================
 
     const handleArchive = async () => {
 
@@ -130,8 +108,7 @@ function ProductList() {
 
             await loadProducts();
 
-        }
-        catch (err) {
+        } catch (err) {
 
             console.error(
                 "Failed to archive product:",
@@ -143,33 +120,21 @@ function ProductList() {
                 "Unable to archive product."
             );
 
-        }
-        finally {
+        } finally {
 
             setArchiving(false);
 
         }
     };
 
-    // ============================================================
-    // LOADING
-    // ============================================================
-
     if (loading) {
-
         return (
             <Loading message="Loading products..." />
         );
-
     }
 
     return (
-
         <div className="product-page">
-
-            {/* ================================================== */}
-            {/* HEADER */}
-            {/* ================================================== */}
 
             <div className="product-page-header">
 
@@ -185,7 +150,7 @@ function ProductList() {
                     type="button"
                     className="btn-primary"
                     onClick={() =>
-                        navigate("/products/new")
+                        navigate("/dashboard/products/new")
                     }
                 >
                     + Add Product
@@ -193,21 +158,11 @@ function ProductList() {
 
             </div>
 
-            {/* ================================================== */}
-            {/* ERROR */}
-            {/* ================================================== */}
-
             {error && (
-
                 <div className="product-error">
                     {error}
                 </div>
-
             )}
-
-            {/* ================================================== */}
-            {/* TABLE */}
-            {/* ================================================== */}
 
             {products.length === 0 ? (
 
@@ -225,23 +180,14 @@ function ProductList() {
                         <table className="product-table">
 
                             <thead>
-
                                 <tr>
-
                                     <th>ID</th>
-
                                     <th>Product Name</th>
-
                                     <th>Category</th>
-
                                     <th>Status</th>
-
                                     <th>Branch Permission</th>
-
                                     <th>Actions</th>
-
                                 </tr>
-
                             </thead>
 
                             <tbody>
@@ -257,14 +203,10 @@ function ProductList() {
                                         </td>
 
                                         <td>
-
                                             <div className="product-name">
-
                                                 {product.productName ||
                                                     "Unnamed Product"}
-
                                             </div>
-
                                         </td>
 
                                         <td>
@@ -274,7 +216,6 @@ function ProductList() {
                                         </td>
 
                                         <td>
-
                                             <span
                                                 className={
                                                     product.isActive
@@ -286,15 +227,12 @@ function ProductList() {
                                                     ? "Active"
                                                     : "Inactive"}
                                             </span>
-
                                         </td>
 
                                         <td>
-
                                             {product.hasBranchPermission
                                                 ? "Enabled"
                                                 : "Disabled"}
-
                                         </td>
 
                                         <td>
@@ -306,7 +244,7 @@ function ProductList() {
                                                     className="action-button"
                                                     onClick={() =>
                                                         navigate(
-                                                            `/products/${product.productId}`
+                                                            `/dashboard/products/${product.productId}`
                                                         )
                                                     }
                                                 >
@@ -318,7 +256,7 @@ function ProductList() {
                                                     className="action-button"
                                                     onClick={() =>
                                                         navigate(
-                                                            `/products/${product.productId}/edit`
+                                                            `/dashboard/products/${product.productId}/edit`
                                                         )
                                                     }
                                                 >
@@ -348,10 +286,6 @@ function ProductList() {
                         </table>
 
                     </div>
-
-                    {/* ================================================== */}
-                    {/* PAGINATION */}
-                    {/* ================================================== */}
 
                     <div className="pagination">
 
@@ -390,12 +324,7 @@ function ProductList() {
                     </div>
 
                 </div>
-
             )}
-
-            {/* ================================================== */}
-            {/* ARCHIVE CONFIRMATION */}
-            {/* ================================================== */}
 
             <ConfirmDialog
                 open={selectedProduct !== null}
@@ -413,7 +342,6 @@ function ProductList() {
             />
 
         </div>
-
     );
 }
 

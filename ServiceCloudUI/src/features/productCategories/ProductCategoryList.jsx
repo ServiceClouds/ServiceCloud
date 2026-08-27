@@ -5,7 +5,7 @@ import {
     getPagedProductCategories,
     archiveProductCategory
 } from "../../api/product/productCategoryApi";
-    
+
 import Loading from "../../components/common/Loading";
 import EmptyState from "../../components/common/EmptyState";
 import ConfirmDialog from "../../components/common/ConfirmDialog";
@@ -13,49 +13,33 @@ import ConfirmDialog from "../../components/common/ConfirmDialog";
 import "./productCategory.css";
 
 function ProductCategoryList() {
-
     const navigate = useNavigate();
 
     const [categories, setCategories] = useState([]);
-
     const [loading, setLoading] = useState(true);
-
     const [error, setError] = useState("");
 
     const [pageNumber, setPageNumber] = useState(1);
-
     const [pageSize] = useState(10);
-
     const [totalPages, setTotalPages] = useState(1);
-
     const [totalRecords, setTotalRecords] = useState(0);
 
     const [search, setSearch] = useState("");
-
     const [searchInput, setSearchInput] = useState("");
 
-    const [selectedCategory, setSelectedCategory] =
-        useState(null);
-
+    const [selectedCategory, setSelectedCategory] = useState(null);
     const [archiving, setArchiving] = useState(false);
 
-    // ============================================================
-    // LOAD CATEGORIES
-    // ============================================================
-
     const loadCategories = async () => {
-
         try {
-
             setLoading(true);
             setError("");
 
-            const response =
-                await getPagedProductCategories(
-                    pageNumber,
-                    pageSize,
-                    search
-                );
+            const response = await getPagedProductCategories(
+                pageNumber,
+                pageSize,
+                search
+            );
 
             const data =
                 response?.messageData ??
@@ -69,22 +53,13 @@ function ProductCategoryList() {
                 [];
 
             setCategories(
-                Array.isArray(items)
-                    ? items
-                    : []
+                Array.isArray(items) ? items : []
             );
 
-            setTotalPages(
-                data?.totalPages ?? 1
-            );
+            setTotalPages(data?.totalPages ?? 1);
+            setTotalRecords(data?.totalRecords ?? 0);
 
-            setTotalRecords(
-                data?.totalRecords ?? 0
-            );
-
-        }
-        catch (err) {
-
+        } catch (err) {
             console.error(
                 "Failed to load product categories:",
                 err
@@ -95,49 +70,28 @@ function ProductCategoryList() {
                 err?.response?.data?.messageData ||
                 "Unable to load product categories."
             );
-
-        }
-        finally {
-
+        } finally {
             setLoading(false);
-
         }
     };
 
     useEffect(() => {
-
         loadCategories();
-
     }, [pageNumber, search]);
 
-    // ============================================================
-    // SEARCH
-    // ============================================================
-
     const handleSearch = (event) => {
-
         event.preventDefault();
 
         setPageNumber(1);
-
-        setSearch(
-            searchInput.trim()
-        );
-
+        setSearch(searchInput.trim());
     };
 
-    // ============================================================
-    // ARCHIVE
-    // ============================================================
-
     const handleArchive = async () => {
-
         if (!selectedCategory) {
             return;
         }
 
         try {
-
             setArchiving(true);
 
             await archiveProductCategory(
@@ -150,21 +104,14 @@ function ProductCategoryList() {
                 categories.length === 1 &&
                 pageNumber > 1
             ) {
-
                 setPageNumber(
                     (previous) => previous - 1
                 );
-
-            }
-            else {
-
+            } else {
                 await loadCategories();
-
             }
 
-        }
-        catch (err) {
-
+        } catch (err) {
             console.error(
                 "Failed to archive product category:",
                 err
@@ -174,49 +121,30 @@ function ProductCategoryList() {
                 err?.response?.data?.message ||
                 "Unable to archive product category."
             );
-
-        }
-        finally {
-
+        } finally {
             setArchiving(false);
-
         }
     };
 
-    // ============================================================
-    // LOADING
-    // ============================================================
-
     if (loading) {
-
         return (
             <Loading
                 message="Loading product categories..."
             />
         );
-
     }
 
     return (
-
         <div className="product-category-page">
-
-            {/* ================================================== */}
-            {/* HEADER */}
-            {/* ================================================== */}
 
             <div className="product-category-page-header">
 
                 <div>
-
-                    <h1>
-                        Product Categories
-                    </h1>
+                    <h1>Product Categories</h1>
 
                     <p>
                         Manage your product categories.
                     </p>
-
                 </div>
 
                 <button
@@ -224,7 +152,7 @@ function ProductCategoryList() {
                     className="btn-primary"
                     onClick={() =>
                         navigate(
-                            "/product-categories/new"
+                            "/dashboard/product-categories/new"
                         )
                     }
                 >
@@ -233,21 +161,11 @@ function ProductCategoryList() {
 
             </div>
 
-            {/* ================================================== */}
-            {/* ERROR */}
-            {/* ================================================== */}
-
             {error && (
-
                 <div className="product-category-error">
                     {error}
                 </div>
-
             )}
-
-            {/* ================================================== */}
-            {/* SEARCH */}
-            {/* ================================================== */}
 
             <form
                 className="category-search"
@@ -258,9 +176,7 @@ function ProductCategoryList() {
                     type="text"
                     value={searchInput}
                     onChange={(event) =>
-                        setSearchInput(
-                            event.target.value
-                        )
+                        setSearchInput(event.target.value)
                     }
                     placeholder="Search categories..."
                 />
@@ -273,28 +189,20 @@ function ProductCategoryList() {
                 </button>
 
                 {search && (
-
                     <button
                         type="button"
                         className="btn-secondary"
                         onClick={() => {
-
                             setSearchInput("");
                             setSearch("");
                             setPageNumber(1);
-
                         }}
                     >
                         Clear
                     </button>
-
                 )}
 
             </form>
-
-            {/* ================================================== */}
-            {/* TABLE */}
-            {/* ================================================== */}
 
             {categories.length === 0 ? (
 
@@ -316,11 +224,9 @@ function ProductCategoryList() {
                 <div className="product-category-table-card">
 
                     <div className="category-summary">
-
                         <span>
                             Total Categories: {totalRecords}
                         </span>
-
                     </div>
 
                     <div className="product-category-table-wrapper">
@@ -328,30 +234,19 @@ function ProductCategoryList() {
                         <table className="product-category-table">
 
                             <thead>
-
                                 <tr>
-
                                     <th>ID</th>
-
                                     <th>Category Name</th>
-
                                     <th>Description</th>
-
                                     <th>Branch Permission</th>
-
                                     <th>App Source Type</th>
-
                                     <th>Actions</th>
-
                                 </tr>
-
                             </thead>
 
                             <tbody>
 
-                                {categories.map(
-                                    (category) => (
-
+                                {categories.map((category) => (
                                     <tr
                                         key={
                                             category.productCategoryId
@@ -366,29 +261,22 @@ function ProductCategoryList() {
                                         </td>
 
                                         <td>
-
                                             <div className="category-name">
-
                                                 {
                                                     category.productCategoryName ||
                                                     "Unnamed Category"
                                                 }
-
                                             </div>
-
                                         </td>
 
                                         <td>
-
                                             {
                                                 category.description ||
                                                 "-"
                                             }
-
                                         </td>
 
                                         <td>
-
                                             <span
                                                 className={
                                                     category.hasBranchPermission
@@ -402,16 +290,13 @@ function ProductCategoryList() {
                                                         : "Disabled"
                                                 }
                                             </span>
-
                                         </td>
 
                                         <td>
-
                                             {
                                                 category.appSourceTypeId ??
                                                 "-"
                                             }
-
                                         </td>
 
                                         <td>
@@ -423,7 +308,7 @@ function ProductCategoryList() {
                                                     className="action-button"
                                                     onClick={() =>
                                                         navigate(
-                                                            `/product-categories/${category.productCategoryId}`
+                                                            `/dashboard/product-categories/${category.productCategoryId}`
                                                         )
                                                     }
                                                 >
@@ -435,7 +320,7 @@ function ProductCategoryList() {
                                                     className="action-button"
                                                     onClick={() =>
                                                         navigate(
-                                                            `/product-categories/${category.productCategoryId}/edit`
+                                                            `/dashboard/product-categories/${category.productCategoryId}/edit`
                                                         )
                                                     }
                                                 >
@@ -459,7 +344,6 @@ function ProductCategoryList() {
                                         </td>
 
                                     </tr>
-
                                 ))}
 
                             </tbody>
@@ -468,17 +352,11 @@ function ProductCategoryList() {
 
                     </div>
 
-                    {/* ================================================== */}
-                    {/* PAGINATION */}
-                    {/* ================================================== */}
-
                     <div className="pagination">
 
                         <button
                             type="button"
-                            disabled={
-                                pageNumber <= 1
-                            }
+                            disabled={pageNumber <= 1}
                             onClick={() =>
                                 setPageNumber(
                                     (previous) =>
@@ -511,41 +389,24 @@ function ProductCategoryList() {
                     </div>
 
                 </div>
-
             )}
 
-            {/* ================================================== */}
-            {/* ARCHIVE CONFIRMATION */}
-            {/* ================================================== */}
-
             <ConfirmDialog
-
-                open={
-                    selectedCategory !== null
-                }
-
+                open={selectedCategory !== null}
                 title="Archive Product Category"
-
                 message={
                     `Are you sure you want to archive "${selectedCategory?.productCategoryName || "this category"}"?`
                 }
-
                 confirmText="Archive"
-
                 cancelText="Cancel"
-
                 loading={archiving}
-
                 onConfirm={handleArchive}
-
                 onCancel={() =>
                     setSelectedCategory(null)
                 }
-
             />
 
         </div>
-
     );
 }
 

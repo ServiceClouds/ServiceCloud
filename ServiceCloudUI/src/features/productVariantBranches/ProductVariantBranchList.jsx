@@ -31,16 +31,14 @@ const ProductVariantBranchList = () => {
             setLoading(true);
             setError("");
 
-            const result =
-                await getPagedProductVariantBranches(
-                    pageNumber,
-                    pageSize,
-                    search
-                );
+            const result = await getPagedProductVariantBranches(
+                pageNumber,
+                pageSize,
+                search
+            );
 
             setItems(result.items || []);
             setTotalPages(result.totalPages || 1);
-
         } catch (err) {
             console.error(err);
 
@@ -79,7 +77,6 @@ const ProductVariantBranchList = () => {
             } else {
                 await loadData();
             }
-
         } catch (err) {
             console.error(err);
 
@@ -118,7 +115,9 @@ const ProductVariantBranchList = () => {
                 <button
                     className="primary-button"
                     onClick={() =>
-                        navigate("/product-variant-branches/new")
+                        navigate(
+                            "/dashboard/product-variant-branches/new"
+                        )
                     }
                 >
                     + Add Variant Branch
@@ -250,7 +249,7 @@ const ProductVariantBranchList = () => {
                                                 className="view-button"
                                                 onClick={() =>
                                                     navigate(
-                                                        `/product-variant-branches/${item.productVariantBranchId}`
+                                                        `/dashboard/product-variant-branches/${item.productVariantBranchId}`
                                                     )
                                                 }
                                             >
@@ -261,7 +260,7 @@ const ProductVariantBranchList = () => {
                                                 className="edit-button"
                                                 onClick={() =>
                                                     navigate(
-                                                        `/product-variant-branches/${item.productVariantBranchId}/edit`
+                                                        `/dashboard/product-variant-branches/${item.productVariantBranchId}/edit`
                                                     )
                                                 }
                                             >

@@ -241,7 +241,7 @@ function ProductVariantList() {
                     type="button"
                     className="btn-primary"
                     onClick={() =>
-                        navigate("/product-variants/new")
+                        navigate("/dashboard/product-variants/new")
                     }
                 >
                     + Add Variant
@@ -424,7 +424,7 @@ function ProductVariantList() {
                                                     className="action-button"
                                                     onClick={() =>
                                                         navigate(
-                                                            `/product-variants/${variant.productVariantId}`
+                                                            `/dashboard/product-variants/${variant.productVariantId}`
                                                         )
                                                     }
                                                 >
