@@ -1,5 +1,6 @@
 ﻿using Application.Abstractions.Commands.Login;
 using Application.Abstractions.Commands.Login.GetCompanies;
+using Application.Abstractions.Commands.Login.RefreshToken;
 using Application.Abstractions.Commands.Login.VefityLogin;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -45,12 +46,35 @@ public class AuthController : ControllerBase
             : Ok(result.ToApiResponse());
     }
 
+
+
+
+
+
+
+
     [HttpPost("verify-login")]
     public async Task<IActionResult> VerifyLogin(
         VerifyLoginCommand command,
         CancellationToken cancellationToken)
     {
         var result = await _sender.Send(command, cancellationToken);
+
+        return result.IsFailure
+            ? BadRequest(result.ToApiResponse())
+            : Ok(result.ToApiResponse());
+    }
+
+
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> RefreshToken(
+    RefreshTokenCommand command,
+    CancellationToken cancellationToken)
+    {
+        var result = await _sender.Send(
+            command,
+            cancellationToken);
 
         return result.IsFailure
             ? BadRequest(result.ToApiResponse())

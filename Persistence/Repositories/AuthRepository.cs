@@ -4,6 +4,7 @@ using Application.Abstractions.Repositories;
 using Domain.Entities.ServiceCloud;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data.MasterDbContext;
+    using Application.Abstractions.Commands.Login.RefreshToken;
 
 namespace Persistence.Repositories
 {
@@ -101,7 +102,26 @@ namespace Persistence.Repositories
                 })
                 .ToListAsync(cancellationToken);
         }
-        
+
+        public async Task UpdateStaffTokenAsync(
+    StaffToken staffToken,
+    CancellationToken cancellationToken = default)
+        {
+            _context.StaffTokens.Update(staffToken);
+
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<StaffToken?> GetStaffTokenAsync(
+    long staffTokenId,
+    CancellationToken cancellationToken = default)
+        {
+            return await _context.StaffTokens
+                .FirstOrDefaultAsync(
+                    x => x.StaffTokenId == staffTokenId,
+                    cancellationToken);
+        }
+
 
         public async Task<bool> IsBranchAssignedAsync(
     int staffId,
@@ -139,6 +159,35 @@ namespace Persistence.Repositories
             await _context.SaveChangesAsync(cancellationToken);
         }
 
+
+        public async Task<RefreshTokenData?> GetRefreshTokenDataAsync(
+    string refreshToken,
+    CancellationToken cancellationToken = default)
+        {
+            return await (
+                from token in _context.StaffTokens
+                join login in _context.StaffLogins
+                    on token.StaffLoginId equals login.StaffLoginId
+                join staff in _context.Staff
+                    on login.StaffId equals staff.StaffId
+                join branch in _context.StaffLoggedInBranches
+                    on token.StaffTokenId equals branch.StaffTokenId
+                where token.RefreshToken == refreshToken
+                select new RefreshTokenData
+                {
+                    StaffTokenId = token.StaffTokenId,
+                    StaffLoginId = login.StaffLoginId,
+                    StaffId = staff.StaffId,
+                    CompanyId = login.CompanyId,
+                    BranchId = branch.BranchId,
+                    Email = staff.Email,
+                    IsSuperAdmin = staff.IsSuperAdmin,
+                    HasEnterpriseRole = login.HasEnterpriseRole,
+                    RefreshToken = token.RefreshToken!,
+                    RefreshTokenExpiry = token.RefreshTokenExpiry
+                })
+                .FirstOrDefaultAsync(cancellationToken);
+        }
 
 
         public async Task AddLoggedInBranchAsync(

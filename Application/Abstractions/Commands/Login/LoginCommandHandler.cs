@@ -84,9 +84,11 @@ public sealed class LoginCommandHandler
 
         // 7. Save Staff Token
         var staffToken = StaffToken.Create(
-     staffLogin.StaffLoginId,
-     response.AccessToken,
-     response.ExpiresAt);
+      staffLogin.StaffLoginId,
+      response.AccessToken,
+      response.ExpiresAt,
+      response.RefreshToken,
+      response.RefreshTokenExpiresAt);
 
         await _authRepository.AddStaffTokenAsync(
             staffToken,

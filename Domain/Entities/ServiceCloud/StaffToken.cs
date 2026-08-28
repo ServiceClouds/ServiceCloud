@@ -37,4 +37,16 @@ public class StaffToken
             CreatedOn = DateTime.UtcNow
         };
     }
+
+    public void UpdateTokens(
+    string accessToken,
+    DateTime accessTokenExpiry,
+    string refreshToken,
+    DateTime refreshTokenExpiry)
+    {
+        AccessToken = accessToken;
+        AccessTokenExpiry = accessTokenExpiry;
+        RefreshToken = refreshToken;
+        RefreshTokenExpiry = refreshTokenExpiry;
+    }
 }

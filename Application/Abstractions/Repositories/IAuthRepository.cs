@@ -1,6 +1,9 @@
 ﻿using Application.Abstractions.Commands.Login.GetCompanies;
+using Application.Abstractions.Commands.Login.RefreshToken;
 using Application.Abstractions.Commands.Login.VefityLogin;
 using Domain.Entities.ServiceCloud;
+
+namespace Application.Abstractions.Repositories;
 
 public interface IAuthRepository
 {
@@ -42,5 +45,17 @@ public interface IAuthRepository
 
     Task AddLoggedInBranchAsync(
         StaffLoggedInBranch loggedInBranch,
+        CancellationToken cancellationToken = default);
+
+    Task<RefreshTokenData?> GetRefreshTokenDataAsync(
+        string refreshToken,
+        CancellationToken cancellationToken = default);
+
+    Task<StaffToken?> GetStaffTokenAsync(
+        long staffTokenId,
+        CancellationToken cancellationToken = default);
+
+    Task UpdateStaffTokenAsync(
+        StaffToken staffToken,
         CancellationToken cancellationToken = default);
 }

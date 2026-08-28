@@ -1,10 +1,10 @@
 ﻿using Application.Abstractions.Authentication;
-
 using Application.Abstractions.Commands.Login;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Infrastructure.Authentication
@@ -27,37 +27,49 @@ namespace Infrastructure.Authentication
                 key,
                 SecurityAlgorithms.HmacSha256);
 
-            var expires = DateTime.UtcNow.AddHours(
+            var accessTokenExpiry = DateTime.UtcNow.AddHours(
                 _jwtSettings.AccessTokenExpirationInHours);
 
+            var refreshTokenExpiry = DateTime.UtcNow.AddMinutes(
+                _jwtSettings.RefreshTokenExpirationMinutes);
+
             var claims = new List<Claim>
-            {
-               
-                new Claim("StaffId", user.StaffId.ToString()),
-                new Claim("CompanyId", user.CompanyId.ToString()),
-                new Claim("Email", user.Email),
-                new Claim("IsSuperAdmin", user.IsSuperAdmin.ToString()),
-                new Claim("HasEnterpriseRole", user.HasEnterpriseRole.ToString())
-            };
+    {
+        new Claim("StaffId", user.StaffId.ToString()),
+        new Claim("CompanyId", user.CompanyId.ToString()),
+        new Claim("Email", user.Email),
+        new Claim("IsSuperAdmin", user.IsSuperAdmin.ToString()),
+        new Claim("HasEnterpriseRole", user.HasEnterpriseRole.ToString())
+    };
 
             if (user.BranchId.HasValue)
             {
-                claims.Add(new Claim("BranchId", user.BranchId.Value.ToString()));
+                claims.Add(new Claim(
+                    "BranchId",
+                    user.BranchId.Value.ToString()));
             }
 
-            var token = new JwtSecurityToken(
+            var accessToken = new JwtSecurityToken(
                 issuer: _jwtSettings.Issuer,
                 audience: _jwtSettings.Audience,
                 claims: claims,
-                expires: expires,
+                expires: accessTokenExpiry,
                 signingCredentials: credentials);
+
+            var refreshToken = Convert.ToBase64String(
+                RandomNumberGenerator.GetBytes(64));
 
             return new LoginResponse
             {
-                AccessToken = new JwtSecurityTokenHandler().WriteToken(token),
-                ExpiresAt = expires
+                AccessToken = new JwtSecurityTokenHandler()
+                    .WriteToken(accessToken),
+
+                RefreshToken = refreshToken,
+
+                ExpiresAt = accessTokenExpiry,
+
+                RefreshTokenExpiresAt = refreshTokenExpiry
             };
         }
     }
 }
-
