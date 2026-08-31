@@ -12,11 +12,14 @@ export function AuthProvider({ children }) {
 
     const isAuthenticated = !!accessToken;
 
-    const loginSession = (token) => {
+    const loginSession = (accessToken, refreshToken) => {
 
-        authStorage.setAccessToken(token);
+        authStorage.setTokens(
+            accessToken,
+            refreshToken
+        );
 
-        setAccessToken(token);
+        setAccessToken(accessToken);
     };
 
     const logout = () => {

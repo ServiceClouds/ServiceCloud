@@ -44,10 +44,13 @@ function BranchSelection() {
             console.log("Login Response:", response);
 
             /*
-             * Store the JWT through AuthContext.
-             * AuthContext handles localStorage internally.
+             * Store both access and refresh tokens
+             * through AuthContext.
              */
-            loginSession(response.accessToken);
+            loginSession(
+                response.accessToken,
+                response.refreshToken
+            );
 
             navigate("/dashboard", {
                 replace: true

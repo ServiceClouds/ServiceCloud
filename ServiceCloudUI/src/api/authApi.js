@@ -32,3 +32,15 @@ export const login = async (request) => {
 
     return response.data.messageData;
 };
+
+export const refreshToken = async (refreshToken) => {
+
+    const response = await api.post(
+        API_ENDPOINTS.AUTH.REFRESH_TOKEN,
+        {
+            refreshToken
+        }
+    );
+
+    return response.data.messageData;
+};
