@@ -115,7 +115,7 @@ function CountryDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/countries")
+                        navigate("/dashboard/countries")
                     }
                 >
                     Back to Countries
@@ -142,7 +142,7 @@ function CountryDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/countries")
+                        navigate("/dashboard/countries")
                     }
                 >
                     Back to Countries
@@ -252,7 +252,7 @@ function CountryDetails() {
                         type="button"
                         className="btn-secondary"
                         onClick={() =>
-                            navigate("/countries")
+                            navigate("/dashboard/countries")
                         }
                     >
                         Back
@@ -264,7 +264,7 @@ function CountryDetails() {
                         className="btn-primary"
                         onClick={() =>
                             navigate(
-                                `/countries/${countryId}/edit`
+                                `/dashboard/countries/${countryId}/edit`
                             )
                         }
                     >
