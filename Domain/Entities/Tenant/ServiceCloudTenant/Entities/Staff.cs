@@ -135,11 +135,13 @@ public partial class Staff
 
     // true  = currently active/working
     // false = currently inactive
-    public bool IsActive { get; private set; }
+        
+    //public bool IsActive { get; private set; }
 
     // true  = archived/deleted
     // false = normal record
-    public bool IsArchived { get; private set; }
+    
+    //public bool IsArchived { get; private set; }
 
 
     // ============================================================
@@ -197,7 +199,7 @@ public partial class Staff
         string? title,
         string firstName,
         string? lastName,
-        string? fullName,
+        //string? fullName,
         string? cardNumber,
         string email,
         string? gender,
@@ -233,7 +235,7 @@ public partial class Staff
             Title = title,
             FirstName = firstName,
             LastName = lastName,
-            FullName = fullName,
+            //FullName = fullName,
             CardNumber = cardNumber,
             Email = email,
             Gender = gender,
@@ -259,8 +261,8 @@ public partial class Staff
             IsSuperAdmin = isSuperAdmin,
 
             // New staff starts active and is not archived.
-            IsActive = true,
-            IsArchived = false,
+            //IsActive = true,
+            //IsArchived = false,
 
             CreatedOn = DateTime.UtcNow,
             CreatedBy = createdBy
@@ -282,7 +284,7 @@ public partial class Staff
         string? title,
         string firstName,
         string? lastName,
-        string? fullName,
+        //string? fullName,
         string? cardNumber,
         string email,
         string? gender,
@@ -315,7 +317,7 @@ public partial class Staff
         Title = title;
         FirstName = firstName;
         LastName = lastName;
-        FullName = fullName;
+        //FullName = fullName;
         CardNumber = cardNumber;
         Email = email;
         Gender = gender;
@@ -349,48 +351,48 @@ public partial class Staff
     // ACTIVATE
     // ============================================================
 
-    public void Activate(int modifiedBy)
-    {
-        if (IsArchived)
-        {
-            return;
-        }
+    //public void Activate(int modifiedBy)
+    //{
+    //    if (IsArchived)
+    //    {
+    //        return;
+    //    }
 
-        IsActive = true;
+    //    IsActive = true;
 
-        ModifiedBy = modifiedBy;
-        ModifiedOn = DateTime.UtcNow;
-    }
+    //    ModifiedBy = modifiedBy;
+    //    ModifiedOn = DateTime.UtcNow;
+    //}
 
 
     // ============================================================
     // DEACTIVATE
     // ============================================================
 
-    public void Deactivate(int modifiedBy)
-    {
-        if (IsArchived)
-        {
-            return;
-        }
+    //public void Deactivate(int modifiedBy)
+    //{
+    //    if (IsArchived)
+    //    {
+    //        return;
+    //    }
 
-        IsActive = false;
+    //    IsActive = false;
 
-        ModifiedBy = modifiedBy;
-        ModifiedOn = DateTime.UtcNow;
-    }
+    //    ModifiedBy = modifiedBy;
+    //    ModifiedOn = DateTime.UtcNow;
+    //}
 
 
     // ============================================================
     // ARCHIVE / DELETE
     // ============================================================
 
-    public void Archive(int modifiedBy)
-    {
-        IsActive = false;
-        IsArchived = true;
+    //public void Archive(int modifiedBy)
+    //{
+    //    IsActive = false;
+    //    IsArchived = true;
 
-        ModifiedBy = modifiedBy;
-        ModifiedOn = DateTime.UtcNow;
-    }
+    //    ModifiedBy = modifiedBy;
+    //    ModifiedOn = DateTime.UtcNow;
+    //}
 }

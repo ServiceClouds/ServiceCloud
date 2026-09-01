@@ -47,9 +47,10 @@ public sealed class CreateStaffBranchCommandHandler
         var staffExists =
             await _staffRepository.ExistsAsync(
                 x =>
-                    x.StaffId == request.StaffId &&
-                    x.IsActive &&
-                    !x.IsArchived,
+                    x.StaffId == request.StaffId, 
+                    //&&
+                    //x.IsActive &&
+                    //!x.IsArchived,
                 cancellationToken);
 
         if (!staffExists)

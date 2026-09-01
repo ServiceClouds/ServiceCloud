@@ -124,8 +124,8 @@ public sealed class CreateStaffCommandHandler
         var emailExists =
             await _repository.ExistsAsync(
                 x =>
-                    x.Email == request.Email &&
-                    !x.IsArchived,
+                    x.Email == request.Email, 
+                   // && !x.IsArchived,
                 cancellationToken);
 
         if (emailExists)
@@ -149,7 +149,7 @@ public sealed class CreateStaffCommandHandler
             request.Title,
             request.FirstName,
             request.LastName,
-            request.FullName,
+            //request.FullName,
             request.CardNumber,
             request.Email,
             request.Gender,

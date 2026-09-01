@@ -24,8 +24,8 @@ public sealed class GetStaffByIdQueryHandler
         var staff =
             await _repository.FirstOrDefaultAsync(
                 x =>
-                    x.StaffId == request.StaffId &&
-                    !x.IsArchived,
+                    x.StaffId == request.StaffId, 
+                    //&& !x.IsArchived,
                 cancellationToken: cancellationToken);
 
         if (staff is null)

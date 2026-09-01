@@ -1,7 +1,7 @@
-﻿using Application.Abstractions.Commands;
+﻿//using Application.Abstractions.Commands;
 
-namespace Application.Features.TenantFeatures.Staff.Commands.ArchiveStaff;
+//namespace Application.Features.TenantFeatures.Staff.Commands.ArchiveStaff;
 
-public sealed record ArchiveStaffCommand(
-    int StaffId
-) : ICommand;
+//public sealed record ArchiveStaffCommand(
+//    int StaffId
+//) : ICommand;

@@ -13,7 +13,7 @@ public sealed record UpdateStaffCommand(
     string? Title,
     string FirstName,
     string? LastName,
-    string? FullName,
+    //string? FullName,
     string? CardNumber,
     string Email,
     string? Gender,

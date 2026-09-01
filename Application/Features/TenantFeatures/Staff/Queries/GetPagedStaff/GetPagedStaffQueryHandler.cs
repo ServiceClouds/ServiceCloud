@@ -29,8 +29,8 @@ public sealed class GetPagedStaffQueryHandler
         // ============================================================
 
         var query = _repository
-            .GetAll()
-            .Where(x => !x.IsArchived);
+            .GetAll();
+            //.Where(x => !x.IsArchived);
 
         // ============================================================
         // 2. Search

@@ -11,7 +11,7 @@ using Shared.Response;
 namespace Api.Controllers;
 
 [ApiController]
-[Route("api/staff")]
+[Route("api/staffs")]
 [ApiExplorerSettings(GroupName = "master")]
 public class StaffController : ControllerBase
 {

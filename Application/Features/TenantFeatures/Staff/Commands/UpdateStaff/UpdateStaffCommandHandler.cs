@@ -45,8 +45,8 @@ public sealed class UpdateStaffCommandHandler
         var staff =
             await _repository.FirstOrDefaultAsync(
                 x =>
-                    x.StaffId == request.StaffId &&
-                    !x.IsArchived,
+                    x.StaffId == request.StaffId,
+                    //&& !x.IsArchived,
                 asNoTracking: false,
                 cancellationToken);
 
@@ -122,8 +122,8 @@ public sealed class UpdateStaffCommandHandler
             await _repository.ExistsAsync(
                 x =>
                     x.StaffId != request.StaffId &&
-                    x.Email == request.Email &&
-                    !x.IsArchived,
+                    x.Email == request.Email ,
+                    //&& !x.IsArchived,
                 cancellationToken);
 
         if (duplicateEmail)
@@ -146,7 +146,7 @@ public sealed class UpdateStaffCommandHandler
             request.Title,
             request.FirstName,
             request.LastName,
-            request.FullName,
+            //request.FullName,
             request.CardNumber,
             request.Email,
             request.Gender,
