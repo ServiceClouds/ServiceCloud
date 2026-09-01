@@ -185,7 +185,7 @@ function ProductCategoryForm() {
 
             }
 
-            navigate("/product-categories");
+            navigate("/dashboard/product-categories");
 
         }
         catch (err) {
@@ -246,7 +246,7 @@ function ProductCategoryForm() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-categories")
+                        navigate("/dashboard/product-categories")
                     }
                 >
                     ← Back
@@ -439,7 +439,7 @@ function ProductCategoryForm() {
                         type="button"
                         className="btn-secondary"
                         onClick={() =>
-                            navigate("/product-categories")
+                            navigate("/dashboard/product-categories")
                         }
                         disabled={saving}
                     >

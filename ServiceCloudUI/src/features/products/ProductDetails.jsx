@@ -112,7 +112,7 @@ function ProductDetails() {
                         type="button"
                         className="btn-secondary"
                         onClick={() =>
-                            navigate("/products")
+                            navigate("/dashboard/products")
                         }
                     >
                         ← Back

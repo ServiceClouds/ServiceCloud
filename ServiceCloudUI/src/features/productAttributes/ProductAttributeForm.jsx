@@ -123,7 +123,7 @@ const ProductAttributeForm = () => {
                 });
             }
 
-            navigate("/product-attributes");
+            navigate("/dashboard/product-attributes");
 
         } catch (err) {
             console.error(err);
@@ -252,7 +252,7 @@ const ProductAttributeForm = () => {
                         className="secondary-button"
                         onClick={() =>
                             navigate(
-                                "/product-attributes"
+                                "/dashboard/product-attributes"
                             )
                         }
                     >
