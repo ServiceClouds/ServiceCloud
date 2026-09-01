@@ -73,7 +73,7 @@ const ProductAttributeList = () => {
                     className="primary-button"
                     onClick={() =>
                         navigate(
-                            "/product-attributes/new"
+                            "/dashboard/product-attributes/new"
                         )
                     }
                 >

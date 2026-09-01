@@ -76,7 +76,7 @@ const ProductVariantPackagingDetails = () => {
                     className="edit-button"
                     onClick={() =>
                         navigate(
-                            `/product-variant-packagings/${data.productVariantPackagingId}/edit`
+                            `/dashboard/product-variant-packagings/${data.productVariantPackagingId}/edit`
                         )
                     }
                 >
@@ -195,7 +195,7 @@ const ProductVariantPackagingDetails = () => {
                     className="secondary-button"
                     onClick={() =>
                         navigate(
-                            "/product-variant-packagings"
+                            "/dashboard/product-variant-packagings"
                         )
                     }
                 >

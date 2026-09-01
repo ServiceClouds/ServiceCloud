@@ -24,45 +24,51 @@ const ProductAttributeForm = () => {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
+        let isMounted = true;
+
         if (isEditMode) {
+            const loadData = async () => {
+                try {
+                    setLoading(true);
+                    setError("");
+
+                    const result = await getProductAttributeById(id);
+
+                    if (isMounted) {
+                        setFormData({
+                            productAttributeId: result.productAttributeId ?? "",
+                            productId: result.productId ?? "",
+                            eAttributeId: result.eAttributeId ?? "",
+                            sortOrder: result.sortOrder ?? ""
+                        });
+                    }
+
+                } catch (err) {
+                    console.error(err);
+
+                    if (isMounted) {
+                        setError(
+                            err.response?.data?.message ||
+                            "Failed to load product attribute."
+                        );
+                    }
+                } finally {
+                    if (isMounted) {
+                        setLoading(false);
+                    }
+                }
+            };
+
             loadData();
         }
+
+        return () => {
+            isMounted = false;
+        };
     }, [id]);
-
-    const loadData = async () => {
-        try {
-            setLoading(true);
-
-            const result =
-                await getProductAttributeById(id);
-
-            setFormData({
-                productAttributeId:
-                    result.productAttributeId ?? "",
-
-                productId:
-                    result.productId ?? "",
-
-                eAttributeId:
-                    result.eAttributeId ?? "",
-
-                sortOrder:
-                    result.sortOrder ?? ""
-            });
-
-        } catch (err) {
-            console.error(err);
-
-            setError(
-                err.response?.data?.message ||
-                "Failed to load product attribute."
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -78,48 +84,39 @@ const ProductAttributeForm = () => {
 
         try {
             setError("");
+            setIsSubmitting(true);
+
+            // Validate fields
+            const productAttributeId = Number(formData.productAttributeId);
+            const productId = Number(formData.productId);
+            const eAttributeId = Number(formData.eAttributeId);
+            const sortOrder = Number(formData.sortOrder);
+
+            if (isNaN(productAttributeId) || isNaN(productId) || 
+                isNaN(eAttributeId) || isNaN(sortOrder)) {
+                setError('All fields must be valid numbers');
+                return;
+            }
+
+            if (productAttributeId < 0 || productId < 0 || 
+                eAttributeId < 0 || sortOrder < 0) {
+                setError('All fields must be positive numbers');
+                return;
+            }
 
             if (isEditMode) {
-                await updateProductAttribute(
-                    id,
-                    {
-                        productAttributeId:
-                            Number(
-                                formData.productAttributeId
-                            ),
-
-                        eAttributeId:
-                            Number(
-                                formData.eAttributeId
-                            ),
-
-                        sortOrder:
-                            Number(
-                                formData.sortOrder
-                            )
-                    }
-                );
+                await updateProductAttribute(id, {
+                    productAttributeId,
+                    productId,
+                    eAttributeId,
+                    sortOrder
+                });
             } else {
                 await createProductAttribute({
-                    productAttributeId:
-                        Number(
-                            formData.productAttributeId
-                        ),
-
-                    productId:
-                        Number(
-                            formData.productId
-                        ),
-
-                    eAttributeId:
-                        Number(
-                            formData.eAttributeId
-                        ),
-
-                    sortOrder:
-                        Number(
-                            formData.sortOrder
-                        )
+                    productAttributeId,
+                    productId,
+                    eAttributeId,
+                    sortOrder
                 });
             }
 
@@ -132,6 +129,8 @@ const ProductAttributeForm = () => {
                 err.response?.data?.message ||
                 "Failed to save product attribute."
             );
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -141,6 +140,22 @@ const ProductAttributeForm = () => {
                 <div className="loading-message">
                     Loading product attribute...
                 </div>
+            </div>
+        );
+    }
+
+    if (error && isEditMode && !loading) {
+        return (
+            <div className="crud-page">
+                <div className="error-message">
+                    {error}
+                </div>
+                <button
+                    className="secondary-button"
+                    onClick={() => navigate("/dashboard/product-attributes")}
+                >
+                    Back to List
+                </button>
             </div>
         );
     }
@@ -185,12 +200,11 @@ const ProductAttributeForm = () => {
                         <input
                             type="number"
                             name="productAttributeId"
-                            value={
-                                formData.productAttributeId
-                            }
+                            value={formData.productAttributeId}
                             onChange={handleChange}
                             disabled={isEditMode}
                             required
+                            min="0"
                         />
                     </div>
 
@@ -202,12 +216,11 @@ const ProductAttributeForm = () => {
                         <input
                             type="number"
                             name="productId"
-                            value={
-                                formData.productId
-                            }
+                            value={formData.productId}
                             onChange={handleChange}
                             disabled={isEditMode}
                             required
+                            min="0"
                         />
                     </div>
 
@@ -219,11 +232,10 @@ const ProductAttributeForm = () => {
                         <input
                             type="number"
                             name="eAttributeId"
-                            value={
-                                formData.eAttributeId
-                            }
+                            value={formData.eAttributeId}
                             onChange={handleChange}
                             required
+                            min="0"
                         />
                     </div>
 
@@ -235,11 +247,10 @@ const ProductAttributeForm = () => {
                         <input
                             type="number"
                             name="sortOrder"
-                            value={
-                                formData.sortOrder
-                            }
+                            value={formData.sortOrder}
                             onChange={handleChange}
                             required
+                            min="0"
                         />
                     </div>
 
@@ -255,6 +266,7 @@ const ProductAttributeForm = () => {
                                 "/dashboard/product-attributes"
                             )
                         }
+                        disabled={isSubmitting}
                     >
                         Cancel
                     </button>
@@ -262,10 +274,9 @@ const ProductAttributeForm = () => {
                     <button
                         type="submit"
                         className="primary-button"
+                        disabled={isSubmitting}
                     >
-                        {isEditMode
-                            ? "Update"
-                            : "Create"}
+                        {isSubmitting ? 'Saving...' : (isEditMode ? 'Update' : 'Create')}
                     </button>
 
                 </div>

@@ -184,7 +184,7 @@ const ProductVariantPackagingForm = () => {
             }
 
             navigate(
-                "/product-variant-packagings"
+                "/dashboard/product-variant-packagings"
             );
 
         } catch (err) {
@@ -367,7 +367,7 @@ const ProductVariantPackagingForm = () => {
                         className="secondary-button"
                         onClick={() =>
                             navigate(
-                                "/product-variant-packagings"
+                                "/dashboard/product-variant-packagings"
                             )
                         }
                     >

@@ -342,7 +342,7 @@ const ProductVariantBranchDetails = () => {
                     className="secondary-button"
                     onClick={() =>
                         navigate(
-                            "/product-variant-branches"
+                            "/dashboard/product-variant-branches"
                         )
                     }
                 >
