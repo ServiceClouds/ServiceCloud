@@ -195,7 +195,7 @@ function ProductVariantForm() {
 
             }
 
-            navigate("/product-variants");
+            navigate("/dashboard/product-variants");
 
         }
         catch (err) {
@@ -263,7 +263,7 @@ function ProductVariantForm() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-variants")
+                        navigate("/dashboard/product-variants")
                     }
                 >
                     ← Back
@@ -454,7 +454,7 @@ function ProductVariantForm() {
                         className="btn-secondary"
                         onClick={() =>
                             navigate(
-                                "/product-variants"
+                                "/dashboard/product-variants"
                             )
                         }
                         disabled={saving}

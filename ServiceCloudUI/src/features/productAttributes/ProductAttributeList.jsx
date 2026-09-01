@@ -144,7 +144,7 @@ const ProductAttributeList = () => {
                                                 className="view-button"
                                                 onClick={() =>
                                                     navigate(
-                                                        `/product-attributes/${item.productAttributeId}`
+                                                        `/dashboard/product-attributes/${item.productAttributeId}`
                                                     )
                                                 }
                                             >
@@ -155,7 +155,7 @@ const ProductAttributeList = () => {
                                                 className="edit-button"
                                                 onClick={() =>
                                                     navigate(
-                                                        `/product-attributes/${item.productAttributeId}/edit`
+                                                        `/dashboard/product-attributes/${item.productAttributeId}/edit`
                                                     )
                                                 }
                                             >

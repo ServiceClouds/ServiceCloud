@@ -104,7 +104,7 @@ function ProductVariantDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-variants")
+                        navigate("/dashboard/product-variants")
                     }
                 >
                     ← Back to Product Variants
@@ -131,7 +131,7 @@ function ProductVariantDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-variants")
+                        navigate("/dashboard/product-variants")
                     }
                 >
                     ← Back
@@ -170,7 +170,7 @@ function ProductVariantDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-variants")
+                        navigate("/dashboard/product-variants")
                     }
                 >
                     ← Back
@@ -460,7 +460,7 @@ function ProductVariantDetails() {
                         className="btn-secondary"
                         onClick={() =>
                             navigate(
-                                "/product-variants"
+                                "/dashboard/product-variants"
                             )
                         }
                     >

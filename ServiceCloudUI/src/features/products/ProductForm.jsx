@@ -523,7 +523,7 @@ function ProductForm() {
                         type="button"
                         className="btn-secondary"
                         onClick={() =>
-                            navigate("/products")
+                            navigate("/dashboard/products")
                         }
                         disabled={saving}
                     >

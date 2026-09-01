@@ -84,7 +84,7 @@ function ProductCategoryDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-categories")
+                        navigate("/dashboard/product-categories")
                     }
                 >
                     ← Back
@@ -121,7 +121,7 @@ function ProductCategoryDetails() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/product-categories")
+                        navigate("/dashboard/product-categories")
                     }
                 >
                     ← Back
@@ -238,7 +238,7 @@ function ProductCategoryDetails() {
                     className="btn-secondary"
                     onClick={() =>
                         navigate(
-                            `/product-categories/${id}/edit`
+                            `/dashboard/product-categories/${id}/edit`
                         )
                     }
                 >

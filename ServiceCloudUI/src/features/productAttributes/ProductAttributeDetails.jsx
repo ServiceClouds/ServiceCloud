@@ -76,7 +76,7 @@ const ProductAttributeDetails = () => {
                     className="edit-button"
                     onClick={() =>
                         navigate(
-                            `/product-attributes/${data.productAttributeId}/edit`
+                            `/dashboard/product-attributes/${data.productAttributeId}/edit`
                         )
                     }
                 >
@@ -139,7 +139,7 @@ const ProductAttributeDetails = () => {
                     className="secondary-button"
                     onClick={() =>
                         navigate(
-                            "/product-attributes"
+                            "/dashboard/product-attributes"
                         )
                     }
                 >
