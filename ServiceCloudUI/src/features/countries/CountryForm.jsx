@@ -241,7 +241,7 @@ function CountryForm() {
 
 
             // Return to Country list
-            navigate("/countries");
+            navigate("/dashboard/countries");
 
         }
         catch (err) {
@@ -297,7 +297,7 @@ function CountryForm() {
             return;
         }
 
-        navigate("/countries");
+        navigate("/dashboard/countries");
 
     };
 

@@ -211,7 +211,7 @@ function ProductForm() {
 
             }
 
-            navigate("/products");
+            navigate("/dashboard/products");
 
         }
         catch (err) {
@@ -272,7 +272,7 @@ function ProductForm() {
                     type="button"
                     className="btn-secondary"
                     onClick={() =>
-                        navigate("/products")
+                        navigate("/dashboard/products")
                     }
                 >
                     ← Back
